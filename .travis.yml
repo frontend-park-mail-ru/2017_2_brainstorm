@@ -6,9 +6,9 @@ node_js:
   - '7'
 
 branches:
- only:
-  - master
-  - dev
+  only:
+    - master
+    - dev
 
 deploy:
   provider: heroku
@@ -20,3 +20,6 @@ deploy:
   api_key:
     master:
       secure: Owuf6IVXmQCrXb7LHSJYk9sMriwc5bGxt54/c6+okt2Tz/6dehrW5F71TfCSBFb8K7na/xFRRKC7hcDamOIFs/FUk3h1rCalLgRFyM1xDllG5SUY20qhLvSF974mgLOiqX/izP4ZOxiaqwuszkuzCJ8icj0ycW8hyaUH3m8mbMskvbaFnOmTbigzqaJ6HQy3sJQ/PXf6ubT9zypAbAL/3/V+PjyttYou1D4Zm9kPS5cPeSWzVFda7vHHyUpwBX47hNFZzO39yOcH4maKxtpulb9nUrdF1RWYcJomhBUqcyVo+Cv9G2VhuT2P40NbOOtBhV9F5IvJyCpHFj1WnZV/XffkpIyk7OfLvBbhhUPxFXxZHd1YBBI06mkUbEU31D0DXGnyvXJozkikeYp6DNWoo1PqQKwd3TXaG3y7DGh1JxcTiCcitdLZJXrVJb8Vcm1asZPdh8wikQxGxenEqWOt7R3bODnSSbr7molmWr94rNk7hpkvF5rXAqOyfjy1DzdbnSKlGhYTL2Py9fP4fTydSpe3AUcSIszkTtW1T4oESQ23KlnNZF55u1b+6y2Sjb8L7UyP8xjFvu7zgM0eH4vtEAWlU+Of/3b4Zb6QDlooYWak6ma+sb0vFKKA+TiXqwcKsxq368OUYxJeVyK0K9yMSwTRlqaXe7qbfSgFRRnJ5dk=
+
+script:
+  - echo "Hello World!"
