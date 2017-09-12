@@ -137,33 +137,6 @@ class CorrectLoginPassword {
             errorBox.innerHTML = "";
         }
     }
-    /*correctLog(login) {
-        if (login==="") {
-            return "empty";
-        }
-
-        for (let i = 0; i < login.length; i++) {
-            if (this.validData.indexOf(login[i]) === -1) {
-                return "incorrect";
-            }
-        }
-
-        return "ok";
-    }
-
-    correctPas(password) {
-        if (password==="") {
-            return "empty";
-        }
-
-        for (let i = 0; i < password.length; i++) {
-            if (this.validData.indexOf(password[i]) === -1) {
-                return "incorrect";
-            }
-        }
-
-        return "ok";
-    }*/
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CorrectLoginPassword;
 
