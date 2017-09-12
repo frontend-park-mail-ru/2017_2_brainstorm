@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -83,9 +83,101 @@ class GetElem {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+
+
+class CorrectLoginPassword {
+
+    constructor() {
+        this.validData = 'abcdefghijklmnopqrstuvwxyz';
+        this.validData += this.validData.toUpperCase() + '1234567890';
+        // alert(this.validData);
+    }
+
+    correctLog(login) {
+        if (login==="") {
+            return "empty";
+        }
+
+        for (let i = 0; i < login.length; i++) {
+            if (this.validData.indexOf(login[i]) === -1) {
+                return "incorrect";
+            }
+        }
+
+        return "ok";
+    }
+
+    correctPas(password) {
+        if (password === "") {
+            return "empty";
+        }
+
+        for (let i = 0; i < password.length; i++) {
+            if (this.validData.indexOf(password[i]) === -1) {
+                return "incorrect";
+            }
+        }
+
+        return "ok";
+    }
+
+    correctForm(logValue, pasValue, errorBox)
+    {
+        let log = this.correctLog(logValue);
+        let pas = this.correctPas(pasValue);
+
+        if (log === "empty" || pas === "empty") {
+            errorBox.innerHTML = "Заполнены не все поля";
+        }
+
+        else if(log === "incorrect" || pas === "incorrect") {
+            errorBox.innerHTML = "Использованы недопустимые символы";
+        }
+        else {
+            errorBox.innerHTML = "";
+        }
+    }
+    /*correctLog(login) {
+        if (login==="") {
+            return "empty";
+        }
+
+        for (let i = 0; i < login.length; i++) {
+            if (this.validData.indexOf(login[i]) === -1) {
+                return "incorrect";
+            }
+        }
+
+        return "ok";
+    }
+
+    correctPas(password) {
+        if (password==="") {
+            return "empty";
+        }
+
+        for (let i = 0; i < password.length; i++) {
+            if (this.validData.indexOf(password[i]) === -1) {
+                return "incorrect";
+            }
+        }
+
+        return "ok";
+    }*/
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = CorrectLoginPassword;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GetElem_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AddEvent_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AddEvent_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CorrectLoginPassword_js__ = __webpack_require__(1);
+
 
 
 
@@ -103,11 +195,13 @@ window.addEventListener("load", function () {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GetElem_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword__ = __webpack_require__(1);
+
 
 
 
@@ -159,7 +253,12 @@ class AddEvent {
         const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
         objGetElem.getEl("login-form__button").addEventListener("click", function(){
-            alert("login logic");
+            const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword__["a" /* default */]();
+            let logValue = objGetElem.getEl("login-form__input-login").value;
+            let pasValue = objGetElem.getEl("login-form__input-password").value;
+            let errBox = objGetElem.getEl("login-form__error-box");
+
+            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
         });
 
         objGetElem.getEl("login-page__button-back").addEventListener("click", function () {
@@ -176,14 +275,19 @@ class AddEvent {
         const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
         objGetElem.getEl("register-form__button").addEventListener("click", function(){
-            alert("register logic");
+            const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword__["a" /* default */]();
+            let logValue = objGetElem.getEl("register-form__input-login").value;
+            let pasValue = objGetElem.getEl("register-form__input-password").value;
+            let errBox = objGetElem.getEl("register-form__error-box");
+
+            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
         });
 
         objGetElem.getEl("register-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
         });
 
-        objGetElem.getEl("login-page__link-to-login").addEventListener("click", function () {
+        objGetElem.getEl("register-page__link-to-login").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
         });
     }
@@ -194,10 +298,6 @@ class AddEvent {
 
         objGetElem.getEl("records-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
-        });
-
-        objGetElem.getEl("register-form__button").addEventListener("click", function(){
-            alert("register logic");
         });
     }
 }

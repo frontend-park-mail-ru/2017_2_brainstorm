@@ -18,6 +18,8 @@
     padding: 10px 20px 0 20px;
     text-align: center;
     border:1em solid lightsalmon;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .login-page__button-login {
@@ -103,4 +105,9 @@ input[type="password"]:focus {
 
 .login-page__link-to-register:hover {
     text-decoration: underline;
+}
+
+.login-form__error-box {
+    color: white;
+    background-color: lightcoral;
 }

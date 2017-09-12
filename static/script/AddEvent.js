@@ -1,6 +1,7 @@
 "use strict";
 
 import GetElem from "./GetElem.js";
+import CorrectLoginPassword from "./CorrectLoginPassword";
 
 export default class AddEvent {
     constructor() {
@@ -49,7 +50,12 @@ export default class AddEvent {
         const objGetElem = new GetElem();
 
         objGetElem.getEl("login-form__button").addEventListener("click", function(){
-            alert("login logic");
+            const objCorrectLogPas = new CorrectLoginPassword();
+            let logValue = objGetElem.getEl("login-form__input-login").value;
+            let pasValue = objGetElem.getEl("login-form__input-password").value;
+            let errBox = objGetElem.getEl("login-form__error-box");
+
+            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
         });
 
         objGetElem.getEl("login-page__button-back").addEventListener("click", function () {
@@ -66,14 +72,19 @@ export default class AddEvent {
         const objGetElem = new GetElem();
 
         objGetElem.getEl("register-form__button").addEventListener("click", function(){
-            alert("register logic");
+            const objCorrectLogPas = new CorrectLoginPassword();
+            let logValue = objGetElem.getEl("register-form__input-login").value;
+            let pasValue = objGetElem.getEl("register-form__input-password").value;
+            let errBox = objGetElem.getEl("register-form__error-box");
+
+            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
         });
 
         objGetElem.getEl("register-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
         });
 
-        objGetElem.getEl("login-page__link-to-login").addEventListener("click", function () {
+        objGetElem.getEl("register-page__link-to-login").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
         });
     }
@@ -84,10 +95,6 @@ export default class AddEvent {
 
         objGetElem.getEl("records-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
-        });
-
-        objGetElem.getEl("register-form__button").addEventListener("click", function(){
-            alert("register logic");
         });
     }
 }

@@ -2,6 +2,7 @@
 
 import GetElem from "./GetElem.js";
 import AddEvent from "./AddEvent.js";
+import CorrectLoginPassword from "./CorrectLoginPassword.js";
 
 class MainClass {
     constructor () {
