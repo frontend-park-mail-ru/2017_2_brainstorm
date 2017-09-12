@@ -1,27 +1,21 @@
 dist: trusty
 sudo: required
-
 language: node_js
 node_js:
-  - '7'
-
+- '7'
 branches:
   only:
-    - master
-    - dev
-
+  - master
+  - dev
 deploy:
   provider: heroku
-  
   app:
     master: brainst0rm
     dev: bubblerise
-  
   api_key:
     master:
       secure: Owuf6IVXmQCrXb7LHSJYk9sMriwc5bGxt54/c6+okt2Tz/6dehrW5F71TfCSBFb8K7na/xFRRKC7hcDamOIFs/FUk3h1rCalLgRFyM1xDllG5SUY20qhLvSF974mgLOiqX/izP4ZOxiaqwuszkuzCJ8icj0ycW8hyaUH3m8mbMskvbaFnOmTbigzqaJ6HQy3sJQ/PXf6ubT9zypAbAL/3/V+PjyttYou1D4Zm9kPS5cPeSWzVFda7vHHyUpwBX47hNFZzO39yOcH4maKxtpulb9nUrdF1RWYcJomhBUqcyVo+Cv9G2VhuT2P40NbOOtBhV9F5IvJyCpHFj1WnZV/XffkpIyk7OfLvBbhhUPxFXxZHd1YBBI06mkUbEU31D0DXGnyvXJozkikeYp6DNWoo1PqQKwd3TXaG3y7DGh1JxcTiCcitdLZJXrVJb8Vcm1asZPdh8wikQxGxenEqWOt7R3bODnSSbr7molmWr94rNk7hpkvF5rXAqOyfjy1DzdbnSKlGhYTL2Py9fP4fTydSpe3AUcSIszkTtW1T4oESQ23KlnNZF55u1b+6y2Sjb8L7UyP8xjFvu7zgM0eH4vtEAWlU+Of/3b4Zb6QDlooYWak6ma+sb0vFKKA+TiXqwcKsxq368OUYxJeVyK0K9yMSwTRlqaXe7qbfSgFRRnJ5dk=
     dev:
-      secure: UIPCMhI+ori62gHcdEKs7LOiiCjCjeM4FowFZk4W6VJ0ex474/WjI0q1ZBJfzLImEtvC7cAAyxRhrvy7bL6KEjGol6CuCYseIePrTYd89L0lxi+BPkQHR6bS/ivOA9xVXRQ5azdlQQmXHIvDN+hXDs4LHCVED9VZ+grirAHWTDiHFH7pubig3GsXev6DvuRYBepXzBChAM3xU5EldjndCv2jTn3Y60P+qS33/6fAWoQ2j7qFYLxnCIgz4tP2Pzh4IcGTexZU3f3YvxsmSvPfHVe674Wr7ZabJ0B42Qk2uBAK2jxv4Hb5JSpmX8qxVOQm1toOL6fK1RxkoJtax/bpvWaRPFFo1NypRSJeSYMoox+wheenU4J2BXR/4TGiow5VWJLybky0GwvSDleOlDuyWrnoo+Rz0hiaHtZMwX4Ur9ybjXTmG/Hc5IkSYO2kwXTNXGrykGo4V+bazTORKd8WgReqls4mzO9Zz6Tu7OmyMX/g62hSG377CiHR40LQSN18nuxCIdZb0tJuJCzUjC/dZzat3jX+y3zOwWjeV6S7fI6iI7WzklM8MgnEHFk+C4I/yUooUS0kfmaOJXiL8GLuYw99j6J7luoippdBhDK1sopCipKsfeLO/to0NjNYvhumjoxIJmOqADfR/g1qS2eG+wqx1bsovNx/jFDHE4HOeMM=
-
+      secure: eiWdbrGLk5KE+l6vdSMo0YBU9rgyjneY9VHsQYwtz+vrHwmokpx/szl3tgDI4Q7vzp9R2dmYo/IOLuAi/O+v3WIplMEGPKU0a8i4uQtUxeL1MW4ruI4L13CvjHmvJCh7Tv6c+/MmTszcBVzN0Sy7avYZ/jlobjKMAIZz58H7Qf9LXGe7Y/IINRpL+/mZpf8fu5ed1VDXceO/WwPRtpYy+/6eN7+QPPhYk3QuZVUcBtXxaN5Fs8gNWz7kw9zvjn64leqxHlKlQxHkFQ5t0kfpuGAGfqTaNxEWwJjiWlO+OFCYA53I75dlIXaG6dMj7sgRMCYrl4Oe5c0k0aOx7bAMduo48QdGANePXTASeSXKCF9qLG7JqZeTOkNFxSeu8cvbUX9OelinjBhr3258VFdscNPYFwo2a2AmwV8rTUbVrHTI6e54cfEiBlr7OxypL9SFyP2b7b2Pukgp9PF3sbJECV/o6FbME5Qr3QWI7/Lv8DUTEoPTMB1jQgXtIh/dgENAHDRrgnm+OYcBYRFOS0NHCu5YYsg0XtjeQnkK/nVK2NwRsnjF0IWgbZxwqSxAvKGPdPxd/RrF5Svbz+DSiqfWAX9pIYeinmSAXkgqQZhTGY/EAcjRur7iyE3BM0b5SUjOtoSGlqCXOJDHCUJtZucSkEtq4aH6EmwcnY/Jw9vwXPg=
 script:
-  - echo "Hello World!"
+- echo "Hello World!"
