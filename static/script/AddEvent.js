@@ -1,7 +1,8 @@
 "use strict";
 
 import GetElem from "./GetElem.js";
-import CorrectLoginPassword from "./CorrectLoginPassword";
+import CorrectLoginPassword from "./CorrectLoginPassword.js";
+import RequestToHost from "./RequestToHost.js";
 
 export default class AddEvent {
     constructor() {
@@ -27,6 +28,16 @@ export default class AddEvent {
     addEventToMainPageButtons() {
         const objGetElem = new GetElem();
         const t = this;
+
+        const objReqUser = new RequestToHost();
+        objReqUser.whoami(function (err, resp) {
+            const logBox = objGetElem.getEl("main-page__user");
+            if (err) {
+                return logBox.innerHTML = "Привет, Гость!";
+            }
+
+            logBox.innerHTML = "Привет, " + resp.login + "!";
+        });
 
         objGetElem.getEl("main-menu__button-play").addEventListener("click", function(){
             alert("start game");
@@ -55,7 +66,25 @@ export default class AddEvent {
             let pasValue = objGetElem.getEl("login-form__input-password").value;
             let errBox = objGetElem.getEl("login-form__error-box");
 
-            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+            const valid = objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+
+            if (valid) {
+                const objReqUser = new RequestToHost();
+                objReqUser.auth(logValue,pasValue,function (err, resp) {
+                    if (err) {
+                        return errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                    }
+
+                    alert("Вы вошли на сайт!");
+
+                    objGetElem.getEl("login-form__input-login").value = "";
+                    objGetElem.getEl("login-form__input-password").value = "";
+                    objGetElem.getEl("login-form__error-box").value = "";
+
+                    window.location.reload();
+                    // objGetElem.getEl("login-page__button-back").click();
+                })
+            }
         });
 
         objGetElem.getEl("login-page__button-back").addEventListener("click", function () {
@@ -77,7 +106,24 @@ export default class AddEvent {
             let pasValue = objGetElem.getEl("register-form__input-password").value;
             let errBox = objGetElem.getEl("register-form__error-box");
 
-            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+            const valid = objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+
+            if (valid) {
+                const objReqUser = new RequestToHost();
+                objReqUser.reg(logValue,pasValue,function (err, resp) {
+                    if (err) {
+                        return errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                    }
+
+                    alert("Вы успешно зарегистрировались!");
+
+                    objGetElem.getEl("register-form__input-login").value = "";
+                    objGetElem.getEl("register-form__input-password").value = "";
+                    objGetElem.getEl("register-form__error-box").value = "";
+
+                    objGetElem.getEl("register-page__button-back").click();
+                })
+            }
         });
 
         objGetElem.getEl("register-page__button-back").addEventListener("click", function () {

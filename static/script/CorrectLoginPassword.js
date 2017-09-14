@@ -43,13 +43,15 @@ export default class CorrectLoginPassword {
 
         if (log === "empty" || pas === "empty") {
             errorBox.innerHTML = "Заполнены не все поля";
+            return false;
         }
 
-        else if(log === "incorrect" || pas === "incorrect") {
+        if (log === "incorrect" || pas === "incorrect") {
             errorBox.innerHTML = "Использованы недопустимые символы";
+            return false;
         }
-        else {
-            errorBox.innerHTML = "";
-        }
+
+        errorBox.innerHTML = "";
+        return true;
     }
 }

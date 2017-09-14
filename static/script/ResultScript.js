@@ -128,14 +128,16 @@ class CorrectLoginPassword {
 
         if (log === "empty" || pas === "empty") {
             errorBox.innerHTML = "Заполнены не все поля";
+            return false;
         }
 
-        else if(log === "incorrect" || pas === "incorrect") {
+        if (log === "incorrect" || pas === "incorrect") {
             errorBox.innerHTML = "Использованы недопустимые символы";
+            return false;
         }
-        else {
-            errorBox.innerHTML = "";
-        }
+
+        errorBox.innerHTML = "";
+        return true;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CorrectLoginPassword;
@@ -173,7 +175,9 @@ window.addEventListener("load", function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GetElem_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__ = __webpack_require__(4);
+
 
 
 
@@ -204,6 +208,16 @@ class AddEvent {
         const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
         const t = this;
 
+        const objReqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
+        objReqUser.whoami(function (err, resp) {
+            const logBox = objGetElem.getEl("main-page__user");
+            if (err) {
+                return logBox.innerHTML = "Привет, Гость!";
+            }
+
+            logBox.innerHTML = "Привет, " + resp.login + "!";
+        });
+
         objGetElem.getEl("main-menu__button-play").addEventListener("click", function(){
             alert("start game");
         });
@@ -226,12 +240,30 @@ class AddEvent {
         const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
         objGetElem.getEl("login-form__button").addEventListener("click", function(){
-            const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword__["a" /* default */]();
+            const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword_js__["a" /* default */]();
             let logValue = objGetElem.getEl("login-form__input-login").value;
             let pasValue = objGetElem.getEl("login-form__input-password").value;
             let errBox = objGetElem.getEl("login-form__error-box");
 
-            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+            const valid = objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+
+            if (valid) {
+                const objReqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
+                objReqUser.auth(logValue,pasValue,function (err, resp) {
+                    if (err) {
+                        return errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                    }
+
+                    alert("Вы вошли на сайт!");
+
+                    objGetElem.getEl("login-form__input-login").value = "";
+                    objGetElem.getEl("login-form__input-password").value = "";
+                    objGetElem.getEl("login-form__error-box").value = "";
+
+                    window.location.reload();
+                    // objGetElem.getEl("login-page__button-back").click();
+                })
+            }
         });
 
         objGetElem.getEl("login-page__button-back").addEventListener("click", function () {
@@ -248,12 +280,29 @@ class AddEvent {
         const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
         objGetElem.getEl("register-form__button").addEventListener("click", function(){
-            const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword__["a" /* default */]();
+            const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword_js__["a" /* default */]();
             let logValue = objGetElem.getEl("register-form__input-login").value;
             let pasValue = objGetElem.getEl("register-form__input-password").value;
             let errBox = objGetElem.getEl("register-form__error-box");
 
-            objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+            const valid = objCorrectLogPas.correctForm(logValue, pasValue, errBox);
+
+            if (valid) {
+                const objReqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
+                objReqUser.reg(logValue,pasValue,function (err, resp) {
+                    if (err) {
+                        return errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                    }
+
+                    alert("Вы успешно зарегистрировались!");
+
+                    objGetElem.getEl("register-form__input-login").value = "";
+                    objGetElem.getEl("register-form__input-password").value = "";
+                    objGetElem.getEl("register-form__error-box").value = "";
+
+                    objGetElem.getEl("register-page__button-back").click();
+                })
+            }
         });
 
         objGetElem.getEl("register-page__button-back").addEventListener("click", function () {
@@ -275,6 +324,81 @@ class AddEvent {
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = AddEvent;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+
+class RequestToHost {
+    auth(login, password, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/auth', true);
+        xhr.withCredentials = true; //for cookies
+
+        const user = {login, password};
+        const body = JSON.stringify(user);
+
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) return;
+            if (+xhr.status !== 200) {
+                return callback(xhr, null);
+            }
+
+            const response = JSON.parse(xhr.responseText);
+            callback(null, response);
+        };
+
+        xhr.send(body);
+    }
+
+    reg(login, password, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/reg', true);
+        xhr.withCredentials = true; //for cookies
+
+        const user = {login, password};
+        const body = JSON.stringify(user);
+
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) return;
+            if (+xhr.status !== 200) {
+                return callback(xhr, null);
+            }
+
+            const response = JSON.parse(xhr.responseText);
+            callback(null, response);
+        };
+
+        xhr.send(body);
+    }
+
+    whoami(callback) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/me', true);
+            xhr.withCredentials = true;
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState !== 4) return;
+                if (+xhr.status !== 200) {
+                    return callback(xhr, null);
+                }
+
+                const response = JSON.parse(xhr.responseText);
+                callback(null, response);
+            };
+
+            xhr.send();
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = RequestToHost;
 
 
 /***/ })
