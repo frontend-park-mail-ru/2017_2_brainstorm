@@ -12,8 +12,8 @@ app.use(express.static('public'));
 app.use(body.json());
 app.use(cookie());
 
-const users = {}; // users.Mark = {log, pas}, users.John = {log, pas}
-const ids = {}; // ids[id] = Mark
+const users = {};
+const ids = {};
 
 let validData = 'abcdefghijklmnopqrstuvwxyz';
 validData += validData.toUpperCase() + '1234567890';

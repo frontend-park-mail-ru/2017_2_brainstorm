@@ -23,6 +23,7 @@
 }
 
 .main-menu__button-play_img {
+    padding-top: 2em;
     padding-left: 3em;
     width: 200px;
     height: 200px;
@@ -66,4 +67,13 @@
 
 .main-menu__button-info:hover {
     border:1em solid lightsalmon;
+}
+
+.main-page__user {
+    font-family: Ubuntu;
+    text-align: center;
+    width: 30em;
+    color: white;
+    font-size: larger;
+    background-color: lightsalmon;
 }

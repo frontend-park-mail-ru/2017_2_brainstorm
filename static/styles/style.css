@@ -24,14 +24,6 @@ p {
     align-content: center;
 }
 
-.main-page__user {
-    font-family: Ubuntu;
-    width: 9em;
-    color: white;
-    font-size: larger;
-    background-color: lightsalmon;
-}
-
 .footer {
     opacity: 0.5;
     padding-bottom: 10px;

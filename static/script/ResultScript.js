@@ -189,6 +189,8 @@ class AddEvent {
         this.addEventToLoginPageButtons();
         this.addEventToRegisterPageButtons();
         this.addEventToRecordsPageButtons();
+        this.addEventToPlayPageButtons();
+        this.addEventToInfoPageButtons();
         this.showOnlyOnePage("main-page");
     }
 
@@ -197,6 +199,8 @@ class AddEvent {
         document.getElementsByClassName('register-page')[0].hidden = true;
         document.getElementsByClassName('records-page')[0].hidden = true;
         document.getElementsByClassName('login-page')[0].hidden = true;
+        document.getElementsByClassName('play-page')[0].hidden = true;
+        document.getElementsByClassName('info-page')[0].hidden = true;
     }
 
     showOnlyOnePage(pageName) {
@@ -219,7 +223,7 @@ class AddEvent {
         });
 
         objGetElem.getEl("main-menu__button-play").addEventListener("click", function(){
-            alert("start game");
+            t.showOnlyOnePage("play-page");
         });
 
         objGetElem.getEl("main-menu__button-login").addEventListener("click", function(){
@@ -231,7 +235,8 @@ class AddEvent {
         });
 
         objGetElem.getEl("main-menu__button-info").addEventListener("click", function(){
-            alert("information about game");
+            t.showOnlyOnePage("info-page");
+            t.showOnlyOnePage("info-page");
         });
     }
 
@@ -251,14 +256,14 @@ class AddEvent {
                 const objReqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
                 objReqUser.auth(logValue,pasValue,function (err, resp) {
                     if (err) {
-                        return errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                        return errBox.innerHTML = "Некорректный ввод или логин не существует";
                     }
 
                     alert("Вы вошли на сайт!");
 
                     objGetElem.getEl("login-form__input-login").value = "";
                     objGetElem.getEl("login-form__input-password").value = "";
-                    objGetElem.getEl("login-form__error-box").value = "";
+                    objGetElem.getEl("login-form__error-box").innerHTML = "";
 
                     window.location.reload();
                     // objGetElem.getEl("login-page__button-back").click();
@@ -272,6 +277,10 @@ class AddEvent {
 
         objGetElem.getEl("login-page__link-to-register").addEventListener("click", function () {
             t.showOnlyOnePage("register-page");
+
+            objGetElem.getEl("login-form__input-login").value = "";
+            objGetElem.getEl("login-form__input-password").value = "";
+            objGetElem.getEl("login-form__error-box").innerHTML = "";
         });
     }
 
@@ -298,7 +307,7 @@ class AddEvent {
 
                     objGetElem.getEl("register-form__input-login").value = "";
                     objGetElem.getEl("register-form__input-password").value = "";
-                    objGetElem.getEl("register-form__error-box").value = "";
+                    objGetElem.getEl("register-form__error-box").innerHTML = "";
 
                     objGetElem.getEl("register-page__button-back").click();
                 })
@@ -311,6 +320,10 @@ class AddEvent {
 
         objGetElem.getEl("register-page__link-to-login").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
+
+            objGetElem.getEl("register-form__input-login").value = "";
+            objGetElem.getEl("register-form__input-password").value = "";
+            objGetElem.getEl("register-form__error-box").innerHTML = "";
         });
     }
 
@@ -319,6 +332,24 @@ class AddEvent {
         const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
         objGetElem.getEl("records-page__button-back").addEventListener("click", function () {
+            t.showOnlyOnePage("main-page");
+        });
+    }
+
+    addEventToPlayPageButtons() {
+        const t = this;
+        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
+
+        objGetElem.getEl("play-page__button-back").addEventListener("click", function () {
+            t.showOnlyOnePage("main-page");
+        });
+    }
+
+    addEventToInfoPageButtons() {
+        const t = this;
+        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
+
+        objGetElem.getEl("info-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
         });
     }
