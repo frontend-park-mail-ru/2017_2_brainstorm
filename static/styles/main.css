@@ -1,0 +1,79 @@
+.main-page {
+    padding-left: 5em;
+    padding-top: 3em;
+    align-content: center;
+}
+
+.main-page__logo-game {
+    opacity: 0.9;
+}
+
+.main-page__main-menu {
+    width:330px;
+    height:330px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-100px 0 0 -150px;
+}
+
+.main-menu__button-play {
+    width: 300px;
+    height: 300px;
+}
+
+.main-menu__button-play_img {
+    padding-top: 2em;
+    padding-left: 3em;
+    width: 200px;
+    height: 200px;
+    z-index: 33;
+}
+
+.main-menu__button-play_img:hover {
+    padding-left: 1.2em;
+    width: 250px;
+    height: 250px;
+}
+
+.main-menu__button-login {
+    width:50px;
+    display:inline-block;
+    border:1em solid lightsalmon;
+    padding: 0.5em;
+}
+
+.main-menu__button-login:hover {
+    border:1em solid salmon;
+}
+
+.main-menu__button-records {
+    width:50px;
+    display:inline-block;
+    border:1em solid lavender;
+    padding: 0.5em;
+}
+
+.main-menu__button-records:hover {
+    border:1em solid lightsalmon;
+}
+
+.main-menu__button-info {
+    width:50px;
+    display:inline-block;
+    border:1em solid lavender;
+    padding: 0.5em;
+}
+
+.main-menu__button-info:hover {
+    border:1em solid lightsalmon;
+}
+
+.main-page__user {
+    font-family: Ubuntu;
+    text-align: center;
+    width: 30em;
+    color: white;
+    font-size: larger;
+    background-color: lightsalmon;
+}
