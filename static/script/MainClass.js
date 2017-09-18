@@ -1,12 +1,13 @@
 "use strict";
 
-import GetElem from "./GetElem.js";
-import AddEvent from "./AddEvent.js";
+import elementPresenter from "./elementPresenter.js";
+import PagePresenter from "./PagePresenter.js";
 import CorrectLoginPassword from "./CorrectLoginPassword.js";
 
 class MainClass {
     constructor () {
-        const objAddEvent = new AddEvent();
+        Object.assign(PagePresenter.prototype, elementPresenter);
+        let pagePresenter = new PagePresenter();
     }
 }
 

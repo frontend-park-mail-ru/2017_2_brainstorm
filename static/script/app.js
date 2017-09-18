@@ -70,12 +70,14 @@
 "use strict";
 
 
-class GetElem {
-    getEl(className) {
+// mixin
+let elementPresenter = {
+    getElementByClass(className) {
         return document.getElementsByClassName(className.toString())[0];
     }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = GetElem;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (elementPresenter);
 
 
 /***/ }),
@@ -143,14 +145,15 @@ class CorrectLoginPassword {
 /* harmony export (immutable) */ __webpack_exports__["a"] = CorrectLoginPassword;
 
 
+
 /***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GetElem_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__AddEvent_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__elementPresenter_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PagePresenter_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__CorrectLoginPassword_js__ = __webpack_require__(1);
 
 
@@ -160,7 +163,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 class MainClass {
     constructor () {
-        const objAddEvent = new __WEBPACK_IMPORTED_MODULE_1__AddEvent_js__["a" /* default */]();
+        Object.assign(__WEBPACK_IMPORTED_MODULE_1__PagePresenter_js__["a" /* default */].prototype, __WEBPACK_IMPORTED_MODULE_0__elementPresenter_js__["a" /* default */]);
+        let pagePresenter = new __WEBPACK_IMPORTED_MODULE_1__PagePresenter_js__["a" /* default */]();
     }
 }
 
@@ -174,16 +178,18 @@ window.addEventListener("load", function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__GetElem_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__elementPresenter_js__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Debugger_js__ = __webpack_require__(5);
 
 
 
 
 
 
-class AddEvent {
+
+class PagePresenter {
     constructor() {
         this.addEventToMainPageButtons();
         this.addEventToLoginPageButtons();
@@ -192,29 +198,28 @@ class AddEvent {
         this.addEventToPlayPageButtons();
         this.addEventToInfoPageButtons();
         this.showOnlyOnePage("main-page");
+        this.clearInputFields();
+        this.clearBoxFields();
     }
 
-    hideAllPages() {
-        document.getElementsByClassName('main-page')[0].hidden = true;
-        document.getElementsByClassName('register-page')[0].hidden = true;
-        document.getElementsByClassName('records-page')[0].hidden = true;
-        document.getElementsByClassName('login-page')[0].hidden = true;
-        document.getElementsByClassName('play-page')[0].hidden = true;
-        document.getElementsByClassName('info-page')[0].hidden = true;
+    static hideAllPages() {
+        let pages = document.getElementsByClassName("page");
+        for (let i = 0; i < pages.length; i++) {
+            pages[i].hidden = true;
+        }
     }
 
     showOnlyOnePage(pageName) {
-        this.hideAllPages();
-        document.getElementsByClassName(pageName.toString())[0].hidden = false;
+        this.constructor.hideAllPages();
+        this.getElementByClass(pageName.toString()).hidden = false;
     }
 
     addEventToMainPageButtons() {
-        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
         const t = this;
 
         const objReqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
         objReqUser.whoami(function (err, resp) {
-            const logBox = objGetElem.getEl("main-page__user");
+            const logBox = t.getElementByClass("main-page__user");
             if (err) {
                 return logBox.innerHTML = "Привет, Гость!";
             }
@@ -222,33 +227,31 @@ class AddEvent {
             logBox.innerHTML = "Привет, " + resp.login + "!";
         });
 
-        objGetElem.getEl("main-menu__button-play").addEventListener("click", function(){
+        this.getElementByClass("main-menu__button-play").addEventListener("click", function(){
             t.showOnlyOnePage("play-page");
         });
 
-        objGetElem.getEl("main-menu__button-login").addEventListener("click", function(){
+        this.getElementByClass("main-menu__button-login").addEventListener("click", function(){
             t.showOnlyOnePage("login-page");
         });
 
-        objGetElem.getEl("main-menu__button-records").addEventListener("click", function(){
+        this.getElementByClass("main-menu__button-records").addEventListener("click", function(){
             t.showOnlyOnePage("records-page");
         });
 
-        objGetElem.getEl("main-menu__button-info").addEventListener("click", function(){
-            t.showOnlyOnePage("info-page");
+        this.getElementByClass("main-menu__button-info").addEventListener("click", function(){
             t.showOnlyOnePage("info-page");
         });
     }
 
     addEventToLoginPageButtons() {
         const t = this;
-        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
-        objGetElem.getEl("login-form__button").addEventListener("click", function(){
+        this.getElementByClass("login-form__button").addEventListener("click", function(){
             const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword_js__["a" /* default */]();
-            let logValue = objGetElem.getEl("login-form__input-login").value;
-            let pasValue = objGetElem.getEl("login-form__input-password").value;
-            let errBox = objGetElem.getEl("login-form__error-box");
+            let logValue = t.getElementByClass("login-form__input-login").value;
+            let pasValue = t.getElementByClass("login-form__input-password").value;
+            let errBox = t.getElementByClass("login-form__error-box");
 
             const valid = objCorrectLogPas.correctForm(logValue, pasValue, errBox);
 
@@ -261,38 +264,37 @@ class AddEvent {
 
                     alert("Вы вошли на сайт!");
 
-                    objGetElem.getEl("login-form__input-login").value = "";
-                    objGetElem.getEl("login-form__input-password").value = "";
-                    objGetElem.getEl("login-form__error-box").innerHTML = "";
+                    t.clearInputFields("login-form__input-login", "login-form__input-password");
+                    t.clearBoxFields("login-form__error-box");
 
                     window.location.reload();
-                    // objGetElem.getEl("login-page__button-back").click();
                 })
             }
         });
 
-        objGetElem.getEl("login-page__button-back").addEventListener("click", function () {
+        this.getElementByClass("login-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
+
+            t.clearInputFields("login-form__input-login", "login-form__input-password");
+            t.clearBoxFields("login-form__error-box");
         });
 
-        objGetElem.getEl("login-page__link-to-register").addEventListener("click", function () {
+        this.getElementByClass("login-page__link-to-register").addEventListener("click", function () {
             t.showOnlyOnePage("register-page");
 
-            objGetElem.getEl("login-form__input-login").value = "";
-            objGetElem.getEl("login-form__input-password").value = "";
-            objGetElem.getEl("login-form__error-box").innerHTML = "";
+            t.clearInputFields("login-form__input-login", "login-form__input-password");
+            t.clearBoxFields("login-form__error-box");
         });
     }
 
     addEventToRegisterPageButtons() {
         const t = this;
-        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
-        objGetElem.getEl("register-form__button").addEventListener("click", function(){
+        this.getElementByClass("register-form__button").addEventListener("click", function(){
             const objCorrectLogPas = new __WEBPACK_IMPORTED_MODULE_1__CorrectLoginPassword_js__["a" /* default */]();
-            let logValue = objGetElem.getEl("register-form__input-login").value;
-            let pasValue = objGetElem.getEl("register-form__input-password").value;
-            let errBox = objGetElem.getEl("register-form__error-box");
+            let logValue = t.getElementByClass("register-form__input-login").value;
+            let pasValue = t.getElementByClass("register-form__input-password").value;
+            let errBox = t.getElementByClass("register-form__error-box");
 
             const valid = objCorrectLogPas.correctForm(logValue, pasValue, errBox);
 
@@ -305,56 +307,69 @@ class AddEvent {
 
                     alert("Вы успешно зарегистрировались!");
 
-                    objGetElem.getEl("register-form__input-login").value = "";
-                    objGetElem.getEl("register-form__input-password").value = "";
-                    objGetElem.getEl("register-form__error-box").innerHTML = "";
+                    t.clearInputFields("register-form__input-login", "register-form__input-password");
+                    t.clearBoxFields("register-form__error-box");
 
-                    objGetElem.getEl("register-page__button-back").click();
+                    t.getElementByClass("register-page__button-back").click();
                 })
             }
         });
 
-        objGetElem.getEl("register-page__button-back").addEventListener("click", function () {
+        this.getElementByClass("register-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
+
+            t.clearInputFields("register-form__input-login", "register-form__input-password");
+            t.clearBoxFields("register-form__error-box");
         });
 
-        objGetElem.getEl("register-page__link-to-login").addEventListener("click", function () {
+        this.getElementByClass("register-page__link-to-login").addEventListener("click", function () {
             t.showOnlyOnePage("login-page");
 
-            objGetElem.getEl("register-form__input-login").value = "";
-            objGetElem.getEl("register-form__input-password").value = "";
-            objGetElem.getEl("register-form__error-box").innerHTML = "";
+            t.clearInputFields("register-form__input-login", "register-form__input-password");
+            t.clearBoxFields("register-form__error-box");
         });
     }
 
     addEventToRecordsPageButtons() {
         const t = this;
-        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
-        objGetElem.getEl("records-page__button-back").addEventListener("click", function () {
+        this.getElementByClass("records-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
         });
     }
 
     addEventToPlayPageButtons() {
         const t = this;
-        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
-        objGetElem.getEl("play-page__button-back").addEventListener("click", function () {
+        this.getElementByClass("play-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
         });
     }
 
     addEventToInfoPageButtons() {
         const t = this;
-        const objGetElem = new __WEBPACK_IMPORTED_MODULE_0__GetElem_js__["a" /* default */]();
 
-        objGetElem.getEl("info-page__button-back").addEventListener("click", function () {
+        this.getElementByClass("info-page__button-back").addEventListener("click", function () {
             t.showOnlyOnePage("main-page");
         });
     }
+
+    clearInputFields(...fields) {
+        const t = this;
+        for (let i = 0; i < fields.length; i++) {
+            t.getElementByClass(fields[i].toString()).value = "";
+        }
+    }
+
+    clearBoxFields(...fields) {
+        const t = this;
+        for (let i = 0; i < fields.length; i++) {
+            t.getElementByClass(fields[i].toString()).innerHTML = "";
+        }
+    }
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = AddEvent;
+/* harmony export (immutable) */ __webpack_exports__["a"] = PagePresenter;
+
 
 
 /***/ }),
@@ -430,6 +445,26 @@ class RequestToHost {
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = RequestToHost;
+
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+
+class Debugger {
+    constructor() {
+        const debugMode = false;
+    }
+
+    static print(logString) {
+        console.log(logString);
+    }
+}
+/* unused harmony export default */
 
 
 /***/ })

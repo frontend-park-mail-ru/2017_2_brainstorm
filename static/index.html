@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel = "stylesheet" type = "text/css" href = "./styles/style.css"/>
@@ -13,28 +13,26 @@
 </head>
 <body>
     <div class="main-box">
-
         <img class="main-box__logo-game" src="img/logo_3.png">
-
-        <div class="main-page">
+        <div class="main-page page">
             <div class="main-page__user">Привет, Гость :)</div>
             <div class="main-page__main-menu main-menu">
                 <div class="main-menu__button-play">
                     <img class="main-menu__button-play_img" src="img/button_play.png">
                 </div>
-                <div class="main-menu__button-login">
-                    <img src="img/login.png" style="width: 100%;">
+                <div class="main-menu__button-login button-login">
+                    <img class="button-login__img" src="img/login.png">
                 </div>
-                <div class="main-menu__button-records">
-                    <img src="img/record.png" style="width: 100%">
+                <div class="main-menu__button-records button-records">
+                    <img class="button-records__img" src="img/record.png">
                 </div>
-                <div class="main-menu__button-info">
-                    <img src="img/info.png" style="width: 100%">
+                <div class="main-menu__button-info button-info">
+                    <img class="button-info__img" src="img/info.png">
                 </div>
             </div>
         </div>
 
-        <div class="login-page" hidden>
+        <div class="login-page page" hidden>
             <div class="login-page__button-back">
                 <img class="login-page__button-back_img" src="img/back_2.png">
             </div>
@@ -49,10 +47,9 @@
             <p>You haven't account?
                 <span class="login-page__link-to-register">Sign Up</span>
             </p>
-            <br>
         </div>
 
-        <div class="register-page" hidden>
+        <div class="register-page page" hidden>
             <div class="register-page__button-back">
                 <img class="register-page__button-back_img" src="img/back_2.png">
             </div>
@@ -64,14 +61,14 @@
             </div>
             <p>Are you already registred?
                 <span class="register-page__link-to-login">Sign In</span>
-            <br>
+            </p>
         </div>
 
-        <div class="records-page" hidden>
+        <div class="records-page page" hidden>
             <div class="records-page__button-back">
                 <img class="records-page__button-back_img" src="img/back_2.png">
             </div>
-            <table border="1" bgcolor="#e6e6fa" align="center">
+            <table class="records-page__table" align="center">
                 <tr>
                     <th>User</th>
                     <th>Score</th>
@@ -92,17 +89,15 @@
             <br>
         </div>
 
-        <div class="play-page" hidden>
+        <div class="play-page page" hidden>
             <div class="play-page__button-back">
                 <img class="play-page__button-back_img" src="img/back_2.png">
             </div>
-            <div class="play-page__play-yard">
-
+            <div class="play-page__play-field">
             </div>
-            <br>
         </div>
 
-        <div class="info-page" hidden>
+        <div class="info-page page" hidden>
             <div class="info-page__button-back">
                 <img class="info-page__button-back_img" src="img/back_2.png">
             </div>
@@ -110,13 +105,11 @@
                     <h3>About</h3>
                     <p>Подавите восстание bubbles'ов!</p>
             </div>
-            <br>
         </div>
-
     </div>
-    <div class="footer" align="center">brainstorm&copy;2017</div>
+    <div class="footer" align="center">&copy;brainstorm,2017</div>
 
-    <script src="./script/ResultScript.js"></script>
+    <script src="./script/app.js"></script>
 
 </body>
 </html>

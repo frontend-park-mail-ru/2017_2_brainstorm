@@ -12,6 +12,8 @@ app.use(express.static('public'));
 app.use(body.json());
 app.use(cookie());
 
+const APPLICATION_PORT = 5000;
+
 const users = {};
 const ids = {};
 
@@ -104,8 +106,6 @@ app.get('/', function(req, res) {
     res.sendfile("static/index.html");
 });
 
-let port = process.env.PORT || 5050;
+let port = process.env.PORT || APPLICATION_PORT;
 
 app.listen(port);
-
-console.log("Server works on port " + port);

@@ -42,6 +42,16 @@
     border:1em solid lightsalmon;
     padding: 0.5em;
 }
+/*
+
+.main-menu__button-login.img {
+    width: 100%;
+}
+*/
+
+.button-login__img{
+    width: 100%;
+}
 
 .main-menu__button-login:hover {
     border:1em solid salmon;
@@ -54,6 +64,10 @@
     padding: 0.5em;
 }
 
+.button-records__img{
+    width: 100%;
+}
+
 .main-menu__button-records:hover {
     border:1em solid lightsalmon;
 }
@@ -63,6 +77,10 @@
     display:inline-block;
     border:1em solid lavender;
     padding: 0.5em;
+}
+
+.button-info__img{
+    width: 100%;
 }
 
 .main-menu__button-info:hover {

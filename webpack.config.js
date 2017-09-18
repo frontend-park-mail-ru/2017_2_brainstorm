@@ -1,6 +1,6 @@
 module.exports = {
 	entry: "./static/script/MainClass.js",
 	output: {
-		filename: "./static/script/ResultScript.js"
+		filename: "./static/script/app.js"
 	}
 };
