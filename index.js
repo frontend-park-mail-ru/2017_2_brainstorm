@@ -12,7 +12,7 @@ app.use(express.static('public'));
 app.use(body.json());
 app.use(cookie());
 
-const APPLICATION_PORT = 5000;
+const APPLICATION_PORT = 5678;
 
 const users = {};
 const ids = {};
