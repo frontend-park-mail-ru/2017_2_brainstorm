@@ -10,7 +10,7 @@
 
 .register-page__register-form {
     width: 330px;
-    height: 160px;
+    height: 190px;
     margin: 0 auto;
     margin-left: 10%;
     border-radius: 15px;
@@ -39,6 +39,10 @@
 }
 
 .register-form__input-password {
+    width: 100%;
+}
+
+.register-form__input-email {
     width: 100%;
 }
 
@@ -112,3 +116,4 @@ input[type="password"]:focus {
     color: white;
     background-color: lightcoral;
 }
+

@@ -3,7 +3,7 @@
 export default class RequestToHost {
     auth(login, password, callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/auth', true);
+        xhr.open('POST', 'https://bubblerise-backend.herokuapp.com/api/users/signin', true);
         xhr.withCredentials = true; //for cookies
 
         const user = {login, password};
@@ -24,12 +24,12 @@ export default class RequestToHost {
         xhr.send(body);
     }
 
-    reg(login, password, callback) {
+    reg(login, password, email, callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/reg', true);
+        xhr.open('PUT', 'https://bubblerise-backend.herokuapp.com/api/users/signup', true);
         xhr.withCredentials = true; //for cookies
 
-        const user = {login, password};
+        const user = {login, password, email};
         const body = JSON.stringify(user);
 
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
@@ -49,7 +49,7 @@ export default class RequestToHost {
 
     whoami(callback) {
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', '/me', true);
+            xhr.open('GET', 'https://bubblerise-backend.herokuapp.com/api/users/me', true);
             xhr.withCredentials = true;
 
             xhr.onreadystatechange = function () {

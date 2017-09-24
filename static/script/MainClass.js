@@ -2,7 +2,8 @@
 
 import elementPresenter from "./elementPresenter.js";
 import PagePresenter from "./PagePresenter.js";
-import CorrectLoginPassword from "./CorrectLoginPassword.js";
+import Validator from "./Validator.js";
+import whoamiMixin from "./whoamiMixin.js";
 
 class MainClass {
     constructor () {
