@@ -16,45 +16,32 @@ export default class CorrectLoginPassword {
         if (login==="") {
             return this.EMPTY;
         }
-
-        for (let i = 0; i < login.length; i++) {
-            if (this.validData.indexOf(login[i]) === -1) {
-                return this.INCORRECT;
-            }
+        if (/^[a-zA-Z][a-zA-Z0-9]{3,10}/.test(login)) {
+            return this.OK
+        } else {
+            return this.INCORRECT;
         }
-
-        return this.OK;
     }
 
     correctPas(password) {
         if (password === "") {
             return this.EMPTY;
         }
-
-        for (let i = 0; i < password.length; i++) {
-            if (this.validData.indexOf(password[i]) === -1) {
-                return this.INCORRECT;
-            }
+        if (/^[a-z0-9]{3,16}$/i.test(password)) {
+            return this.OK
+        } else {
+            return this.INCORRECT;
         }
-
-        return this.OK;
     }
 
     correctEmail(email) {
         if (email === "") {
             return this.EMPTY;
         }
-
-        if (email.indexOf("@") === -1)  {
+        if (/^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i.test(email)) {
+            return this.OK
+        } else {
             return this.NOT_EMAIL;
         }
-
-        for (let i = 0; i < email.length; i++) {
-            if (((this.validData + ".").indexOf(email[i]) === -1) && (email[i] !== "@")) {
-                return this.INCORRECT;
-            }
-        }
-
-        return this.OK;
     }
 }

@@ -21,7 +21,7 @@ export default class RegisterForm extends Validator {
         let pas = this.correctPas(pasValue);
         let email = this.correctEmail(emailValue);
 
-        if (log === this.EMPTY || pas === this.EMPTY) {
+        if (log === this.EMPTY || pas === this.EMPTY || email === this.EMPTY) {
             errorBox.innerHTML = "Заполнены не все поля";
             return false;
         }

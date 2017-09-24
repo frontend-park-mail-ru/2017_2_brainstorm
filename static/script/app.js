@@ -103,14 +103,18 @@ class CorrectLoginPassword {
         if (login==="") {
             return this.EMPTY;
         }
-
-        for (let i = 0; i < login.length; i++) {
-            if (this.validData.indexOf(login[i]) === -1) {
-                return this.INCORRECT;
-            }
+        if (/^[a-zA-Z][a-zA-Z0-9]{1,10}/.test(login)) {
+            return this.OK
+        } else {
+            return this.INCORRECT;
         }
 
-        return this.OK;
+        // for (let i = 0; i < login.length; i++) {
+        //     if (this.validData.indexOf(login[i]) === -1) {
+        //         return this.INCORRECT;
+        //     }
+        // }
+        // return this.OK;
     }
 
     correctPas(password) {
@@ -118,31 +122,30 @@ class CorrectLoginPassword {
             return this.EMPTY;
         }
 
-        for (let i = 0; i < password.length; i++) {
-            if (this.validData.indexOf(password[i]) === -1) {
-                return this.INCORRECT;
-            }
+        if (/^[a-z0-9]{3,}$/i.test(password)) {
+            return this.OK
+        } else {
+            return this.INCORRECT;
         }
 
-        return this.OK;
+        // for (let i = 0; i < password.length; i++) {
+        //     if (this.validData.indexOf(password[i]) === -1) {
+        //         return this.INCORRECT;
+        //     }
+        // }
+        //
+        // return this.OK;
     }
 
     correctEmail(email) {
         if (email === "") {
             return this.EMPTY;
         }
-
-        if (email.indexOf("@") === -1)  {
+        if (/^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i.test(email)) {
+            return this.OK
+        } else {
             return this.NOT_EMAIL;
         }
-
-        for (let i = 0; i < email.length; i++) {
-            if (((this.validData + ".").indexOf(email[i]) === -1) && (email[i] !== "@")) {
-                return this.INCORRECT;
-            }
-        }
-
-        return this.OK;
     }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = CorrectLoginPassword;
@@ -581,7 +584,7 @@ class RegisterForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* de
         let pas = this.correctPas(pasValue);
         let email = this.correctEmail(emailValue);
 
-        if (log === this.EMPTY || pas === this.EMPTY) {
+        if (log === this.EMPTY || pas === this.EMPTY || email === this.EMPTY) {
             errorBox.innerHTML = "Заполнены не все поля";
             return false;
         }
