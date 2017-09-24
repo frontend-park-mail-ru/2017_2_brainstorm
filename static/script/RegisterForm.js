@@ -4,6 +4,7 @@ import elementPresenter from "./elementPresenter.js";
 import Validator from "./Validator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
+import {messagesRegisterForm} from "./messages";
 
 export default class RegisterForm extends Validator {
     constructor() {
@@ -22,17 +23,17 @@ export default class RegisterForm extends Validator {
         let email = this.correctEmail(emailValue);
 
         if (log === this.EMPTY || pas === this.EMPTY || email === this.EMPTY) {
-            errorBox.innerHTML = "Заполнены не все поля";
+            errorBox.innerHTML = messagesRegisterForm.EMPTY_MESSAGE;
             return false;
         }
 
         if (log === this.INCORRECT || pas === this.INCORRECT) {
-            errorBox.innerHTML = "Использованы недопустимые символы";
+            errorBox.innerHTML = messagesRegisterForm.INCORRECT_MESSAGE;
             return false;
         }
 
         if (email === this.NOT_EMAIL) {
-            errorBox.innerHTML = "Некорректный email";
+            errorBox.innerHTML = messagesRegisterForm.NOT_EMAIL_MESSAGE;
             return false;
         }
 
@@ -45,7 +46,7 @@ export default class RegisterForm extends Validator {
         const reqUser = new RequestToHost();
         reqUser.reg(t.logValue, t.pasValue, t.emailValue, function (err, resp) {
             if (err) {
-                return t.errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                return t.errBox.innerHTML = messagesRegisterForm.RESPONSE_MESSAGE;
             }
 
             alert("Вы успешно зарегистрировались!");

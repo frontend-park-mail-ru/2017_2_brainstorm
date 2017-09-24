@@ -8,8 +8,8 @@ export default class CorrectLoginPassword {
         this.INCORRECT = "incorrect";
         this.NOT_EMAIL = "is not email";
 
-        this.validData = 'abcdefghijklmnopqrstuvwxyz';
-        this.validData += this.validData.toUpperCase() + '1234567890';
+        this.validData = "abcdefghijklmnopqrstuvwxyz";
+        this.validData += this.validData.toUpperCase() + "1234567890";
     }
 
     correctLog(login) {
@@ -38,7 +38,7 @@ export default class CorrectLoginPassword {
         if (email === "") {
             return this.EMPTY;
         }
-        if (/^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i.test(email)) {
+        if (/^[.a-z0-9_-]+@[a-z0-9_-]+\.([a-z]{2,6})+$/.test(email)) {
             return this.OK
         } else {
             return this.NOT_EMAIL;

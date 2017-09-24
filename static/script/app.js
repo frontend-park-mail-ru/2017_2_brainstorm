@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -95,53 +95,37 @@ class CorrectLoginPassword {
         this.INCORRECT = "incorrect";
         this.NOT_EMAIL = "is not email";
 
-        this.validData = 'abcdefghijklmnopqrstuvwxyz';
-        this.validData += this.validData.toUpperCase() + '1234567890';
+        this.validData = "abcdefghijklmnopqrstuvwxyz";
+        this.validData += this.validData.toUpperCase() + "1234567890";
     }
 
     correctLog(login) {
         if (login==="") {
             return this.EMPTY;
         }
-        if (/^[a-zA-Z][a-zA-Z0-9]{1,10}/.test(login)) {
+        if (/^[a-zA-Z][a-zA-Z0-9]{3,10}/.test(login)) {
             return this.OK
         } else {
             return this.INCORRECT;
         }
-
-        // for (let i = 0; i < login.length; i++) {
-        //     if (this.validData.indexOf(login[i]) === -1) {
-        //         return this.INCORRECT;
-        //     }
-        // }
-        // return this.OK;
     }
 
     correctPas(password) {
         if (password === "") {
             return this.EMPTY;
         }
-
-        if (/^[a-z0-9]{3,}$/i.test(password)) {
+        if (/^[a-z0-9]{3,16}$/i.test(password)) {
             return this.OK
         } else {
             return this.INCORRECT;
         }
-
-        // for (let i = 0; i < password.length; i++) {
-        //     if (this.validData.indexOf(password[i]) === -1) {
-        //         return this.INCORRECT;
-        //     }
-        // }
-        //
-        // return this.OK;
     }
 
     correctEmail(email) {
         if (email === "") {
             return this.EMPTY;
         }
-        if (/^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i.test(email)) {
+        if (/^[.a-z0-9_-]+@[a-z0-9_-]+\.([a-z]{2,6})+$/.test(email)) {
             return this.OK
         } else {
             return this.NOT_EMAIL;
@@ -253,6 +237,31 @@ class Debugger {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return messagesLoginForm; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return messagesRegisterForm; });
+
+
+const messagesLoginForm = {
+    EMPTY_MESSAGE : "Заполнены не все поля",
+    INCORRECT_MESSAGE : "Использованы недопустимые символы",
+    RESPONSE_MESSAGE : "Некорректный ввод или логин не существует"
+};
+
+const messagesRegisterForm = {
+    EMPTY_MESSAGE : "Заполнены не все поля",
+    INCORRECT_MESSAGE : "Использованы недопустимые символы",
+    NOT_EMAIL_MESSAGE : "Некорректный email",
+    RESPONSE_MESSAGE : "Некорректный ввод или логин уже существует"
+};
+
+
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__RequestToHost_js__ = __webpack_require__(2);
 
 
@@ -279,15 +288,15 @@ let whoamiMixin = {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__elementPresenter_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PagePresenter_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PagePresenter_js__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Validator_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__whoamiMixin_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__whoamiMixin_js__ = __webpack_require__(5);
 
 
 
@@ -308,7 +317,7 @@ window.addEventListener("load", function () {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -316,8 +325,8 @@ window.addEventListener("load", function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Validator_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Debugger_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Page_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__whoamiMixin_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Page_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__whoamiMixin_js__ = __webpack_require__(5);
 
 
 
@@ -381,7 +390,7 @@ class PagePresenter {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -389,9 +398,9 @@ class PagePresenter {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Validator_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Debugger_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fieldsCleaner_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__LoginForm_js__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__RegisterForm_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__fieldsCleaner_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__LoginForm_js__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__RegisterForm_js__ = __webpack_require__(11);
 
 
 
@@ -442,7 +451,7 @@ class Page {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -466,7 +475,7 @@ let fieldsCleaner = {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -474,6 +483,8 @@ let fieldsCleaner = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Validator_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Debugger_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__messages__ = __webpack_require__(4);
+
 
 
 
@@ -496,12 +507,12 @@ class LoginForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* defau
         let pas = this.correctPas(pasValue);
 
         if (log === this.EMPTY || pas === this.EMPTY) {
-            errorBox.innerHTML = "Заполнены не все поля";
+            errorBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["a" /* messagesLoginForm */].EMPTY_MESSAGE;
             return false;
         }
 
         if (log === this.INCORRECT || pas === this.INCORRECT) {
-            errorBox.innerHTML = "Использованы недопустимые символы";
+            errorBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["a" /* messagesLoginForm */].INCORRECT_MESSAGE;
             return false;
         }
 
@@ -514,7 +525,7 @@ class LoginForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* defau
         const reqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
         reqUser.auth(t.logValue, t.pasValue, function (err, resp) {
             if (err) {
-                return t.errBox.innerHTML = "Некорректный ввод или логин не существует";
+                return t.errBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["a" /* messagesLoginForm */].RESPONSE_MESSAGE;
             }
 
             alert("Вы вошли на сайт!");
@@ -553,7 +564,7 @@ class LoginForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* defau
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -561,6 +572,8 @@ class LoginForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* defau
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Validator_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Debugger_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__messages__ = __webpack_require__(4);
+
 
 
 
@@ -585,17 +598,17 @@ class RegisterForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* de
         let email = this.correctEmail(emailValue);
 
         if (log === this.EMPTY || pas === this.EMPTY || email === this.EMPTY) {
-            errorBox.innerHTML = "Заполнены не все поля";
+            errorBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["b" /* messagesRegisterForm */].EMPTY_MESSAGE;
             return false;
         }
 
         if (log === this.INCORRECT || pas === this.INCORRECT) {
-            errorBox.innerHTML = "Использованы недопустимые символы";
+            errorBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["b" /* messagesRegisterForm */].INCORRECT_MESSAGE;
             return false;
         }
 
         if (email === this.NOT_EMAIL) {
-            errorBox.innerHTML = "Некорректный email";
+            errorBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["b" /* messagesRegisterForm */].NOT_EMAIL_MESSAGE;
             return false;
         }
 
@@ -608,7 +621,7 @@ class RegisterForm extends __WEBPACK_IMPORTED_MODULE_1__Validator_js__["a" /* de
         const reqUser = new __WEBPACK_IMPORTED_MODULE_2__RequestToHost_js__["a" /* default */]();
         reqUser.reg(t.logValue, t.pasValue, t.emailValue, function (err, resp) {
             if (err) {
-                return t.errBox.innerHTML = "Некорректный ввод или логин уже существует";
+                return t.errBox.innerHTML = __WEBPACK_IMPORTED_MODULE_4__messages__["b" /* messagesRegisterForm */].RESPONSE_MESSAGE;
             }
 
             alert("Вы успешно зарегистрировались!");

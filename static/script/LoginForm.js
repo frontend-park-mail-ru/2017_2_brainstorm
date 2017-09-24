@@ -4,6 +4,7 @@ import elementPresenter from "./elementPresenter.js";
 import Validator from "./Validator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
+import {messagesLoginForm} from "./messages";
 
 export default class LoginForm extends Validator {
     constructor() {
@@ -20,12 +21,12 @@ export default class LoginForm extends Validator {
         let pas = this.correctPas(pasValue);
 
         if (log === this.EMPTY || pas === this.EMPTY) {
-            errorBox.innerHTML = "Заполнены не все поля";
+            errorBox.innerHTML = messagesLoginForm.EMPTY_MESSAGE;
             return false;
         }
 
         if (log === this.INCORRECT || pas === this.INCORRECT) {
-            errorBox.innerHTML = "Использованы недопустимые символы";
+            errorBox.innerHTML = messagesLoginForm.INCORRECT_MESSAGE;
             return false;
         }
 
@@ -38,7 +39,7 @@ export default class LoginForm extends Validator {
         const reqUser = new RequestToHost();
         reqUser.auth(t.logValue, t.pasValue, function (err, resp) {
             if (err) {
-                return t.errBox.innerHTML = "Некорректный ввод или логин не существует";
+                return t.errBox.innerHTML = messagesLoginForm.RESPONSE_MESSAGE;
             }
 
             alert("Вы вошли на сайт!");
