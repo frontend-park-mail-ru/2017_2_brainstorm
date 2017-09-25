@@ -28,7 +28,7 @@ export default class RequestToHost {
 
     reg(login, password, email, callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('PUT', 'https://bubblerise-backend.herokuapp.com/api/users/signup', true);
+        xhr.open('POST', 'https://bubblerise-backend.herokuapp.com/api/users', true);
         xhr.withCredentials = true; //for cookies
 
         const user = {login, password, email};
