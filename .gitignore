@@ -60,3 +60,7 @@ typings/
 # IDE
 .idea
 .idea/
+
+# Webpack result script
+static/script/app.js
+

@@ -1,8 +1,6 @@
 "use strict";
 
 import elementPresenter from "./elementPresenter.js";
-import Validator from "./Validator.js";
-import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
@@ -26,20 +24,20 @@ export default class Page {
     addJumpToButton(...buttons) {
         let t = this;
 
-        buttons.forEach(function(button, i, buttons){
-            t.getElementByClass(button.button).addEventListener("click", function(){
+        buttons.forEach(function (button, i, buttons) {
+            t.getElementByClass(button.button).addEventListener("click", function () {
                 t.showOnlyOnePage(button.nextPage);
             });
         });
     }
 
     static workWithLoginForm() {
-        Object.assign(LoginForm.prototype,elementPresenter,fieldsCleaner);
+        Object.assign(LoginForm.prototype, elementPresenter, fieldsCleaner);
         let loginForm = new LoginForm();
     }
 
     static workWithRegisterForm() {
-        Object.assign(RegisterForm.prototype,elementPresenter,fieldsCleaner);
+        Object.assign(RegisterForm.prototype, elementPresenter, fieldsCleaner);
         let registerForm = new RegisterForm();
     }
 }

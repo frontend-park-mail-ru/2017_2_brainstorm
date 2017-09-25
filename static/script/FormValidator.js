@@ -9,11 +9,15 @@ export default class ValidatorLoginPasswordEmail {
         this.NOT_EMAIL_RESPONSE = "is not email";
     }
 
+    static responseOk() {
+        return "ok";
+    }
+
     correctLogin(login) {
         if (!login) {
             return this.EMPTY_RESPONSE;
         }
-        const loginRegexp = /^[a-zA-Z][a-zA-Z0-9]{3,10}/;
+        const loginRegexp = /^[\w\d]{3,10}$/;
         return (loginRegexp.test(login)) ? this.OK_RESPONSE : this.INCORRECT_RESPONSE;
     }
 
@@ -21,7 +25,7 @@ export default class ValidatorLoginPasswordEmail {
         if (!password) {
             return this.EMPTY_RESPONSE;
         }
-        const passwordRegexp = /\S{3,16}/;
+        const passwordRegexp = /\S{3,16}$/;
         return (passwordRegexp.test(password)) ? this.OK_RESPONSE : this.INCORRECT_RESPONSE;
     }
 
@@ -29,7 +33,7 @@ export default class ValidatorLoginPasswordEmail {
         if (!email) {
             return this.EMPTY_RESPONSE;
         }
-        const emailRegexp = /^[.a-z0-9_-]+@[a-z0-9_-]+\.([a-z]{2,6})+$/;
+        const emailRegexp = /^[.a-z0-9_-]+@[a-z0-9_.-]+\.[a-z]{2,6}$/;
         return (emailRegexp.test(email)) ? this.OK_RESPONSE : this.NOT_EMAIL_RESPONSE;
     }
 }

@@ -1,12 +1,10 @@
 "use strict";
 
-import elementPresenter from "./elementPresenter.js";
-import Validator from "./Validator.js";
+import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
-import {messagesRegisterForm} from "./messages";
 
-export default class RegisterForm extends Validator {
+export default class RegisterForm extends FormValidator {
     constructor() {
         super();
         this.emailValue = "";
@@ -16,24 +14,40 @@ export default class RegisterForm extends Validator {
         this.addEventsToButtons();
     }
 
+    static msgEmptyField() {
+        return "Заполнены не все поля";
+    }
+
+    static msgIncorrectInput() {
+        return "Использованы недопустимые символы";
+    }
+
+    static msgResponseFromHost() {
+        return "Некорректный ввод или логин уже существует";
+    }
+
+    static msgIsNotEmail() {
+        return "Некорректный email";
+    }
+
     validate(logValue, pasValue, emailValue, errorBox)
     {
         let login = this.correctLogin(logValue);
         let password = this.correctPassword(pasValue);
         let email = this.correctEmail(emailValue);
 
+        if (email === this.NOT_EMAIL_RESPONSE) {
+            errorBox.innerHTML = this.constructor.msgIsNotEmail();
+            return false;
+        }
+
         if (login === this.EMPTY_RESPONSE || password === this.EMPTY_RESPONSE || email === this.EMPTY_RESPONSE) {
-            errorBox.innerHTML = messagesRegisterForm.EMPTY_MESSAGE;
+            errorBox.innerHTML = this.constructor.msgEmptyField();
             return false;
         }
 
         if (login === this.INCORRECT_RESPONSE || password === this.INCORRECT_RESPONSE) {
-            errorBox.innerHTML = messagesRegisterForm.INCORRECT_MESSAGE;
-            return false;
-        }
-
-        if (email === this.NOT_EMAIL_RESPONSE) {
-            errorBox.innerHTML = messagesRegisterForm.NOT_EMAIL_MESSAGE;
+            errorBox.innerHTML = this.constructor.msgIncorrectInput();
             return false;
         }
 
@@ -46,17 +60,16 @@ export default class RegisterForm extends Validator {
     }
 
     sendRequest() {
-        const t = this;
         const reqUser = new RequestToHost();
-        reqUser.reg(t.logValue, t.pasValue, t.emailValue, function (err, resp) {
+        reqUser.reg(this.logValue, this.pasValue, this.emailValue, (err, resp) => {
             if (err) {
-                return t.errBox.innerHTML = messagesRegisterForm.RESPONSE_MESSAGE;
+                return this.errBox.innerHTML = this.constructor.msgResponseFromHost();
             }
 
             alert("Вы успешно зарегистрировались!");
-            t.clearForm();
+            this.clearForm();
 
-            t.getElementByClass("register-page__button-back").click();
+            this.getElementByClass("register-page__button-back").click();
         })
     }
 
@@ -64,20 +77,20 @@ export default class RegisterForm extends Validator {
 
         const t = this;
 
-        this.getElementByClass("register-form__button").addEventListener("click", function(){
-            t.emailValue = t.getElementByClass("register-form__input-email").value;
-            t.logValue = t.getElementByClass("register-form__input-login").value;
-            t.pasValue = t.getElementByClass("register-form__input-password").value;
-            t.errBox = t.getElementByClass("register-form__error-box");
+        this.getElementByClass("register-form__button").addEventListener("click", () => {
+            this.emailValue = this.getElementByClass("register-form__input-email").value;
+            this.logValue = this.getElementByClass("register-form__input-login").value;
+            this.pasValue = this.getElementByClass("register-form__input-password").value;
+            this.errBox = this.getElementByClass("register-form__error-box");
 
-            const valid = t.validate(t.logValue, t.pasValue, t.emailValue, t.errBox);
+            const valid = this.validate(this.logValue, this.pasValue, this.emailValue, this.errBox);
 
             if (valid) {
-                t.sendRequest();
+                this.sendRequest();
             }
         });
 
-        t.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm()});
-        t.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm()});
+        this.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm()});
+        this.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm()});
     }
 }

@@ -1,8 +1,6 @@
 "use strict";
 
 import elementPresenter from "./elementPresenter.js";
-import Validator from "./Validator.js";
-import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
 import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";

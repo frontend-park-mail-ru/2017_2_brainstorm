@@ -4,16 +4,13 @@ import RequestToHost from "./RequestToHost.js";
 
 let whoamiMixin = {
     whoami() {
-        const t = this;
-
         const reqUser = new RequestToHost();
 
-        reqUser.whoami(function (err, resp) {
-            const logBox = t.getElementByClass("main-page__user");
+        reqUser.whoami((err, resp) => {
+            const logBox = this.getElementByClass("main-page__user");
             if (err) {
                 return logBox.innerHTML = "Привет, Гость!";
             }
-
             logBox.innerHTML = "Привет, " + resp.login + "!";
         });
     }
