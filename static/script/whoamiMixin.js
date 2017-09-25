@@ -7,11 +7,11 @@ let whoamiMixin = {
         const reqUser = new RequestToHost();
 
         reqUser.whoami((err, resp) => {
-            const logBox = this.getElementByClass("main-page__user");
+            const loginBox = this.getElementByClass("main-page__user");
             if (err) {
-                return logBox.innerHTML = "Привет, Гость!";
+                return loginBox.innerHTML = "Привет, Гость!";
             }
-            logBox.innerHTML = "Привет, " + resp.login + "!";
+            loginBox.innerHTML = "Привет, " + resp.login + "!";
         });
     }
 };
