@@ -1,6 +1,6 @@
 "use strict";
 
-export default class ValidatorLoginPasswordEmail {
+export default class FormValidator {
 
     constructor() {
         this.OK_RESPONSE = "ok";
