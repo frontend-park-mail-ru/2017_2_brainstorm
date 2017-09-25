@@ -1,47 +1,35 @@
 "use strict";
 
-export default class CorrectLoginPassword {
+export default class ValidatorLoginPasswordEmail {
 
     constructor() {
-        this.OK = "ok";
-        this.EMPTY = "empty";
-        this.INCORRECT = "incorrect";
-        this.NOT_EMAIL = "is not email";
-
-        this.validData = "abcdefghijklmnopqrstuvwxyz";
-        this.validData += this.validData.toUpperCase() + "1234567890";
+        this.OK_RESPONSE = "ok";
+        this.EMPTY_RESPONSE = "empty";
+        this.INCORRECT_RESPONSE = "incorrect";
+        this.NOT_EMAIL_RESPONSE = "is not email";
     }
 
-    correctLog(login) {
-        if (login==="") {
-            return this.EMPTY;
+    correctLogin(login) {
+        if (!login) {
+            return this.EMPTY_RESPONSE;
         }
-        if (/^[a-zA-Z][a-zA-Z0-9]{3,10}/.test(login)) {
-            return this.OK
-        } else {
-            return this.INCORRECT;
-        }
+        const loginRegexp = /^[a-zA-Z][a-zA-Z0-9]{3,10}/;
+        return (loginRegexp.test(login)) ? this.OK_RESPONSE : this.INCORRECT_RESPONSE;
     }
 
-    correctPas(password) {
-        if (password === "") {
-            return this.EMPTY;
+    correctPassword(password) {
+        if (!password) {
+            return this.EMPTY_RESPONSE;
         }
-        if (/^[a-z0-9]{3,16}$/i.test(password)) {
-            return this.OK
-        } else {
-            return this.INCORRECT;
-        }
+        const passwordRegexp = /\S{3,16}/;
+        return (passwordRegexp.test(password)) ? this.OK_RESPONSE : this.INCORRECT_RESPONSE;
     }
 
     correctEmail(email) {
-        if (email === "") {
-            return this.EMPTY;
+        if (!email) {
+            return this.EMPTY_RESPONSE;
         }
-        if (/^[.a-z0-9_-]+@[a-z0-9_-]+\.([a-z]{2,6})+$/.test(email)) {
-            return this.OK
-        } else {
-            return this.NOT_EMAIL;
-        }
+        const emailRegexp = /^[.a-z0-9_-]+@[a-z0-9_-]+\.([a-z]{2,6})+$/;
+        return (emailRegexp.test(email)) ? this.OK_RESPONSE : this.NOT_EMAIL_RESPONSE;
     }
 }

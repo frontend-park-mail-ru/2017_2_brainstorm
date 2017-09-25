@@ -18,27 +18,31 @@ export default class RegisterForm extends Validator {
 
     validate(logValue, pasValue, emailValue, errorBox)
     {
-        let log = this.correctLog(logValue);
-        let pas = this.correctPas(pasValue);
+        let login = this.correctLogin(logValue);
+        let password = this.correctPassword(pasValue);
         let email = this.correctEmail(emailValue);
 
-        if (log === this.EMPTY || pas === this.EMPTY || email === this.EMPTY) {
+        if (login === this.EMPTY_RESPONSE || password === this.EMPTY_RESPONSE || email === this.EMPTY_RESPONSE) {
             errorBox.innerHTML = messagesRegisterForm.EMPTY_MESSAGE;
             return false;
         }
 
-        if (log === this.INCORRECT || pas === this.INCORRECT) {
+        if (login === this.INCORRECT_RESPONSE || password === this.INCORRECT_RESPONSE) {
             errorBox.innerHTML = messagesRegisterForm.INCORRECT_MESSAGE;
             return false;
         }
 
-        if (email === this.NOT_EMAIL) {
+        if (email === this.NOT_EMAIL_RESPONSE) {
             errorBox.innerHTML = messagesRegisterForm.NOT_EMAIL_MESSAGE;
             return false;
         }
 
         errorBox.innerHTML = "";
         return true;
+    }
+
+    clearForm() {
+        this.clearFields("register-form__input-email", "register-form__input-login", "register-form__input-password", "register-form__error-box");
     }
 
     sendRequest() {
@@ -50,8 +54,7 @@ export default class RegisterForm extends Validator {
             }
 
             alert("Вы успешно зарегистрировались!");
-
-            t.clearFields("register-form__input-email", "register-form__input-login", "register-form__input-password", "register-form__error-box");
+            t.clearForm();
 
             t.getElementByClass("register-page__button-back").click();
         })
@@ -74,12 +77,7 @@ export default class RegisterForm extends Validator {
             }
         });
 
-        t.getElementByClass("register-page__button-back").addEventListener("click", function () {
-            t.clearFields("register-form__input-email", "register-form__input-login", "register-form__input-password", "register-form__error-box");
-        });
-
-        t.getElementByClass("register-page__link-to-login").addEventListener("click", function () {
-            t.clearFields("register-form__input-email", "register-form__input-login", "register-form__input-password","register-form__error-box");
-        });
+        t.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm()});
+        t.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm()});
     }
 }

@@ -17,21 +17,25 @@ export default class LoginForm extends Validator {
 
     validate(logValue, pasValue, errorBox)
     {
-        let log = this.correctLog(logValue);
-        let pas = this.correctPas(pasValue);
+        let login = this.correctLogin(logValue);
+        let password  = this.correctPassword(pasValue);
 
-        if (log === this.EMPTY || pas === this.EMPTY) {
+        if (login === this.EMPTY_RESPONSE || password  === this.EMPTY_RESPONSE) {
             errorBox.innerHTML = messagesLoginForm.EMPTY_MESSAGE;
             return false;
         }
 
-        if (log === this.INCORRECT || pas === this.INCORRECT) {
+        if (login === this.INCORRECT_RESPONSE || password  === this.INCORRECT_RESPONSE) {
             errorBox.innerHTML = messagesLoginForm.INCORRECT_MESSAGE;
             return false;
         }
 
         errorBox.innerHTML = "";
         return true;
+    }
+
+    clearForm() {
+        this.clearFields("login-form__input-login", "login-form__input-password", "login-form__error-box");
     }
 
     sendRequest() {
@@ -43,8 +47,7 @@ export default class LoginForm extends Validator {
             }
 
             alert("Вы вошли на сайт!");
-
-            t.clearFields("login-form__input-login", "login-form__input-password", "login-form__error-box");
+            t.clearForm();
 
             window.location.reload();
         })
@@ -64,12 +67,7 @@ export default class LoginForm extends Validator {
             }
         });
 
-        t.getElementByClass("login-page__button-back").addEventListener("click", function () {
-            t.clearFields("login-form__input-login", "login-form__input-password", "login-form__error-box");
-        });
-
-        t.getElementByClass("login-page__link-to-register").addEventListener("click", function () {
-            t.clearFields("login-form__input-login", "login-form__input-password","login-form__error-box");
-        });
+        t.getElementByClass("login-page__button-back").addEventListener("click", () => {this.clearForm()});
+        t.getElementByClass("login-page__link-to-register").addEventListener("click", () => {this.clearForm()});
     }
 }

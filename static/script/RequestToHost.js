@@ -12,7 +12,9 @@ export default class RequestToHost {
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState !== 4) return;
+            if (xhr.readyState !== 4) {
+                return;
+            }
             if (+xhr.status !== 200) {
                 return callback(xhr, null);
             }
@@ -35,7 +37,9 @@ export default class RequestToHost {
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState !== 4) return;
+            if (xhr.readyState !== 4) {
+                return;
+            }
             if (+xhr.status !== 200) {
                 return callback(xhr, null);
             }
@@ -53,7 +57,9 @@ export default class RequestToHost {
             xhr.withCredentials = true;
 
             xhr.onreadystatechange = function () {
-                if (xhr.readyState !== 4) return;
+                if (xhr.readyState !== 4) {
+                    return;
+                }
                 if (+xhr.status !== 200) {
                     return callback(xhr, null);
                 }
