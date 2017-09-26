@@ -5,52 +5,30 @@ import Debugger from "./Debugger.js";
 import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
 
+import RecordsPage from "./RecordsPage.js";
+import InfoPage from "./InfoPage.js";
+import PlayPage from "./PlayPage";
+import MainPage from "./MainPage.js";
+import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
+
 export default class PagePresenter {
     constructor() {
 
-        let mainPage = new Page();
-        Object.assign(mainPage, elementPresenter, whoamiMixin);
+        Object.assign(Page.prototype, elementPresenter, whoamiMixin);
+        let mainPage = new MainPage();
         mainPage.showOnlyOnePage("main-page");
-        mainPage.addJumpToButton(
-            {button: "main-menu__button-play", nextPage: "play-page"},
-            {button: "main-menu__button-login", nextPage: "login-page"},
-            {button: "main-menu__button-records", nextPage: "records-page"},
-            {button: "main-menu__button-info", nextPage: "info-page"}
-        );
+        mainPage.addEventsOnButtons();
         mainPage.whoami();
 
-        let recordsPage = new Page();
-        Object.assign(recordsPage, elementPresenter);
-        recordsPage.addJumpToButton(
-            {button: "records-page__button-back", nextPage: "main-page"}
-        );
+        let recordsPage = new RecordsPage();
 
-        let infoPage = new Page();
-        Object.assign(infoPage, elementPresenter);
-        infoPage.addJumpToButton(
-            {button: "info-page__button-back", nextPage: "main-page"}
-        );
+        let infoPage = new InfoPage();
 
-        let playPage = new Page();
-        Object.assign(playPage, elementPresenter);
-        playPage.addJumpToButton(
-            {button: "play-page__button-back", nextPage: "main-page"}
-        );
+        let playPage = new PlayPage();
 
-        let loginPage = new Page();
-        Object.assign(loginPage, elementPresenter);
-        loginPage.addJumpToButton(
-            {button: "login-page__button-back", nextPage: "main-page"},
-            {button: "login-page__link-to-register", nextPage: "register-page"}
-        );
-        loginPage.constructor.workWithLoginForm();
+        let loginPage = new LoginPage();
 
-        let registerPage = new Page();
-        Object.assign(registerPage, elementPresenter);
-        registerPage.addJumpToButton(
-            {button: "register-page__button-back", nextPage: "login-page"},
-            {button: "register-page__link-to-login", nextPage: "login-page"}
-        );
-        registerPage.constructor.workWithRegisterForm();
+        let registerPage = new RegisterPage();
     }
 }

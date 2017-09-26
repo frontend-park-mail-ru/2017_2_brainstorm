@@ -1,13 +1,12 @@
 "use strict";
 
-import elementPresenter from "./elementPresenter.js";
-import Debugger from "./Debugger.js";
-import fieldsCleaner from "./fieldsCleaner.js";
-
-import LoginForm from "./LoginForm.js";
-import RegisterForm from "./RegisterForm.js";
-
 export default class Page {
+
+    constructor() {
+        this.addEventsOnButtons();
+    }
+
+    addEventOnButtons() {};
 
     static hideAllPages() {
         let pages = document.getElementsByClassName("page");
@@ -21,7 +20,7 @@ export default class Page {
         this.getElementByClass(pageName.toString()).hidden = false;
     }
 
-    addJumpToButton(...buttons) {
+    addRedirectOnButtons(...buttons) {
         let t = this;
 
         buttons.forEach(function (button, i, buttons) {
@@ -31,13 +30,4 @@ export default class Page {
         });
     }
 
-    static workWithLoginForm() {
-        Object.assign(LoginForm.prototype, elementPresenter, fieldsCleaner);
-        let loginForm = new LoginForm();
-    }
-
-    static workWithRegisterForm() {
-        Object.assign(RegisterForm.prototype, elementPresenter, fieldsCleaner);
-        let registerForm = new RegisterForm();
-    }
 }
