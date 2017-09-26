@@ -1,73 +1,68 @@
 "use strict";
 
+const HTTP_OK = 200;
+
 export default class RequestToHost {
-    auth(login, password, callback) {
+
+    static baseUrl() {
+        return  'https://bubblerise-backend.herokuapp.com/';
+    };
+
+    static requestPost(address, user, callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://bubblerise-backend.herokuapp.com/api/users/signin', true);
+        xhr.open('POST', this.baseUrl() + address, true);
         xhr.withCredentials = true; //for cookies
 
-        const user = {login, password};
         const body = JSON.stringify(user);
 
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
+
+        xhr.send(body);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState !== 4) {
                 return;
             }
-            if (+xhr.status !== 200) {
+            if (+xhr.status !== HTTP_OK) {
                 return callback(xhr, null);
             }
 
             const response = JSON.parse(xhr.responseText);
             callback(null, response);
         };
+    }
 
-        xhr.send(body);
+    static requestGet(address, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', this.baseUrl() + address, true);
+        xhr.withCredentials = true;
+
+        xhr.send();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) {
+                return;
+            }
+            if (+xhr.status !== HTTP_OK) {
+                return callback(xhr, null);
+            }
+
+            const response = JSON.parse(xhr.responseText);
+            callback(null, response);
+        };
+    }
+
+    auth(login, password, callback) {
+        const user = {login, password};
+        let response = this.constructor.requestPost('api/users/signin', user, callback);
     }
 
     reg(login, password, email, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://bubblerise-backend.herokuapp.com/api/users', true);
-        xhr.withCredentials = true; //for cookies
-
         const user = {login, password, email};
-        const body = JSON.stringify(user);
-
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState !== 4) {
-                return;
-            }
-            if (+xhr.status !== 200) {
-                return callback(xhr, null);
-            }
-
-            const response = JSON.parse(xhr.responseText);
-            callback(null, response);
-        };
-
-        xhr.send(body);
+        let response = this.constructor.requestPost('api/users', user, callback);
     }
 
     whoami(callback) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://bubblerise-backend.herokuapp.com/api/users/me', true);
-            xhr.withCredentials = true;
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState !== 4) {
-                    return;
-                }
-                if (+xhr.status !== 200) {
-                    return callback(xhr, null);
-                }
-
-                const response = JSON.parse(xhr.responseText);
-                callback(null, response);
-            };
-
-            xhr.send();
+        let response = this.constructor.requestGet('api/users/me', callback)
     }
 }
