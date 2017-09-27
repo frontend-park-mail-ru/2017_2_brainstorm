@@ -13,6 +13,7 @@ import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
 
 export default class PagePresenter {
+
     constructor() {
 
         Object.assign(Page.prototype, elementPresenter, whoamiMixin);

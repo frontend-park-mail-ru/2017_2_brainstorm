@@ -10,6 +10,6 @@ app.get('/', function(req, res) {
     res.sendfile("static/index.html");
 });
 
-let port = process.env.PORT || APPLICATION_PORT;
+const port = process.env.PORT || APPLICATION_PORT;
 
 app.listen(port);

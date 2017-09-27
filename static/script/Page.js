@@ -16,7 +16,7 @@ export default class Page {
     }
 
     showOnlyOnePage(pageName) {
-        this.constructor.hideAllPages();
+        Page.hideAllPages();
         this.getElementByClass(pageName.toString()).hidden = false;
     }
 

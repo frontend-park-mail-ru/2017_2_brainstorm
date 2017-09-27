@@ -1,7 +1,8 @@
 "use strict";
 
 export default class Debugger {
-    constructor() {
+
+    debugMode() {
         const debugMode = false;
     }
 

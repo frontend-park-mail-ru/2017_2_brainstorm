@@ -5,6 +5,7 @@ import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
 
 export default class LoginForm extends FormValidator {
+
     constructor() {
         super();
         this.logValue = "";
@@ -25,18 +26,22 @@ export default class LoginForm extends FormValidator {
         return "Некорректный ввод или логин не существует";
     }
 
+    static msgSignInSuccess() {
+        return "Вы вошли на сайт!";
+    }
+
     validate(logValue, pasValue, errorBox)
     {
-        let login = this.correctLogin(logValue);
-        let password  = this.correctPassword(pasValue);
+        let login = FormValidator.correctLogin(logValue);
+        let password  = FormValidator.correctPassword(pasValue);
 
-        if (login === this.EMPTY_RESPONSE || password  === this.EMPTY_RESPONSE) {
-            errorBox.innerHTML = this.constructor.msgEmptyField();
+        if (login === FormValidator.responseEmpty()|| password  === FormValidator.responseEmpty()) {
+            errorBox.innerHTML = LoginForm.msgEmptyField();
             return false;
         }
 
-        if (login === this.INCORRECT_RESPONSE || password  === this.INCORRECT_RESPONSE) {
-            errorBox.innerHTML = this.constructor.msgIncorrectInput();
+        if (login === FormValidator.responseIncorrect() || password  === FormValidator.responseIncorrect()) {
+            errorBox.innerHTML = LoginForm.msgIncorrectInput();
             return false;
         }
 
@@ -52,10 +57,10 @@ export default class LoginForm extends FormValidator {
         const reqUser = new RequestToHost();
         reqUser.auth(this.logValue, this.pasValue, (err, resp) => {
             if (err) {
-                return this.errBox.innerHTML = this.constructor.msgResponseFromHost();
+                return this.errBox.innerHTML = LoginForm.msgResponseFromHost();
             }
 
-            alert("Вы вошли на сайт!");
+            alert(LoginForm.msgSignInSuccess());
             this.clearForm();
 
             window.location.reload();

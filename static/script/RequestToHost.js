@@ -54,15 +54,15 @@ export default class RequestToHost {
 
     auth(login, password, callback) {
         const user = {login, password};
-        let response = this.constructor.requestPost('api/users/signin', user, callback);
+        let response = RequestToHost.requestPost('api/users/signin', user, callback);
     }
 
     reg(login, password, email, callback) {
         const user = {login, password, email};
-        let response = this.constructor.requestPost('api/users', user, callback);
+        let response = RequestToHost.requestPost('api/users', user, callback);
     }
 
     whoami(callback) {
-        let response = this.constructor.requestGet('api/users/me', callback)
+        let response = RequestToHost.requestGet('api/users/me', callback)
     }
 }

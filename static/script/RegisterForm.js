@@ -5,6 +5,7 @@ import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
 
 export default class RegisterForm extends FormValidator {
+
     constructor() {
         super();
         this.emailValue = "";
@@ -30,24 +31,28 @@ export default class RegisterForm extends FormValidator {
         return "Некорректный email";
     }
 
+    static msgSignUpSuccess() {
+        return "Вы успешно зарегистрировались!";
+    }
+
     validate(logValue, pasValue, emailValue, errorBox)
     {
-        let login = this.correctLogin(logValue);
-        let password = this.correctPassword(pasValue);
-        let email = this.correctEmail(emailValue);
+        let login = FormValidator.correctLogin(logValue);
+        let password = FormValidator.correctPassword(pasValue);
+        let email = FormValidator.correctEmail(emailValue);
 
-        if (email === this.NOT_EMAIL_RESPONSE) {
-            errorBox.innerHTML = this.constructor.msgIsNotEmail();
+        if (email === FormValidator.responseIsNotEmail()) {
+            errorBox.innerHTML = RegisterForm.msgIsNotEmail();
             return false;
         }
 
-        if (login === this.EMPTY_RESPONSE || password === this.EMPTY_RESPONSE || email === this.EMPTY_RESPONSE) {
-            errorBox.innerHTML = this.constructor.msgEmptyField();
+        if (login === FormValidator.responseEmpty() || password === FormValidator.responseEmpty() || email === FormValidator.responseEmpty()) {
+            errorBox.innerHTML = RegisterForm.msgEmptyField();
             return false;
         }
 
-        if (login === this.INCORRECT_RESPONSE || password === this.INCORRECT_RESPONSE) {
-            errorBox.innerHTML = this.constructor.msgIncorrectInput();
+        if (login === FormValidator.responseIncorrect() || password === FormValidator.responseIncorrect()) {
+            errorBox.innerHTML = RegisterForm.msgIncorrectInput();
             return false;
         }
 
@@ -63,10 +68,10 @@ export default class RegisterForm extends FormValidator {
         const reqUser = new RequestToHost();
         reqUser.reg(this.logValue, this.pasValue, this.emailValue, (err, resp) => {
             if (err) {
-                return this.errBox.innerHTML = this.constructor.msgResponseFromHost();
+                return this.errBox.innerHTML = RegisterForm.msgResponseFromHost();
             }
 
-            alert("Вы успешно зарегистрировались!");
+            alert(RegisterForm.msgSignUpSuccess());
             this.clearForm();
 
             this.getElementByClass("register-page__button-back").click();

@@ -3,7 +3,8 @@
 import elementPresenter from "./elementPresenter.js";
 import PagePresenter from "./PagePresenter.js";
 
-class MainClass {
+class MainApp {
+
     constructor () {
         Object.assign(PagePresenter.prototype, elementPresenter);
         let pagePresenter = new PagePresenter();
@@ -11,5 +12,5 @@ class MainClass {
 }
 
 window.addEventListener("load", function () {
-    const objMain = new MainClass();
+    const application = new MainApp();
 });
