@@ -12,9 +12,9 @@ export default class RegisterForm extends FormValidator {
         super();
         Object.assign(RegisterForm.prototype, elementPresenter, fieldsCleaner);
         this.emailValue = "";
-        this.logValue = "";
-        this.pasValue = "";
-        this.errBox = null;
+        this.loginValue = "";
+        this.passwordValue = "";
+        this.errorBox = null;
         this.addEventsToButtons();
     }
 
@@ -38,10 +38,10 @@ export default class RegisterForm extends FormValidator {
         return "Вы успешно зарегистрировались!";
     }
 
-    validate(logValue, pasValue, emailValue, errorBox)
+    static validate(loginValue, passwordValue, emailValue, errorBox)
     {
-        let login = FormValidator.correctLogin(logValue);
-        let password = FormValidator.correctPassword(pasValue);
+        let login = FormValidator.correctLogin(loginValue);
+        let password = FormValidator.correctPassword(passwordValue);
         let email = FormValidator.correctEmail(emailValue);
 
         if (email === FormValidator.responseIsNotEmail()) {
@@ -69,9 +69,9 @@ export default class RegisterForm extends FormValidator {
 
     sendRequest() {
         const reqUser = new RequestToHost();
-        reqUser.reg(this.logValue, this.pasValue, this.emailValue, (err, resp) => {
+        reqUser.reg(this.loginValue, this.passwordValue, this.emailValue, (err, resp) => {
             if (err) {
-                return this.errBox.innerHTML = RegisterForm.msgResponseFromHost();
+                return this.errorBox.innerHTML = RegisterForm.msgResponseFromHost();
             }
 
             alert(RegisterForm.msgSignUpSuccess());
@@ -87,11 +87,11 @@ export default class RegisterForm extends FormValidator {
 
         this.getElementByClass("register-form__button").addEventListener("click", () => {
             this.emailValue = this.getElementByClass("register-form__input-email").value;
-            this.logValue = this.getElementByClass("register-form__input-login").value;
-            this.pasValue = this.getElementByClass("register-form__input-password").value;
-            this.errBox = this.getElementByClass("register-form__error-box");
+            this.loginValue = this.getElementByClass("register-form__input-login").value;
+            this.passwordValue = this.getElementByClass("register-form__input-password").value;
+            this.errorBox = this.getElementByClass("register-form__error-box");
 
-            const valid = this.validate(this.logValue, this.pasValue, this.emailValue, this.errBox);
+            const valid = RegisterForm.validate(this.loginValue, this.passwordValue, this.emailValue, this.errorBox);
 
             if (valid) {
                 this.sendRequest();
@@ -100,5 +100,5 @@ export default class RegisterForm extends FormValidator {
 
         this.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm()});
         this.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm()});
-    }
+    }F
 }

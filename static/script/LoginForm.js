@@ -6,14 +6,16 @@ import Debugger from "./Debugger.js";
 import elementPresenter from "./elementPresenter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
+
+
 export default class LoginForm extends FormValidator {
 
     constructor() {
         super();
         Object.assign(LoginForm.prototype, elementPresenter, fieldsCleaner);
-        this.logValue = "";
-        this.pasValue = "";
-        this.errBox = null;
+        this.loginValue = "";
+        this.passwordValue = "";
+        this.errorBox = null;
         this.addEventsToButtons();
     }
 
@@ -33,10 +35,10 @@ export default class LoginForm extends FormValidator {
         return "Вы вошли на сайт!";
     }
 
-    validate(logValue, pasValue, errorBox)
+    static validate(loginValue, passwordValue, errorBox)
     {
-        let login = FormValidator.correctLogin(logValue);
-        let password  = FormValidator.correctPassword(pasValue);
+        let login = FormValidator.correctLogin(loginValue);
+        let password  = FormValidator.correctPassword(passwordValue);
 
         if (login === FormValidator.responseEmpty()|| password  === FormValidator.responseEmpty()) {
             errorBox.innerHTML = LoginForm.msgEmptyField();
@@ -58,9 +60,9 @@ export default class LoginForm extends FormValidator {
 
     sendRequest() {
         const reqUser = new RequestToHost();
-        reqUser.auth(this.logValue, this.pasValue, (err, resp) => {
+        reqUser.auth(this.loginValue, this.passwordValue, (err, resp) => {
             if (err) {
-                return this.errBox.innerHTML = LoginForm.msgResponseFromHost();
+                return this.errorBox.innerHTML = LoginForm.msgResponseFromHost();
             }
 
             alert(LoginForm.msgSignInSuccess());
@@ -72,10 +74,10 @@ export default class LoginForm extends FormValidator {
 
     addEventsToButtons() {
         this.getElementByClass("login-form__button").addEventListener("click", () => {
-            this.logValue = this.getElementByClass("login-form__input-login").value;
-            this.pasValue = this.getElementByClass("login-form__input-password").value;
-            this.errBox = this.getElementByClass("login-form__error-box");
-            const valid = this.validate(this.logValue, this.pasValue, this.errBox);
+            this.loginValue = this.getElementByClass("login-form__input-login").value;
+            this.passwordValue = this.getElementByClass("login-form__input-password").value;
+            this.errorBox = this.getElementByClass("login-form__error-box");
+            const valid = LoginForm.validate(this.loginValue, this.passwordValue, this.errorBox);
 
             if (valid) {
                 this.sendRequest();
