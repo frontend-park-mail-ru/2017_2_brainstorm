@@ -76,8 +76,7 @@ export default class RegisterForm extends FormValidator {
     }
 
     sendRequest() {
-        const reqUser = new RequestToHost();
-        reqUser.reg(this.loginValue, this.passwordValue, this.emailValue, (err, resp) => {
+        RequestToHost.register(this.loginValue, this.passwordValue, this.emailValue, (err, resp) => {
             if (err) {
                 return this.errorBox.innerHTML = RegisterForm.msgResponseFromHost();
             }

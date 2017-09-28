@@ -55,17 +55,17 @@ export default class RequestToHost {
         };
     }
 
-    auth(login, password, callback) {
+    static auth(login, password, callback) {
         const user = {login, password};
         let response = RequestToHost.requestPost('api/users/signin', user, callback);
     }
 
-    reg(login, password, email, callback) {
+    static register(login, password, email, callback) {
         const user = {login, password, email};
         let response = RequestToHost.requestPost('api/users', user, callback);
     }
 
-    whoami(callback) {
+    static whoami(callback) {
         let response = RequestToHost.requestGet('api/users/me', callback)
     }
 }

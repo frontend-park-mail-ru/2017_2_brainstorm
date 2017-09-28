@@ -9,7 +9,7 @@ import fieldsCleaner from "./fieldsCleaner.js";
 const messagesLoginForm = {
     EMPTY_MESSAGE : "Заполнены не все поля",
     INCORRECT_MESSAGE : "Использованы недопустимые символы",
-    RESPONSE_MESSAGE : "Некорректный ввод или логин не существует",
+    RESPONSE_MESSAGE : "Некорректный ввод или логина не существует",
     SUCCESS_SIGN_IN_MESSAGE : "Вы вошли на сайт!"
 };
 
@@ -64,8 +64,7 @@ export default class LoginForm extends FormValidator {
     }
 
     sendRequest() {
-        const reqUser = new RequestToHost();
-        reqUser.auth(this.loginValue, this.passwordValue, (err, resp) => {
+        RequestToHost.auth(this.loginValue, this.passwordValue, (err, resp) => {
             if (err) {
                 return this.errorBox.innerHTML = LoginForm.msgResponseFromHost();
             }

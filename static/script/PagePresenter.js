@@ -17,19 +17,19 @@ export default class PagePresenter {
     constructor() {
 
         Object.assign(Page.prototype, elementReturner, whoamiMixin);
-        let mainPage = new MainPage();
+        const mainPage = new MainPage();
         mainPage.showOnlyOnePage("main-page");
         mainPage.addEventsOnButtons();
         mainPage.whoami();
 
-        let recordsPage = new RecordsPage();
+        const recordsPage = new RecordsPage();
 
-        let infoPage = new InfoPage();
+        const infoPage = new InfoPage();
 
-        let playPage = new PlayPage();
+        const playPage = new PlayPage();
 
-        let loginPage = new LoginPage();
+        const loginPage = new LoginPage();
 
-        let registerPage = new RegisterPage();
+        const registerPage = new RegisterPage();
     }
 }

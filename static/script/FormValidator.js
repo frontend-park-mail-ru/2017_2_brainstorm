@@ -1,21 +1,28 @@
 "use strict";
 
+const messagesToForm = {
+    OK_MESSAGE: "ok",
+    EMPTY_MESSAGE : "empty",
+    INCORRECT_MESSAGE : "incorrect",
+    NOT_EMAIL_MESSAGE : "is not email"
+};
+
 export default class FormValidator {
 
     static responseOk() {
-        return "ok";
+        return messagesToForm.OK_MESSAGE;
     }
 
     static responseEmpty() {
-        return "empty";
+        return messagesToForm.EMPTY_MESSAGE;
     }
 
     static responseIncorrect() {
-        return "incorrect";
+        return messagesToForm.INCORRECT_MESSAGE;
     }
 
     static responseIsNotEmail() {
-        return "is not email";
+        return messagesToForm.NOT_EMAIL_MESSAGE;
     }
 
     static correctLogin(login) {
