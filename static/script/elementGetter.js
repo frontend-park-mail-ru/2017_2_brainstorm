@@ -1,10 +1,10 @@
 "use strict";
 
 // mixin
-let elementReturner = {
+let elementGetter = {
     getElementByClass(className) {
         return document.getElementsByClassName(className.toString())[0];
     }
 };
 
-export default elementReturner;
+export default elementGetter;

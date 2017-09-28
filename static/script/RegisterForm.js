@@ -3,7 +3,7 @@
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
-import elementReturner from "./elementReturner.js";
+import elementGetter from "./elementGetter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
 const messagesRegisterForm = {
@@ -18,7 +18,7 @@ export default class RegisterForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(RegisterForm.prototype, elementReturner, fieldsCleaner);
+        Object.assign(RegisterForm.prototype, elementGetter, fieldsCleaner);
         this.emailValue = "";
         this.loginValue = "";
         this.passwordValue = "";
