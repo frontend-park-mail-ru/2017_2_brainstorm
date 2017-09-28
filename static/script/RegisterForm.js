@@ -3,14 +3,22 @@
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
-import elementPresenter from "./elementPresenter.js";
+import elementReturner from "./elementReturner.js";
 import fieldsCleaner from "./fieldsCleaner.js";
+
+const messagesRegisterForm = {
+    EMPTY_MESSAGE : "Заполнены не все поля",
+    INCORRECT_MESSAGE : "Использованы недопустимые символы",
+    NOT_EMAIL_MESSAGE : "Некорректный email",
+    RESPONSE_MESSAGE : "Некорректный ввод или логин уже существует",
+    SUCCESS_SIGN_UP_MESSAGE : "Вы успешо зарегистрировались!"
+};
 
 export default class RegisterForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(RegisterForm.prototype, elementPresenter, fieldsCleaner);
+        Object.assign(RegisterForm.prototype, elementReturner, fieldsCleaner);
         this.emailValue = "";
         this.loginValue = "";
         this.passwordValue = "";
@@ -19,23 +27,23 @@ export default class RegisterForm extends FormValidator {
     }
 
     static msgEmptyField() {
-        return "Заполнены не все поля";
+        return messagesRegisterForm.EMPTY_MESSAGE;
     }
 
     static msgIncorrectInput() {
-        return "Использованы недопустимые символы";
+        return messagesRegisterForm.INCORRECT_MESSAGE;
     }
 
     static msgResponseFromHost() {
-        return "Некорректный ввод или логин уже существует";
+        return messagesRegisterForm.RESPONSE_MESSAGE;
     }
 
     static msgIsNotEmail() {
-        return "Некорректный email";
+        return messagesRegisterForm.NOT_EMAIL_MESSAGE;
     }
 
     static msgSignUpSuccess() {
-        return "Вы успешно зарегистрировались!";
+        return messagesRegisterForm.SUCCESS_SIGN_UP_MESSAGE;
     }
 
     static validate(loginValue, passwordValue, emailValue, errorBox)
@@ -100,5 +108,5 @@ export default class RegisterForm extends FormValidator {
 
         this.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm()});
         this.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm()});
-    }F
+    }
 }

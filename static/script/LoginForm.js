@@ -3,16 +3,21 @@
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
-import elementPresenter from "./elementPresenter.js";
+import elementReturner from "./elementReturner.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
-
+const messagesLoginForm = {
+    EMPTY_MESSAGE : "Заполнены не все поля",
+    INCORRECT_MESSAGE : "Использованы недопустимые символы",
+    RESPONSE_MESSAGE : "Некорректный ввод или логин не существует",
+    SUCCESS_SIGN_IN_MESSAGE : "Вы вошли на сайт!"
+};
 
 export default class LoginForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(LoginForm.prototype, elementPresenter, fieldsCleaner);
+        Object.assign(LoginForm.prototype, elementReturner, fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
         this.errorBox = null;
@@ -20,19 +25,19 @@ export default class LoginForm extends FormValidator {
     }
 
     static msgEmptyField() {
-        return "Заполнены не все поля";
+        return messagesLoginForm.EMPTY_MESSAGE;
     }
 
     static msgIncorrectInput() {
-        return "Использованы недопустимые символы";
+        return messagesLoginForm.INCORRECT_MESSAGE;
     }
 
     static msgResponseFromHost() {
-        return "Некорректный ввод или логин не существует";
+        return messagesLoginForm.RESPONSE_MESSAGE;
     }
 
     static msgSignInSuccess() {
-        return "Вы вошли на сайт!";
+        return messagesLoginForm.SUCCESS_SIGN_IN_MESSAGE;
     }
 
     static validate(loginValue, passwordValue, errorBox)

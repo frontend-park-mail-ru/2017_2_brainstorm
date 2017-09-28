@@ -1,6 +1,6 @@
 "use strict";
 
-import elementPresenter from "./elementPresenter.js";
+import elementReturner from "./elementReturner.js";
 import Debugger from "./Debugger.js";
 import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
@@ -16,7 +16,7 @@ export default class PagePresenter {
 
     constructor() {
 
-        Object.assign(Page.prototype, elementPresenter, whoamiMixin);
+        Object.assign(Page.prototype, elementReturner, whoamiMixin);
         let mainPage = new MainPage();
         mainPage.showOnlyOnePage("main-page");
         mainPage.addEventsOnButtons();

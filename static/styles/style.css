@@ -2,10 +2,10 @@
 
 body {
     background-color: lavender;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 
 p {
-    font-family: Ubuntu;
     color: dimgrey;
 }
 

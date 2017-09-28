@@ -1,12 +1,12 @@
 "use strict";
 
+const DEBUG_MODE = true;
+
 export default class Debugger {
 
-    debugMode() {
-        const debugMode = false;
-    }
-
     static print(logString) {
-        console.log(logString);
+        if (DEBUG_MODE) {
+            console.log(logString);
+        }
     }
 }

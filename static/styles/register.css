@@ -10,7 +10,7 @@
 
 .register-page__register-form {
     width: 330px;
-    height: 190px;
+    height: 200px;
     margin: 0 auto;
     margin-left: 10%;
     border-radius: 15px;
@@ -110,7 +110,6 @@ input[type="password"]:focus {
 .register-page__link-to-login:hover {
     text-decoration: underline;
 }
-
 
 .register-form__error-box {
     color: white;

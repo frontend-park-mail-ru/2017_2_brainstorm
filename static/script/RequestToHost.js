@@ -1,6 +1,9 @@
 "use strict";
 
-const HTTP_OK = 200;
+const messagesFromHost = {
+    HTTP_OK : 200,
+    XHR_READY : 4
+};
 
 export default class RequestToHost {
 
@@ -20,10 +23,10 @@ export default class RequestToHost {
         xhr.send(body);
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState !== 4) {
+            if (xhr.readyState !== messagesFromHost.XHR_READY) {
                 return;
             }
-            if (+xhr.status !== HTTP_OK) {
+            if (+xhr.status !== messagesFromHost.HTTP_OK) {
                 return callback(xhr, null);
             }
 
@@ -40,10 +43,10 @@ export default class RequestToHost {
         xhr.send();
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState !== 4) {
+            if (xhr.readyState !== messagesFromHost.XHR_READY) {
                 return;
             }
-            if (+xhr.status !== HTTP_OK) {
+            if (+xhr.status !== messagesFromHost.HTTP_OK) {
                 return callback(xhr, null);
             }
 
