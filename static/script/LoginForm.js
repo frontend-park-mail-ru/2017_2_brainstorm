@@ -3,11 +3,14 @@
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger.js";
+import elementPresenter from "./elementPresenter.js";
+import fieldsCleaner from "./fieldsCleaner.js";
 
 export default class LoginForm extends FormValidator {
 
     constructor() {
         super();
+        Object.assign(LoginForm.prototype, elementPresenter, fieldsCleaner);
         this.logValue = "";
         this.pasValue = "";
         this.errBox = null;
