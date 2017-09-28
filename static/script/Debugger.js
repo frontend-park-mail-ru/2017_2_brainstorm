@@ -1,6 +1,6 @@
 "use strict";
 
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 
 export default class Debugger {
 
