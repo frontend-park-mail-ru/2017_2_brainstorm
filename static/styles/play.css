@@ -27,7 +27,8 @@
 }
 
 .play-page__play-field {
-    width: 35em;
-    height: 35em;
+    width: 600px;
+    height: 600px;
     background: bisque;
+    margin-left: -30px;
 }
