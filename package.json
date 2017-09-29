@@ -1,0 +1,23 @@
+{
+  "name": "BubbleRise",
+  "version": "1.0.2",
+  "description": "game",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack && node index.js",
+    "test": "echo \"Error: no test specified\""
+  },
+  "keywords": ["game","bubble"],
+  "author": "brainstorm",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/frontend-park-mail-ru/2017_2_brainstorm.git"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.6"
+  }
+}
