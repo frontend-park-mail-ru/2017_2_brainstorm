@@ -4,7 +4,7 @@
   "description": "game",
   "main": "index.js",
   "scripts": {
-    "start": "webpack && node index.js",
+    "start": "node_modules/.bin/webpack && node index.js",
     "test": "echo \"Error: no test specified\""
   },
   "keywords": ["game","bubble"],
