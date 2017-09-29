@@ -2,14 +2,14 @@
 
 let fieldsCleaner = {
     clearFields(...fields) {
-        for (let i = 0; i < fields.length; i++) {
-            let elem = this.getElementByClass(fields[i].toString());
+        fields.forEach(field => {
+            let elem = this.getElementByClass(field.toString());
             if (elem.nodeName === "INPUT") {
                 elem.value = "";
             } else if (elem.nodeName === "DIV") {
                 elem.innerHTML = "";
             }
-        }
+        });
     }
 };
 

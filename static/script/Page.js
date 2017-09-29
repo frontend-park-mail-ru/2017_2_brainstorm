@@ -9,10 +9,10 @@ export default class Page {
     addEventOnButtons() {};
 
     static hideAllPages() {
-        let pages = document.getElementsByClassName("page");
-        for (let i = 0; i < pages.length; i++) {
+       let pages = document.getElementsByClassName("page");
+       for (let i = 0; i < pages.length; i++) {
             pages[i].hidden = true;
-        }
+       }
     }
 
     showOnlyOnePage(pageName) {
@@ -21,13 +21,8 @@ export default class Page {
     }
 
     addRedirectOnButtons(...buttons) {
-        let t = this;
-
-        buttons.forEach(function (button, i, buttons) {
-            t.getElementByClass(button.button).addEventListener("click", function () {
-                t.showOnlyOnePage(button.nextPage);
-            });
+        buttons.forEach( button => {
+            this.getElementByClass(button.button).addEventListener("click", () => this.showOnlyOnePage(button.nextPage));
         });
     }
-
 }
