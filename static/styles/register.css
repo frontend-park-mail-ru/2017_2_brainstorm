@@ -22,18 +22,6 @@
     padding-bottom: 1em;
 }
 
-.register-page__button-register {
-    width: 50%;
-    cursor: pointer;
-    font-size:15px;
-    text-decoration: none;
-    padding:10px 20px;
-    color:#4a4a4a;
-    background-color:#E6E6FA;
-    border-radius:6px;
-    border: 4px solid #E6E6FA;
-}
-
 .register-form__input-login {
     width: 100%;
 }
@@ -76,6 +64,7 @@ input[type="password"]:focus {
 .register-page__button-back {
     width: 60px;
     height: 60px;
+    cursor: pointer;
 }
 
 .register-page__button-back_img {
@@ -91,20 +80,9 @@ input[type="password"]:focus {
     height: 60px;
 }
 
-.register-page__button-register {
-    width: 50%;
-    cursor: pointer;
-    font-size:15px;
-    text-decoration: none;
-    padding:10px 20px;
-    color:#4a4a4a;
-    background-color:#E6E6FA;
-    border-radius:6px;
-    border: 4px solid #E6E6FA;
-}
-
 .register-page__link-to-login {
     color: blue;
+    cursor: pointer;
 }
 
 .register-page__link-to-login:hover {
