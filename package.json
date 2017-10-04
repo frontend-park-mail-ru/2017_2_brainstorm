@@ -4,8 +4,8 @@
   "description": "game",
   "main": "index.js",
   "scripts": {
-    "start": "npm run webpug && node index.js",
-    "webpug": "./node_modules/webpack/bin/webpack.js && npm run compile-pug",
+    "prestart": "./node_modules/webpack/bin/webpack.js && npm run compile-pug",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\"",
     "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static"
   },
@@ -18,7 +18,8 @@
   "dependencies": {
     "express": "^4.15.4",
     "pug": "^2.0.0-rc.4",
-    "pug-cli": "^1.0.0-alpha6"
+    "pug-cli": "^1.0.0-alpha6",
+    "webpack": "^3.5.6"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,5 @@
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-import": "^2.7.0",
     "pug-loader": "^2.3.0",
-    "webpack": "^3.5.6"
   }
 }
