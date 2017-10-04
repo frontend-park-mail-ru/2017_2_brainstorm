@@ -4,8 +4,8 @@
   "description": "game",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "node_modules/.bin/webpack && npm run compile-pug",
+    "start": "npm run webpug && node index.js",
+    "webpug": "./node_modules/webpack/bin/webpack.js && npm run compile-pug",
     "test": "echo \"Error: no test specified\"",
     "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static"
   },
