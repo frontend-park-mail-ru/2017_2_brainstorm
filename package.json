@@ -4,20 +4,23 @@
   "description": "game",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/webpack && node index.js",
+    "prestart": "./node_modules/webpack/bin/webpack.js && npm run compile-pug",
+    "start": "node index.js",
+    "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static",
     "test": "echo \"Error: no test specified\""
   },
   "keywords": ["game","bubble"],
   "author": "brainstorm",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "webpack": "^3.5.6"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/frontend-park-mail-ru/2017_2_brainstorm.git"
   },
   "devDependencies": {
-    "webpack": "^3.5.6"
   }
 }
+
