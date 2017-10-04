@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "postinstall": "npm run compile-pug && webpack",
+    "postinstall": "node_modules/.bin/webpack && npm run compile-pug",
     "test": "echo \"Error: no test specified\"",
     "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static"
   },
