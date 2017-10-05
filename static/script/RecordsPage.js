@@ -24,10 +24,10 @@ export default class RecordsPage extends Page {
     }
 
 	addEventsOnButtons() {
+        //RecordsPage.renderLeaderBoard([{"login": "Jack", "numberOfGames": 133, "record": 333}, {"login": "Ron", "numberOfGames": 12, "record": 233}]);
+        this.sendRequest();
 		this.addRedirectOnButtons(
 			{button: "records-page__button-back", nextPage: "main-page"}
 		);
-        //RecordsPage.renderLeaderBoard([{"login": "Jack", "numberOfGames": 133, "record": 333}, {"login": "Ron", "numberOfGames": 12, "record": 233}]);
-		this.sendRequest();
 	}
 }
