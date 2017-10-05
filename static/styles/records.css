@@ -63,3 +63,8 @@ tr:last-child td:last-child {
 tr td:last-child {
     border-right: none;
 }
+
+.records-page__error-box {
+    color: coral;
+    font-size: 30px;
+}

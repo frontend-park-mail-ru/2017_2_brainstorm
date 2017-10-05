@@ -7,7 +7,8 @@
     "prestart": "./node_modules/webpack/bin/webpack.js && npm run compile-pug",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\"",
-    "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static"
+    "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static",
+    "eslint": "./node_modules/.bin/eslint ./static/script"
   },
   "keywords": [
     "game",
