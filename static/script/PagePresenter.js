@@ -21,7 +21,7 @@ export default class PagePresenter {
 		mainPage.addEventsOnButtons();
 		mainPage.whoami();
 
-		new RecordsPage();
+		// new RecordsPage();
 
 		new InfoPage();
 
