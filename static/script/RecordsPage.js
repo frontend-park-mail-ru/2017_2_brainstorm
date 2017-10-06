@@ -11,8 +11,9 @@ export default class RecordsPage extends Page {
 		// устанавливаем локальные переменные для рендеринга
 		let locals = resp;
 		// рендерим шаблон
-		document.querySelector(".records-page").innerHTML += template(locals);
-	}
+		//document.querySelector(".records-page").innerHTML += template(locals);
+        document.querySelector(".records-page__table").innerHTML = template(locals);
+    }
 
     sendRequest() {
         RequestToHost.records((err, resp) => {
