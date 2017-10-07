@@ -9,6 +9,7 @@ import PlayPage from "./PlayPage";
 import MainPage from "./MainPage.js";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import RecordsPage from "./RecordsPage";
 
 export default class PagePresenter {
 
@@ -27,5 +28,7 @@ export default class PagePresenter {
 		new LoginPage();
 
 		new RegisterPage();
+
+		new RecordsPage();
 	}
 }

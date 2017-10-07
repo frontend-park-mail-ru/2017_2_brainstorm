@@ -14,7 +14,7 @@ export default class RecordsPage extends Page {
 		document.querySelector(".records-page__table").innerHTML = template(locals);
 	}
 
-	sendRequest() {
+	sendRequestForRecords() {
 		RequestToHost.records((err, resp) => {
 			if (err) {
 				return alert("Empty TOP");
@@ -24,12 +24,14 @@ export default class RecordsPage extends Page {
 	}
 
 	addEventsOnButtons() {
-		this.sendRequest();
 		this.getElementByClass("records-page__button-back").addEventListener("click", () => {
 			document.querySelector(".records-page__table").innerHTML = "";
 		});
 		this.addRedirectOnButtons(
 			{button: "records-page__button-back", nextPage: "main-page"}
 		);
+		this.getElementByClass("main-menu__button-records").addEventListener("click", () => {
+			this.sendRequestForRecords();
+		});
 	}
 }
