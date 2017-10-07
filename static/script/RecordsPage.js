@@ -6,8 +6,9 @@ import RequestToHost from "./RequestToHost.js";
 export default class RecordsPage extends Page {
 
     static renderLeaderBoard(resp) {
+        const recordsTemplatePath = Page.templatePath() + "records-page.pug";
         // подготовка шаблона для рендеринга
-        let template = require(Page.templatePath() + "records-page.pug");
+        let template = require(recordsTemplatePath + ".html");
         // устанавливаем локальные переменные для рендеринга
         let locals = resp;
         // рендерим шаблон
