@@ -104,7 +104,7 @@ export default class RequestToHost {
 		RequestToHost.requestGet("api/users/me", callback);
 	}
 
-    /**
+	/**
 	 * Запрашивает TOP пользователей
      * @param callback
      */

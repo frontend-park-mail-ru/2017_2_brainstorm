@@ -12,8 +12,8 @@ export default class MainPage extends Page {
 			{button: "main-menu__button-records", nextPage: "records-page"},
 			{button: "main-menu__button-info", nextPage: "info-page"}
 		);
-        this.getElementByClass("main-menu__button-records").addEventListener("click", () => {
-            new RecordsPage();
+		this.getElementByClass("main-menu__button-records").addEventListener("click", () => {
+			new RecordsPage();
 		});
-    }
+	}
 }

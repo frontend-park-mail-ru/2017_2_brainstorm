@@ -4,7 +4,6 @@ import elementGetter from "./elementGetter.js";
 import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
 
-import RecordsPage from "./RecordsPage.js";
 import InfoPage from "./InfoPage.js";
 import PlayPage from "./PlayPage";
 import MainPage from "./MainPage.js";
@@ -20,8 +19,6 @@ export default class PagePresenter {
 		mainPage.showOnlyOnePage("main-page");
 		mainPage.addEventsOnButtons();
 		mainPage.whoami();
-
-		// new RecordsPage();
 
 		new InfoPage();
 
