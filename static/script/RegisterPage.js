@@ -5,15 +5,15 @@ import RegisterForm from "./RegisterForm.js";
 
 export default class RegisterPage extends Page {
 
-	constructor() {
-		super();
-		this.form = new RegisterForm();
-	}
+    constructor() {
+        super();
+        this.form = new RegisterForm();
+    }
 
-	addEventsOnButtons() {
-		this.addRedirectOnButtons(
-			{button: "register-page__button-back", nextPage: "login-page"},
-			{button: "register-page__link-to-login", nextPage: "login-page"}
-		);
-	}
+    addEventsOnButtons() {
+        this.addRedirectOnButtons(
+            {button: "register-page__button-back", nextPage: "login-page"},
+            {button: "register-page__link-to-login", nextPage: "login-page"}
+        );
+    }
 }

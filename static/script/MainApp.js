@@ -5,12 +5,12 @@ import Debugger from "./Debugger.js";
 
 class MainApp {
 
-	constructor () {
-		Debugger.print("Application was created");
-		new PagePresenter();
-	}
+    constructor () {
+        Debugger.print("Application was created");
+        new PagePresenter();
+    }
 }
 
 window.addEventListener("load", function () {
-	new MainApp();
+    new MainApp();
 });

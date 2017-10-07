@@ -13,22 +13,22 @@ import RecordsPage from "./RecordsPage";
 
 export default class PagePresenter {
 
-	constructor() {
+    constructor() {
 
-		Object.assign(Page.prototype, elementGetter, whoamiMixin);
-		const mainPage = new MainPage();
-		mainPage.showOnlyOnePage("main-page");
-		mainPage.addEventsOnButtons();
-		mainPage.whoami();
+        Object.assign(Page.prototype, elementGetter, whoamiMixin);
+        const mainPage = new MainPage();
+        mainPage.showOnlyOnePage("main-page");
+        mainPage.addEventsOnButtons();
+        mainPage.whoami();
 
-		new InfoPage();
+        new InfoPage();
 
-		new PlayPage();
+        new PlayPage();
 
-		new LoginPage();
+        new LoginPage();
 
-		new RegisterPage();
+        new RegisterPage();
 
-		new RecordsPage();
-	}
+        new RecordsPage();
+    }
 }
