@@ -19,7 +19,6 @@ export default class RecordsPage extends Page {
 			if (err) {
 				return alert("Empty TOP");
 			}
-			// console.log(resp);
 			RecordsPage.renderLeaderBoard(resp);
 		});
 	}
