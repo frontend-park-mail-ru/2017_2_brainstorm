@@ -7,7 +7,7 @@ export default class RecordsPage extends Page {
 
     static renderLeaderBoard(resp) {
         // подготовка шаблона для рендеринга
-        let template = require(this.templatePath + "records-page.pug");
+        let template = require(Page.templatePath() + "records-page.pug");
         // устанавливаем локальные переменные для рендеринга
         let locals = resp;
         // рендерим шаблон

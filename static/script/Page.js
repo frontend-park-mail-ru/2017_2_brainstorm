@@ -4,7 +4,10 @@ export default class Page {
 
     constructor() {
         this.addEventsOnButtons();
-        this.templatePath = "./../views/";
+    }
+
+    static templatePath() {
+        return "./../views/";
     }
 
     addEventOnButtons() {}
