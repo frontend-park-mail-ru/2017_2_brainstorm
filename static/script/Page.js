@@ -6,10 +6,6 @@ export default class Page {
         this.addEventsOnButtons();
     }
 
-    static templatePath() {
-        return "./../views/";
-    }
-
     addEventOnButtons() {}
 
     static hideAllPages() {
