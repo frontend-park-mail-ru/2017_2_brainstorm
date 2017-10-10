@@ -1,16 +1,15 @@
 "use strict";
 
 import elementGetter from "./elementGetter.js";
-import Debugger from "./Debugger.js";
 import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
 
-import RecordsPage from "./RecordsPage.js";
 import InfoPage from "./InfoPage.js";
 import PlayPage from "./PlayPage";
 import MainPage from "./MainPage.js";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";
+import RecordsPage from "./RecordsPage";
 
 export default class PagePresenter {
 
@@ -22,14 +21,14 @@ export default class PagePresenter {
         mainPage.addEventsOnButtons();
         mainPage.whoami();
 
-        const recordsPage = new RecordsPage();
+        new InfoPage();
 
-        const infoPage = new InfoPage();
+        new PlayPage();
 
-        const playPage = new PlayPage();
+        new LoginPage();
 
-        const loginPage = new LoginPage();
+        new RegisterPage();
 
-        const registerPage = new RegisterPage();
+        new RecordsPage();
     }
 }

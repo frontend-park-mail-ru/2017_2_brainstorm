@@ -5,20 +5,33 @@ const messagesFromHost = {
     XHR_READY : 4
 };
 
+/**
+ * Класс для запросов на сервер
+ */
 export default class RequestToHost {
 
+    /**
+	 * Возвращает url backend сервера
+     * @returns {string}
+     */
     static baseUrl() {
-        return  'https://bubblerise-backend.herokuapp.com/';
-    };
+        return  "https://bubblerise-backend.herokuapp.com/";
+    }
 
+    /**
+	 * POST-запрос на сервер
+     * @param {string} address
+     * @param {string} user
+     * @param callback
+     */
     static requestPost(address, user, callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', this.baseUrl() + address, true);
+        xhr.open("POST", this.baseUrl() + address, true);
         xhr.withCredentials = true; //for cookies
 
         const body = JSON.stringify(user);
 
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf8');
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
 
         xhr.send(body);
 
@@ -35,9 +48,14 @@ export default class RequestToHost {
         };
     }
 
+    /**
+	 * GET-запрос на сервер
+     * @param {string} address - string with url
+     * @param callback
+     */
     static requestGet(address, callback) {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', this.baseUrl() + address, true);
+        xhr.open("GET", this.baseUrl() + address, true);
         xhr.withCredentials = true;
 
         xhr.send();
@@ -55,17 +73,42 @@ export default class RequestToHost {
         };
     }
 
+    /**
+	 * Авторизация пользователя
+     * @param login
+     * @param password
+     * @param callback
+     */
     static auth(login, password, callback) {
         const user = {login, password};
-        let response = RequestToHost.requestPost('api/users/signin', user, callback);
+        RequestToHost.requestPost("api/users/signin", user, callback);
     }
 
+    /**
+	 * Регистрация пользователя
+     * @param login
+     * @param password
+     * @param email
+     * @param callback
+     */
     static register(login, password, email, callback) {
         const user = {login, password, email};
-        let response = RequestToHost.requestPost('api/users', user, callback);
+        RequestToHost.requestPost("api/users", user, callback);
     }
 
+    /**
+	 * Узнает логин текущего пользователя
+     * @param callback
+     */
     static whoami(callback) {
-        let response = RequestToHost.requestGet('api/users/me', callback)
+        RequestToHost.requestGet("api/users/me", callback);
+    }
+
+    /**
+	 * Запрашивает TOP пользователей
+     * @param callback
+     */
+    static records(callback) {
+        RequestToHost.requestGet("api/users/records", callback);
     }
 }

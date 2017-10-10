@@ -64,3 +64,6 @@ typings/
 # Webpack result script
 static/script/app.js
 
+# Pug templates result
+static/views/*.pug.js
+

@@ -1,9 +1,10 @@
 "use strict";
 
 const express = require('express');
+
 const app = express();
 
-const APPLICATION_PORT = 5555;
+const APPLICATION_PORT = 5550;
 
 app.get('/', function(req, res) {
     app.use(express.static(__dirname + "/static"));

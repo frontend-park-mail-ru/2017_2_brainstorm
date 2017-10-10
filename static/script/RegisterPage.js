@@ -1,7 +1,6 @@
 "use strict";
 
 import Page from "./Page.js";
-import Debugger from "./Debugger.js";
 import RegisterForm from "./RegisterForm.js";
 
 export default class RegisterPage extends Page {

@@ -2,7 +2,6 @@
 
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
-import Debugger from "./Debugger.js";
 import elementGetter from "./elementGetter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
@@ -45,7 +44,7 @@ export default class LoginForm extends FormValidator {
         let login = FormValidator.correctLogin(loginValue);
         let password  = FormValidator.correctPassword(passwordValue);
 
-        if (login === FormValidator.responseEmpty()|| password  === FormValidator.responseEmpty()) {
+        if (login === FormValidator.responseEmpty() || password === FormValidator.responseEmpty()) {
             errorBox.innerHTML = LoginForm.msgEmptyField();
             return false;
         }
@@ -64,7 +63,7 @@ export default class LoginForm extends FormValidator {
     }
 
     sendRequest() {
-        RequestToHost.auth(this.loginValue, this.passwordValue, (err, resp) => {
+        RequestToHost.auth(this.loginValue, this.passwordValue, (err) => {
             if (err) {
                 return this.errorBox.innerHTML = LoginForm.msgResponseFromHost();
             }
@@ -73,7 +72,7 @@ export default class LoginForm extends FormValidator {
             this.clearForm();
 
             window.location.reload();
-        })
+        });
     }
 
     addEventsToButtons() {
@@ -88,7 +87,7 @@ export default class LoginForm extends FormValidator {
             }
         });
 
-        this.getElementByClass("login-page__button-back").addEventListener("click", () => {this.clearForm()});
-        this.getElementByClass("login-page__link-to-register").addEventListener("click", () => {this.clearForm()});
+        this.getElementByClass("login-page__button-back").addEventListener("click", () => {this.clearForm();});
+        this.getElementByClass("login-page__link-to-register").addEventListener("click", () => {this.clearForm();});
     }
 }

@@ -1,7 +1,6 @@
 "use strict";
 
 import Page from "./Page.js";
-import Debugger from "./Debugger.js";
 import LoginForm from "./LoginForm.js";
 
 export default class LoginPage extends Page {

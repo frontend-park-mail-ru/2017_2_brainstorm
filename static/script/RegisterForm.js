@@ -2,7 +2,6 @@
 
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
-import Debugger from "./Debugger.js";
 import elementGetter from "./elementGetter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
@@ -76,7 +75,7 @@ export default class RegisterForm extends FormValidator {
     }
 
     sendRequest() {
-        RequestToHost.register(this.loginValue, this.passwordValue, this.emailValue, (err, resp) => {
+        RequestToHost.register(this.loginValue, this.passwordValue, this.emailValue, (err) => {
             if (err) {
                 return this.errorBox.innerHTML = RegisterForm.msgResponseFromHost();
             }
@@ -85,12 +84,10 @@ export default class RegisterForm extends FormValidator {
             this.clearForm();
 
             this.getElementByClass("register-page__button-back").click();
-        })
+        });
     }
 
     addEventsToButtons() {
-
-        const t = this;
 
         this.getElementByClass("register-form__button").addEventListener("click", () => {
             this.emailValue = this.getElementByClass("register-form__input-email").value;
@@ -105,7 +102,7 @@ export default class RegisterForm extends FormValidator {
             }
         });
 
-        this.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm()});
-        this.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm()});
+        this.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm();});
+        this.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm();});
     }
 }

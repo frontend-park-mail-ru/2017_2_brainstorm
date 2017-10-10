@@ -6,13 +6,13 @@ export default class Page {
         this.addEventsOnButtons();
     }
 
-    addEventOnButtons() {};
+    addEventOnButtons() {}
 
     static hideAllPages() {
-       let pages = document.getElementsByClassName("page");
-       for (let i = 0; i < pages.length; i++) {
+        let pages = document.getElementsByClassName("page");
+        for (let i = 0; i < pages.length; i++) {
             pages[i].hidden = true;
-       }
+        }
     }
 
     showOnlyOnePage(pageName) {

@@ -7,10 +7,10 @@ class MainApp {
 
     constructor () {
         Debugger.print("Application was created");
-        let pagePresenter = new PagePresenter();
+        new PagePresenter();
     }
 }
 
 window.addEventListener("load", function () {
-    const application = new MainApp();
+    new MainApp();
 });

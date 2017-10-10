@@ -1,7 +1,6 @@
 "use strict";
 
 import Page from "./Page.js";
-import Debugger from "./Debugger.js";
 
 export default class MainPage extends Page {
 
