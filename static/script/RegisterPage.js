@@ -5,15 +5,20 @@ import RegisterForm from "./RegisterForm.js";
 
 export default class RegisterPage extends Page {
 
+    static pagePath() {
+        return "/register";
+    }
+
     constructor() {
         super();
         this.form = new RegisterForm();
     }
 
+    getForm() {
+        return this.form;
+    }
+
     addEventsOnButtons() {
-        this.addRedirectOnButtons(
-            {button: "register-page__button-back", nextPage: "login-page"},
-            {button: "register-page__link-to-login", nextPage: "login-page"}
-        );
+
     }
 }

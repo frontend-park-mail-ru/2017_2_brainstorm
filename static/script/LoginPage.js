@@ -5,15 +5,20 @@ import LoginForm from "./LoginForm.js";
 
 export default class LoginPage extends Page {
 
+    static pagePath() {
+        return "/login";
+    }
+
     constructor() {
         super();
         this.form = new LoginForm();
     }
 
+    getForm() {
+        return this.form;
+    }
+
     addEventsOnButtons() {
-        this.addRedirectOnButtons(
-            {button: "login-page__button-back", nextPage: "main-page"},
-            {button: "login-page__link-to-register", nextPage: "register-page"}
-        );
+
     }
 }

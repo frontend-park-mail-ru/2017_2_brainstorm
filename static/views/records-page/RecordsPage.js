@@ -1,13 +1,17 @@
 "use strict";
 
-import Page from "./Page.js";
-import RequestToHost from "./RequestToHost.js";
+import Page from "../../script/Page.js";
+import RequestToHost from "../../script/RequestToHost.js";
 
 export default class RecordsPage extends Page {
 
+    static pagePath() {
+        return "/records";
+    }
+
     static renderLeaderBoard(resp) {
         // подготовка шаблона для рендеринга
-        let template = require("./../views/records-page.pug");
+        let template = require("./records-page.pug");
         // устанавливаем локальные переменные для рендеринга
         let locals = resp;
         // рендерим шаблон
@@ -24,13 +28,10 @@ export default class RecordsPage extends Page {
     }
 
     addEventsOnButtons() {
-        this.getElementByClass("records-page__button-back").addEventListener("click", () => {
+        document.querySelector(".records-page__button-back").addEventListener("click", () => {
             document.querySelector(".records-page__table").innerHTML = "";
         });
-        this.addRedirectOnButtons(
-            {button: "records-page__button-back", nextPage: "main-page"}
-        );
-        this.getElementByClass("main-menu__button-records").addEventListener("click", () => {
+        document.querySelector(".main-menu__button-records").addEventListener("click", () => {
             this.sendRequestForRecords();
         });
     }

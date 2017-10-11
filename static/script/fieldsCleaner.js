@@ -3,7 +3,8 @@
 let fieldsCleaner = {
     clearFields(...fields) {
         fields.forEach(field => {
-            let elem = this.getElementByClass(field.toString());
+            const fieldName = "." + field;
+            let elem = document.querySelector(fieldName);
             if (elem.nodeName === "INPUT") {
                 elem.value = "";
             } else if (elem.nodeName === "DIV") {

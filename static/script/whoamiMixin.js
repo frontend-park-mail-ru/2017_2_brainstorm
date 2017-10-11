@@ -10,7 +10,7 @@ const messagesWhoAmI = {
 let whoamiMixin = {
     whoami() {
         RequestToHost.whoami((err, resp) => {
-            const loginBox = this.getElementByClass("main-page__user");
+            const loginBox = document.querySelector(".main-page__user");
             if (err) {
                 return loginBox.innerHTML = messagesWhoAmI.GUEST_HELLO_MESSAGE;
             }

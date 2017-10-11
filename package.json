@@ -1,6 +1,6 @@
 {
   "name": "BubbleRise",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "game",
   "main": "index.js",
   "scripts": {
@@ -17,11 +17,14 @@
   "author": "brainstorm",
   "license": "ISC",
   "dependencies": {
+    "css-loader": "^0.28.7",
     "express": "^4.15.4",
+    "extract-text-webpack-plugin": "^3.0.1",
     "pug": "^2.0.0-rc.4",
     "pug-cli": "^1.0.0-alpha6",
-    "webpack": "^3.5.6",
-    "pug-loader": "^2.3.0"
+    "pug-loader": "^2.3.0",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.5.6"
   },
   "repository": {
     "type": "git",
@@ -34,4 +37,3 @@
     "eslint-plugin-import": "^2.7.0"
   }
 }
-

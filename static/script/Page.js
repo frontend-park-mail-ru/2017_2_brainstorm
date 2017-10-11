@@ -3,10 +3,13 @@
 export default class Page {
 
     constructor() {
+        Page.pagePath();
         this.addEventsOnButtons();
     }
 
-    addEventOnButtons() {}
+    static pagePath() {}
+
+    addEventsOnButtons() {}
 
     static hideAllPages() {
         let pages = document.getElementsByClassName("page");
@@ -15,14 +18,17 @@ export default class Page {
         }
     }
 
-    showOnlyOnePage(pageName) {
+    static showOnlyOnePage(pageName) {
         Page.hideAllPages();
-        this.getElementByClass(pageName.toString()).hidden = false;
+        document.querySelector("." + pageName).hidden = false;
     }
 
     addRedirectOnButtons(...buttons) {
         buttons.forEach( button => {
-            this.getElementByClass(button.button).addEventListener("click", () => this.showOnlyOnePage(button.nextPage));
+            document.querySelector("."+button.button).addEventListener("click", () => {
+                Page.showOnlyOnePage(button.nextPage);
+                history.pushState({}, "", button.pagePath);
+            });
         });
     }
 }
