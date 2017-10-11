@@ -13,8 +13,9 @@ const messagesLoginForm = {
 
 export default class LoginForm extends FormValidator {
 
-    constructor() {
+    constructor(loginPage) {
         super();
+        this.loginPage = loginPage;
         Object.assign(LoginForm.prototype, /*elementGetter, */fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
@@ -71,6 +72,7 @@ export default class LoginForm extends FormValidator {
             this.clearForm();
 
             history.pushState({}, "", "/main");
+            this.loginPage.showOnlyOnePage("main-page");
         });
     }
 
