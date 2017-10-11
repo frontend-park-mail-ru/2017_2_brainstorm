@@ -73,6 +73,7 @@ export default class LoginForm extends FormValidator {
 
             history.pushState({}, "", "/main");
             Page.showOnlyOnePage("main-page");
+            Page.whoami();
         });
     }
 
