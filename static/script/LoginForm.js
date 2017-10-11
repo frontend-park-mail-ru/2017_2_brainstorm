@@ -70,7 +70,7 @@ export default class LoginForm extends FormValidator {
             alert(LoginForm.msgSignInSuccess());
             this.clearForm();
 
-            window.location.reload();
+            history.pushState({}, "", "/main");
         });
     }
 
