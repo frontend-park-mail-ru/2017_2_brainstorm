@@ -3,6 +3,7 @@
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import fieldsCleaner from "./fieldsCleaner.js";
+import Page from "./Page.js";
 
 const messagesLoginForm = {
     EMPTY_MESSAGE : "Заполнены не все поля",
@@ -13,9 +14,8 @@ const messagesLoginForm = {
 
 export default class LoginForm extends FormValidator {
 
-    constructor(loginPage) {
+    constructor() {
         super();
-        this.loginPage = loginPage;
         Object.assign(LoginForm.prototype, /*elementGetter, */fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
@@ -72,7 +72,7 @@ export default class LoginForm extends FormValidator {
             this.clearForm();
 
             history.pushState({}, "", "/main");
-            this.loginPage.showOnlyOnePage("main-page");
+            Page.showOnlyOnePage("main-page");
         });
     }
 

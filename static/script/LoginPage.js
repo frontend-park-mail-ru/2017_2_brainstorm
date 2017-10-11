@@ -11,7 +11,7 @@ export default class LoginPage extends Page {
 
     constructor() {
         super();
-        this.form = new LoginForm(this);
+        this.form = new LoginForm();
     }
 
     getForm() {
