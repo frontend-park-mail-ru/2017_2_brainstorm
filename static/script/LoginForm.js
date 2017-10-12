@@ -17,7 +17,7 @@ export default class LoginForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(LoginForm.prototype, whoamiMixin,fieldsCleaner);
+        Object.assign(LoginForm.prototype, whoamiMixin, fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
         this.errorBox = null;

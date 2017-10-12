@@ -25,6 +25,29 @@
             "error",
             "always"
         ],
+        "space-in-parens": [
+            "error",
+            "never"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "never"
+        ],
+        "array-bracket-spacing": [
+            "error",
+            "never"
+        ],
+        "computed-property-spacing": [
+            "error",
+            "never"
+        ],
+        "comma-spacing": [
+            "error", {
+                "before": false,
+                "after": true
+            }
+        ],
+        "space-infix-ops": "error",
         "no-console":0
     }
 }

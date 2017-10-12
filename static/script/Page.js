@@ -24,8 +24,8 @@ export default class Page {
     }
 
     addRedirectOnButtons(...buttons) {
-        buttons.forEach( button => {
-            document.querySelector("."+button.button).addEventListener("click", () => {
+        buttons.forEach(button => {
+            document.querySelector("." + button.button).addEventListener("click", () => {
                 Page.showOnlyOnePage(button.nextPage);
                 history.pushState({}, "", button.pagePath);
             });
