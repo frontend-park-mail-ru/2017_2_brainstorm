@@ -4,6 +4,7 @@ import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 import Page from "./Page.js";
+import whoamiMixin from "./whoamiMixin.js";
 
 const messagesLoginForm = {
     EMPTY_MESSAGE : "Заполнены не все поля",
@@ -16,7 +17,7 @@ export default class LoginForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(LoginForm.prototype, /*elementGetter, */fieldsCleaner);
+        Object.assign(LoginForm.prototype, whoamiMixin,fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
         this.errorBox = null;
@@ -72,8 +73,9 @@ export default class LoginForm extends FormValidator {
             this.clearForm();
 
             history.pushState({}, "", "/main");
+
             Page.showOnlyOnePage("main-page");
-            Page.whoami();
+            this.whoami();
         });
     }
 
