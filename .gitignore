@@ -65,5 +65,5 @@ typings/
 static/script/app.js
 
 # Pug templates result
-static/views/*.pug.js
+*.pug.js
 
