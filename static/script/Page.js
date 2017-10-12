@@ -1,5 +1,7 @@
 "use strict";
 
+import PagePresenter from "./PagePresenter.js";
+
 export default class Page {
 
     constructor() {
@@ -11,22 +13,10 @@ export default class Page {
 
     addEventsOnButtons() {}
 
-    static hideAllPages() {
-        let pages = document.getElementsByClassName("page");
-        for (let i = 0; i < pages.length; i++) {
-            pages[i].hidden = true;
-        }
-    }
-
-    static showOnlyOnePage(pageName) {
-        Page.hideAllPages();
-        document.querySelector("." + pageName).hidden = false;
-    }
-
     addRedirectOnButtons(...buttons) {
         buttons.forEach(button => {
             document.querySelector("." + button.button).addEventListener("click", () => {
-                Page.showOnlyOnePage(button.nextPage);
+                PagePresenter.showOnlyOnePage(button.nextPage);
                 history.pushState({}, "", button.pagePath);
             });
         });

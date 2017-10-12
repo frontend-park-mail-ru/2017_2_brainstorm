@@ -2,8 +2,8 @@
 
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
+import PagePresenter from "./PagePresenter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
-import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
 
 const messagesLoginForm = {
@@ -74,7 +74,7 @@ export default class LoginForm extends FormValidator {
 
             history.pushState({}, "", "/main");
 
-            Page.showOnlyOnePage("main-page");
+            PagePresenter.showOnlyOnePage("main-page");
             this.whoami();
         });
     }

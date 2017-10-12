@@ -5,11 +5,17 @@ import RequestToHost from "../../script/RequestToHost.js";
 
 export default class RecordsPage extends Page {
 
+    constructor() {
+        super();
+        this.sendRequestForRecords();
+    }
+
     static pagePath() {
         return "/records";
     }
 
     static renderLeaderBoard(resp) {
+        document.querySelector(".records-page__table").innerHTML = "";
         // подготовка шаблона для рендеринга
         let template = require("./records-page.pug");
         // устанавливаем локальные переменные для рендеринга
@@ -28,9 +34,6 @@ export default class RecordsPage extends Page {
     }
 
     addEventsOnButtons() {
-        document.querySelector(".records-page__button-back").addEventListener("click", () => {
-            document.querySelector(".records-page__table").innerHTML = "";
-        });
         document.querySelector(".main-menu__button-records").addEventListener("click", () => {
             this.sendRequestForRecords();
         });
