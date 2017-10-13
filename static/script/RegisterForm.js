@@ -2,7 +2,6 @@
 
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
-import elementGetter from "./elementGetter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
 
 const messagesRegisterForm = {
@@ -17,7 +16,7 @@ export default class RegisterForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(RegisterForm.prototype, elementGetter, fieldsCleaner);
+        Object.assign(RegisterForm.prototype, fieldsCleaner);
         this.emailValue = "";
         this.loginValue = "";
         this.passwordValue = "";
@@ -45,8 +44,7 @@ export default class RegisterForm extends FormValidator {
         return messagesRegisterForm.SUCCESS_SIGN_UP_MESSAGE;
     }
 
-    static validate(loginValue, passwordValue, emailValue, errorBox)
-    {
+    static validate(loginValue, passwordValue, emailValue, errorBox) {
         let login = FormValidator.correctLogin(loginValue);
         let password = FormValidator.correctPassword(passwordValue);
         let email = FormValidator.correctEmail(emailValue);
@@ -83,17 +81,17 @@ export default class RegisterForm extends FormValidator {
             alert(RegisterForm.msgSignUpSuccess());
             this.clearForm();
 
-            this.getElementByClass("register-page__button-back").click();
+            document.querySelector(".register-page__button-back").click();
         });
     }
 
     addEventsToButtons() {
 
-        this.getElementByClass("register-form__button").addEventListener("click", () => {
-            this.emailValue = this.getElementByClass("register-form__input-email").value;
-            this.loginValue = this.getElementByClass("register-form__input-login").value;
-            this.passwordValue = this.getElementByClass("register-form__input-password").value;
-            this.errorBox = this.getElementByClass("register-form__error-box");
+        document.querySelector(".register-form__button").addEventListener("click", () => {
+            this.emailValue = document.querySelector(".register-form__input-email").value;
+            this.loginValue = document.querySelector(".register-form__input-login").value;
+            this.passwordValue = document.querySelector(".register-form__input-password").value;
+            this.errorBox = document.querySelector(".register-form__error-box");
 
             const valid = RegisterForm.validate(this.loginValue, this.passwordValue, this.emailValue, this.errorBox);
 
@@ -102,7 +100,7 @@ export default class RegisterForm extends FormValidator {
             }
         });
 
-        this.getElementByClass("register-page__button-back").addEventListener("click", () => {this.clearForm();});
-        this.getElementByClass("register-page__link-to-login").addEventListener("click", () => {this.clearForm();});
+        document.querySelector(".register-page__button-back").addEventListener("click", () => {this.clearForm();});
+        document.querySelector(".register-page__link-to-login").addEventListener("click", () => {this.clearForm();});
     }
 }

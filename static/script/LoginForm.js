@@ -2,8 +2,9 @@
 
 import FormValidator from "./FormValidator.js";
 import RequestToHost from "./RequestToHost.js";
-import elementGetter from "./elementGetter.js";
+import PagePresenter from "./PagePresenter.js";
 import fieldsCleaner from "./fieldsCleaner.js";
+import whoamiMixin from "./whoamiMixin.js";
 
 const messagesLoginForm = {
     EMPTY_MESSAGE : "Заполнены не все поля",
@@ -16,7 +17,7 @@ export default class LoginForm extends FormValidator {
 
     constructor() {
         super();
-        Object.assign(LoginForm.prototype, elementGetter, fieldsCleaner);
+        Object.assign(LoginForm.prototype, whoamiMixin, fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
         this.errorBox = null;
@@ -71,15 +72,18 @@ export default class LoginForm extends FormValidator {
             alert(LoginForm.msgSignInSuccess());
             this.clearForm();
 
-            window.location.reload();
+            history.pushState({}, "", "/main");
+
+            PagePresenter.showOnlyOnePage("main-page");
+            this.whoami();
         });
     }
 
     addEventsToButtons() {
-        this.getElementByClass("login-form__button").addEventListener("click", () => {
-            this.loginValue = this.getElementByClass("login-form__input-login").value;
-            this.passwordValue = this.getElementByClass("login-form__input-password").value;
-            this.errorBox = this.getElementByClass("login-form__error-box");
+        document.querySelector(".login-form__button").addEventListener("click", () => {
+            this.loginValue = document.querySelector(".login-form__input-login").value;
+            this.passwordValue = document.querySelector(".login-form__input-password").value;
+            this.errorBox = document.querySelector(".login-form__error-box");
             const valid = LoginForm.validate(this.loginValue, this.passwordValue, this.errorBox);
 
             if (valid) {
@@ -87,7 +91,7 @@ export default class LoginForm extends FormValidator {
             }
         });
 
-        this.getElementByClass("login-page__button-back").addEventListener("click", () => {this.clearForm();});
-        this.getElementByClass("login-page__link-to-register").addEventListener("click", () => {this.clearForm();});
+        document.querySelector(".login-page__button-back").addEventListener("click", () => {this.clearForm();});
+        document.querySelector(".login-page__link-to-register").addEventListener("click", () => {this.clearForm();});
     }
 }

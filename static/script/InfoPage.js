@@ -4,9 +4,11 @@ import Page from "./Page.js";
 
 export default class InfoPage extends Page {
 
+    static pagePath() {
+        return "/info";
+    }
+
     addEventsOnButtons() {
-        this.addRedirectOnButtons(
-            {button: "info-page__button-back", nextPage: "main-page"}
-        );
+
     }
 }

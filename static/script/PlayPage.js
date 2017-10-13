@@ -4,9 +4,11 @@ import Page from "./Page.js";
 
 export default class InfoPage extends Page {
 
+    static pagePath() {
+        return "/play";
+    }
+
     addEventsOnButtons() {
-        this.addRedirectOnButtons(
-            {button: "play-page__button-back", nextPage: "main-page"}
-        );
+
     }
 }

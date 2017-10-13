@@ -1,7 +1,10 @@
+"use strict";
+
 module.exports = {
 	entry: "./static/script/MainApp.js",
 	output: {
-		filename: "./static/script/app.js"
+        path: __dirname + "/static/script/",
+		filename: "app.js"
 	},
     module: {
         rules: [
