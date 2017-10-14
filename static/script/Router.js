@@ -4,11 +4,11 @@ import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
 import PagePresenter from "./PagePresenter.js";
 
-import InfoPage from "./InfoPage.js";
-import PlayPage from "./PlayPage";
-import MainPage from "./MainPage.js";
-import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPage";
+import InfoPage from "../views/info-page/InfoPage.js";
+import PlayPage from "../views/play-page/PlayPage";
+import MainPage from "../views/main-page/MainPage.js";
+import LoginPage from "../views/login-page/LoginPage";
+import RegisterPage from "../views/register-page/RegisterPage";
 import RecordsPage from "../views/records-page/RecordsPage";
 
 export default class Router {
@@ -22,9 +22,7 @@ export default class Router {
         const registerPagePath = RegisterPage.pagePath();
         const recordsPagePath = RecordsPage.pagePath();
 
-        this.redirectToPage();
-
-        Object.assign(Page.prototype, /*elementGetter, */whoamiMixin);
+        Object.assign(Page.prototype, whoamiMixin);
         const mainPage = new MainPage();
         mainPage.whoami();
         mainPage.addRedirectOnButtons(
@@ -45,12 +43,13 @@ export default class Router {
         );
 
         const loginPage = new LoginPage();
+        const registerPage = new RegisterPage();
+
         loginPage.addRedirectOnButtons(
             {button: "login-page__button-back", nextPage: "main-page", pagePath: mainPagePath},
             {button: "login-page__link-to-register", nextPage: "register-page", pagePath: registerPagePath}
         );
 
-        const registerPage = new RegisterPage();
         registerPage.addRedirectOnButtons(
             {button: "register-page__button-back", nextPage: "login-page", pagePath: loginPagePath},
             {button: "register-page__link-to-login", nextPage: "login-page", pagePath: loginPagePath}
@@ -60,6 +59,8 @@ export default class Router {
         this.recordsPage.addRedirectOnButtons(
             {button: "records-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
+
+        this.redirectToPage();
 
         window.addEventListener("popstate", () => {
             this.redirectToPage();
