@@ -1,6 +1,6 @@
 "use strict";
 
-import Page from "../../script/Page.js";
+import Page from "../../modules/Page.js";
 
 export default class MainPage extends Page {
 
@@ -13,14 +13,14 @@ export default class MainPage extends Page {
         return "/main";
     }
 
+    static pageBoxName() {
+        return "main-page";
+    }
+
     static render(resp = null) {
-        document.querySelector(".main-page").innerHTML = "";
-        // подготовка шаблона для рендеринга
         let template = require("./main-page.pug");
-        // устанавливаем локальные переменные для рендеринга
-        let locals = resp;
-        // рендерим шаблон
-        document.querySelector(".main-page").innerHTML = template(locals);
+        let mainPageBox = Page.createBoxForPage(this.pageBoxName());
+        mainPageBox.innerHTML = template();
     }
 
     addEventsOnButtons() {

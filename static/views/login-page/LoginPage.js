@@ -1,13 +1,9 @@
 "use strict";
 
-import Page from "../../script/Page.js";
-import LoginForm from "../../script/LoginForm.js";
+import Page from "../../modules/Page.js";
+import LoginForm from "../../modules/LoginForm.js";
 
 export default class LoginPage extends Page {
-
-    static pagePath() {
-        return "/login";
-    }
 
     constructor() {
         super();
@@ -15,19 +11,22 @@ export default class LoginPage extends Page {
         this.form = new LoginForm()
     }
 
+    static pagePath() {
+        return "/login";
+    }
+
+    static pageBoxName() {
+        return "login-page";
+    }
+
     getForm() {
         return this.form;
     }
 
     static render() {
-        const resp = null;
-        document.querySelector(".login-page").innerHTML = "";
-        // подготовка шаблона для рендеринга
         let template = require("./login-page.pug");
-        // устанавливаем локальные переменные для рендеринга
-        let locals = resp;
-        // рендерим шаблон
-        document.querySelector(".login-page").innerHTML = template(locals);
+        let loginPageBox = Page.createBoxForPage(this.pageBoxName());
+        loginPageBox.innerHTML = template();
     }
 
     addEventsOnButtons() {

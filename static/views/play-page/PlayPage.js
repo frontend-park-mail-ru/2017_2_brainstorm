@@ -1,6 +1,6 @@
 "use strict";
 
-import Page from "../../script/Page.js";
+import Page from "../../modules/Page.js";
 
 export default class PlayPage extends Page {
 
@@ -13,14 +13,14 @@ export default class PlayPage extends Page {
         return "/play";
     }
 
-    static render(resp = null) {
-        document.querySelector(".play-page").innerHTML = "";
-        // подготовка шаблона для рендеринга
+    static pageBoxName() {
+        return "play-page";
+    }
+
+    static render() {
         let template = require("./play-page.pug");
-        // устанавливаем локальные переменные для рендеринга
-        let locals = resp;
-        // рендерим шаблон
-        document.querySelector(".play-page").innerHTML = template(locals);
+        let playPageBox = Page.createBoxForPage(this.pageBoxName());
+        playPageBox.innerHTML = template();
     }
 
     addEventsOnButtons() {

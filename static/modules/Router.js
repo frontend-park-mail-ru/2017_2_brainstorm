@@ -89,7 +89,7 @@ export default class Router {
             break;
 
         case "/records":
-            new RecordsPage();
+            this.recordsPage.sendRequestForRecords();
             PagePresenter.showOnlyOnePage("records-page");
             break;
 

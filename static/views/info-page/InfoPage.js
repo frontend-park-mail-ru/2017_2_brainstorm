@@ -1,6 +1,6 @@
 "use strict";
 
-import Page from "../../script/Page.js";
+import Page from "../../modules/Page.js";
 
 export default class InfoPage extends Page {
 
@@ -13,14 +13,14 @@ export default class InfoPage extends Page {
         return "/info";
     }
 
-    static render(resp = null) {
-        document.querySelector(".info-page").innerHTML = "";
-        // подготовка шаблона для рендеринга
+    static pageBoxName() {
+        return "info-page";
+    }
+
+    static render() {
         let template = require("./info-page.pug");
-        // устанавливаем локальные переменные для рендеринга
-        let locals = resp;
-        // рендерим шаблон
-        document.querySelector(".info-page").innerHTML = template();
+        let infoPageBox = Page.createBoxForPage(this.pageBoxName());
+        infoPageBox.innerHTML = template();
     }
 
     addEventsOnButtons() {
