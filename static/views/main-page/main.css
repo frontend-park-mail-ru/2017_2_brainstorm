@@ -6,6 +6,7 @@
 
 .main-page__logo-game {
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .main-page__main-menu {
@@ -47,6 +48,7 @@
     border:1em solid lightsalmon;
     padding: 0.5em;
     cursor: pointer;
+    margin: 3px;
 }
 
 .button-login__img{
@@ -63,6 +65,7 @@
     border:1em solid lavender;
     padding: 0.5em;
     cursor: pointer;
+    margin: 3px;
 }
 
 .button-records__img{
@@ -79,6 +82,7 @@
     border:1em solid lavender;
     padding: 0.5em;
     cursor: pointer;
+    margin: 3px;
 }
 
 .button-info__img{

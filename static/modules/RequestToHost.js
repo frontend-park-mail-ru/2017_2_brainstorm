@@ -16,6 +16,8 @@ export default class RequestToHost {
      */
     static baseUrl() {
         return  "https://bubblerise-backend.herokuapp.com/";
+        // для тестирования взаимодействия с сервером на localhost
+        // return  "http://localhost:8080/";
     }
 
     /**

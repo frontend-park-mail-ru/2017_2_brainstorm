@@ -3,97 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-    <link rel = "stylesheet" type = "text/css" href = "./styles/style.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "./styles/main.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "./styles/login.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "./styles/register.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "./styles/records.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "./styles/play.css"/>
-    <link rel = "stylesheet" type = "text/css" href = "./styles/info.css"/>
+    <link rel = "stylesheet" type = "text/css" href = "./styles/app.css"/>
+    <style class="theme-styles"></style>
     <title>BubbleRise</title>
 </head>
 <body>
     <div class="main-box">
         <img class="main-box__logo-game" src="img/logo_3.png">
-        <div class="main-page page" hidden>
-            <div class="main-page__user">Привет, Гость!</div>
-            <div class="main-page__main-menu main-menu">
-                <div class="main-menu__button-play">
-                    <img class="main-menu__button-play_img" src="img/button_play.png">
-                </div>
-                <div class="main-menu__button-login button-login">
-                    <img class="button-login__img" src="img/login.png">
-                </div>
-                <div class="main-menu__button-records button-records">
-                    <img class="button-records__img" src="img/record.png">
-                </div>
-                <div class="main-menu__button-info button-info">
-                    <img class="button-info__img" src="img/info.png">
-                </div>
-            </div>
-        </div>
-
-        <div class="login-page page" hidden>
-            <div class="login-page__button-back">
-                <img class="login-page__button-back_img" src="img/back_2.png">
-            </div>
-
-            <div class="login-page__login-form login-form">
-                <div class="login-form__error-box"></div>
-                <p><input type="text" class="login-form__input-login" name="login" placeholder="You login"></p>
-                <p><input type="password" class="login-form__input-password" name="password" placeholder="*********"></p>
-                <div></div>
-                <button class="login-form__button">Log In</button>
-            </div>
-            <p>You haven't account?
-                <span class="login-page__link-to-register">Sign Up</span>
-            </p>
-        </div>
-
-        <div class="register-page page" hidden>
-            <div class="register-page__button-back">
-                <img class="register-page__button-back_img" src="img/back_2.png">
-            </div>
-            <div class="register-page__register-form register-form">
-                <div class="register-form__error-box"></div>
-                <p><input type="text" class="register-form__input-email" name="email" placeholder="You email"></p>
-                <p><input type="text" class="register-form__input-login" name="login" placeholder="You login"></p>
-                <p><input type="password" class="register-form__input-password" name="password" placeholder="*********"></p>
-                <button class="register-form__button">Sign Up</button>
-            </div>
-            <p>Are you already registred?
-                <span class="register-page__link-to-login">Sign In</span>
-            </p>
-        </div>
-
-        <div class="records-page page" hidden>
-            <div class="records-page__button-back">
-                <img class="records-page__button-back_img" src="img/back_2.png">
-            </div>
-            <table class="records-page__table" align="center"></table>
-        </div>
-
-        <div class="play-page page" hidden>
-            <div class="play-page__button-back">
-                <img class="play-page__button-back_img" src="img/back_2.png">
-            </div>
-            <div class="play-page__play-field">
-            </div>
-        </div>
-
-        <div class="info-page page" hidden>
-            <div class="info-page__button-back">
-                <img class="info-page__button-back_img" src="img/back_2.png">
-            </div>
-            <div class="info-page__info-box">
-                    <h3>About</h3>
-                    <p>Подавите восстание bubbles'ов!</p>
-            </div>
-        </div>
+        <div class="main-box__theme-changer"></div>
     </div>
     <div class="footer" align="center">&copy;brainstorm,2017</div>
 
-    <script src="./script/app.js"></script>
+    <script src="modules/app.js"></script>
 
 </body>
 </html>

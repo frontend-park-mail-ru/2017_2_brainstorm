@@ -6,12 +6,23 @@ export default class Page {
 
     constructor() {
         Page.pagePath();
+        Page.pageBoxName();
         this.addEventsOnButtons();
     }
 
     static pagePath() {}
 
+    static pageBoxName() {}
+
     addEventsOnButtons() {}
+
+    static createBoxForPage(pageBoxName) {
+        let pageBox = document.createElement("div");
+        pageBox.className = pageBoxName + " page";
+        pageBox.hidden = true;
+        document.querySelector(".main-box").appendChild(pageBox);
+        return pageBox;
+    }
 
     addRedirectOnButtons(...buttons) {
         buttons.forEach(button => {

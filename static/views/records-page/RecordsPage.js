@@ -1,27 +1,42 @@
 "use strict";
 
-import Page from "../../script/Page.js";
-import RequestToHost from "../../script/RequestToHost.js";
+import Page from "../../modules/Page.js";
+import RequestToHost from "../../modules/RequestToHost.js";
 
 export default class RecordsPage extends Page {
 
     constructor() {
         super();
-        this.sendRequestForRecords();
+        RecordsPage.render();
     }
 
     static pagePath() {
         return "/records";
     }
 
-    static renderLeaderBoard(resp) {
-        document.querySelector(".records-page__table").innerHTML = "";
-        // подготовка шаблона для рендеринга
+    static pageBoxName() {
+        return "records-page";
+    }
+
+    static leaderBoardName() {
+        return "records-page__table"
+    }
+
+    static render() {
         let template = require("./records-page.pug");
+        let recordsPageBox = Page.createBoxForPage(this.pageBoxName());
+        recordsPageBox.innerHTML = template();
+    }
+
+    static renderLeaderBoard(resp) {
+        let leaderBoardBox = document.querySelector("." + RecordsPage.leaderBoardName());
+        leaderBoardBox.innerHTML = "";
+        // подготовка шаблона для рендеринга
+        let template = require("./leaderboard.pug");
         // устанавливаем локальные переменные для рендеринга
         let locals = resp;
         // рендерим шаблон
-        document.querySelector(".records-page__table").innerHTML = template(locals);
+        leaderBoardBox.innerHTML = template(locals);
     }
 
     sendRequestForRecords() {
