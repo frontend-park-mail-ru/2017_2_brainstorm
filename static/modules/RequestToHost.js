@@ -116,9 +116,11 @@ export default class RequestToHost {
 
     /**
      * Отправляем тему пользователя
+     * @param theme - 1 или 0 текущая тема пользователя
      * @param callback
      */
     static template(theme, callback) {
-        RequestToHost.requestPost("/api/users/template", callback);
+        const template = theme;
+        RequestToHost.requestPost("/api/users/template", theme, callback);
     }
 }
