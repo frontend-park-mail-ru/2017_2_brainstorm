@@ -3,7 +3,7 @@
 const express = require('express');
 const app = express();
 
-const APPLICATION_PORT = 5555;
+const APPLICATION_PORT = 5500;
 
 app.use(express.static(__dirname + "/static"));
 

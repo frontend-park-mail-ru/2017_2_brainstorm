@@ -6,6 +6,7 @@
 
 .main-page__logo-game {
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .main-page__main-menu {
