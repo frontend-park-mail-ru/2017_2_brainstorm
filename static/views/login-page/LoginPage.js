@@ -7,7 +7,7 @@ export default class LoginPage extends Page {
 
     constructor() {
         super();
-        LoginPage.render();
+        // LoginPage.render();
         this.form = new LoginForm()
     }
 
@@ -23,9 +23,9 @@ export default class LoginPage extends Page {
         return this.form;
     }
 
-    static render() {
+    render() {
         let template = require("./login-page.pug");
-        let loginPageBox = Page.createBoxForPage(this.pageBoxName());
+        let loginPageBox = Page.createBoxForPage(LoginPage.pageBoxName());
         loginPageBox.innerHTML = template();
     }
 

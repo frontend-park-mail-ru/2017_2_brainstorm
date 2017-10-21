@@ -15,9 +15,9 @@ export default class RequestToHost {
      * @returns {string}
      */
     static baseUrl() {
-        return  "https://bubblerise-backend.herokuapp.com/";
+        // return  "https://bubblerise-backend.herokuapp.com/";
         // для тестирования взаимодействия с сервером на localhost
-        // return  "http://localhost:8080/";
+        return  "http://localhost:8080/";
     }
 
     /**
@@ -99,7 +99,7 @@ export default class RequestToHost {
     }
 
     /**
-	 * Узнает логин текущего пользователя
+	 * Узнает информацию о текущем пользователе
      * @param callback
      */
     static whoami(callback) {

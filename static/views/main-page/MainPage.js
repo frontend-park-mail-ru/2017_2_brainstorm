@@ -6,7 +6,7 @@ export default class MainPage extends Page {
 
     constructor() {
         super();
-        MainPage.render();
+        // MainPage.render();
     }
 
     static pagePath() {
@@ -17,9 +17,9 @@ export default class MainPage extends Page {
         return "main-page";
     }
 
-    static render(resp = null) {
+    render(resp = null) {
         let template = require("./main-page.pug");
-        let mainPageBox = Page.createBoxForPage(this.pageBoxName());
+        let mainPageBox = Page.createBoxForPage(MainPage.pageBoxName());
         mainPageBox.innerHTML = template();
     }
 

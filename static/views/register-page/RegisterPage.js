@@ -7,7 +7,7 @@ export default class RegisterPage extends Page {
 
     constructor() {
         super();
-        RegisterPage.render();
+        // RegisterPage.render();
         this.form = new RegisterForm();
     }
 
@@ -23,9 +23,9 @@ export default class RegisterPage extends Page {
         return this.form;
     }
 
-    static render() {
+    render() {
         let template = require("./register-page.pug");
-        let registerPageBox = Page.createBoxForPage(this.pageBoxName());
+        let registerPageBox = Page.createBoxForPage(RegisterPage.pageBoxName());
         registerPageBox.innerHTML = template();
     }
 

@@ -7,7 +7,7 @@ export default class RecordsPage extends Page {
 
     constructor() {
         super();
-        RecordsPage.render();
+        // RecordsPage.render();
     }
 
     static pagePath() {
@@ -22,9 +22,9 @@ export default class RecordsPage extends Page {
         return "records-page__table"
     }
 
-    static render() {
+    render() {
         let template = require("./records-page.pug");
-        let recordsPageBox = Page.createBoxForPage(this.pageBoxName());
+        let recordsPageBox = Page.createBoxForPage(RecordsPage.pageBoxName());
         recordsPageBox.innerHTML = template();
     }
 

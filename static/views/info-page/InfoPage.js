@@ -6,7 +6,7 @@ export default class InfoPage extends Page {
 
     constructor() {
         super();
-        InfoPage.render();
+        // InfoPage.render();
     }
 
     static pagePath() {
@@ -17,9 +17,9 @@ export default class InfoPage extends Page {
         return "info-page";
     }
 
-    static render() {
+    render() {
         let template = require("./info-page.pug");
-        let infoPageBox = Page.createBoxForPage(this.pageBoxName());
+        let infoPageBox = Page.createBoxForPage(InfoPage.pageBoxName());
         infoPageBox.innerHTML = template();
     }
 

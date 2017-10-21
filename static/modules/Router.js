@@ -74,6 +74,8 @@ export default class Router {
 
     redirectToPage() {
         const pathname = window.location.pathname;
+        let gameMode = (pathname === "/play");
+        PlayPage.gameMode(gameMode);
         switch (pathname) {
         case "/main":
             PagePresenter.showOnlyOnePage("main-page");

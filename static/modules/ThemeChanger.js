@@ -7,9 +7,7 @@ export default class ThemeChanger {
     constructor() {
         this.styles = "";
         this.generateTheme([bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover]);
-
-        this.secondTheme = false;
-
+        this.userTheme = false;
         document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
             this.applyTheme();
         })
@@ -31,8 +29,8 @@ export default class ThemeChanger {
             let styleTag = document.querySelector(".theme-styles");
             styleTag.innerHTML = stylesheet;
         };
-        let stylesheet = this.secondTheme ? "" : this.styles;
+        let stylesheet = this.userTheme ? "" : this.styles;
         addThemeStylesheet(stylesheet);
-        this.secondTheme = !this.secondTheme;
+        this.userTheme = !this.userTheme;
     }
 }
