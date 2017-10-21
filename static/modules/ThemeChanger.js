@@ -1,13 +1,30 @@
 "use strict";
 
 import {bodyStyles,mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover} from "./themeStyles.js";
+import RequestToHost from "./RequestToHost";
 
 export default class ThemeChanger {
 
     constructor() {
         this.styles = "";
         this.generateTheme([bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover]);
+        // this.userTheme = false;
+
+
+
+
         this.userTheme = false;
+
+        const userTheme = RequestToHost.whoami((err, resp) => {
+            if (err) {
+                return false;
+            }
+            return !!resp.template});
+        userTheme ? this.applyTheme() : "";
+
+
+
+
         document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
             this.applyTheme();
         })
@@ -32,5 +49,12 @@ export default class ThemeChanger {
         let stylesheet = this.userTheme ? "" : this.styles;
         addThemeStylesheet(stylesheet);
         this.userTheme = !this.userTheme;
+
+        RequestToHost.template(+this.userTheme, (err, resp) => {
+            if (err) {
+                return false;
+            }
+            return resp.template;
+        });
     }
 }

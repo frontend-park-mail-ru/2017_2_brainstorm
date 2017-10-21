@@ -113,4 +113,12 @@ export default class RequestToHost {
     static records(callback) {
         RequestToHost.requestGet("api/users/records", callback);
     }
+
+    /**
+     * Отправляем тему пользователя
+     * @param callback
+     */
+    static template(theme, callback) {
+        RequestToHost.requestPost("/api/users/template", callback);
+    }
 }
