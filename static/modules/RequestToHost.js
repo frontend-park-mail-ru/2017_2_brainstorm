@@ -15,9 +15,9 @@ export default class RequestToHost {
      * @returns {string}
      */
     static baseUrl() {
-        return  "https://bubblerise-backend.herokuapp.com/";
+        // return  "https://bubblerise-backend.herokuapp.com/";
         // для тестирования взаимодействия с сервером на localhost
-        // return  "http://localhost:8080/";
+        return  "http://localhost:8080/";
     }
 
     /**
@@ -121,6 +121,6 @@ export default class RequestToHost {
      */
     static template(theme, callback) {
         const template = theme;
-        RequestToHost.requestPost("/api/users/template", theme, callback);
+        RequestToHost.requestPost("api/users/theme", theme, callback);
     }
 }

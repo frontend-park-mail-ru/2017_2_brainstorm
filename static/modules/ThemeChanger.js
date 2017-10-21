@@ -50,11 +50,16 @@ export default class ThemeChanger {
         addThemeStylesheet(stylesheet);
         this.userTheme = !this.userTheme;
 
-        RequestToHost.template(+this.userTheme, (err, resp) => {
+        RequestToHost.whoami((err, resp) => {
             if (err) {
-                return false;
+                return console.log("not AUTH");
+            } else {
+                RequestToHost.template(+this.userTheme, (err) => {
+                    if (err) {
+                        return console.log("theme not found");
+                    }
+                });
             }
-            return resp.template;
         });
     }
 }
