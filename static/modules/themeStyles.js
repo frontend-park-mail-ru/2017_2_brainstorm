@@ -31,7 +31,7 @@ const themeChangerStyles = {
 const themeChangerStylesHover = {
     selector: ".main-box__theme-changer:hover",
     styles: {
-        background: "#c6c1e1",
+        background: "#e0d9fb",
     }
 };
 
