@@ -15,23 +15,23 @@ export default class RequestToHost {
      * @returns {string}
      */
     static baseUrl() {
-        return  "https://bubblerise-backend.herokuapp.com/";
+        // return  "https://bubblerise-backend.herokuapp.com/";
         // для тестирования взаимодействия с сервером на localhost
-        // return  "http://localhost:8080/";
+        return  "http://localhost:8080/";
     }
 
     /**
 	 * POST-запрос на сервер
      * @param {string} address
-     * @param {string} user
+     * @param {object} data
      * @param callback
      */
-    static requestPost(address, user, callback) {
+    static requestPost(address, data, callback) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", this.baseUrl() + address, true);
         xhr.withCredentials = true; //for cookies
 
-        const body = JSON.stringify(user);
+        const body = JSON.stringify(data);
 
         xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
 
@@ -119,8 +119,8 @@ export default class RequestToHost {
      * @param theme - 1 или 0 текущая тема пользователя
      * @param callback
      */
-    static template(theme, callback) {
-        const template = theme;
-        RequestToHost.requestPost("api/users/theme", theme, callback);
+    static theme(theme, callback) {
+        const userTheme = {theme};
+        RequestToHost.requestPost("api/users/theme", userTheme, callback);
     }
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 import {bodyStyles,mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover} from "./themeStyles.js";
-import RequestToHost from "./RequestToHost";
+import RequestToHost from "./RequestToHost.js";
 
 export default class ThemeChanger {
 
@@ -10,19 +10,21 @@ export default class ThemeChanger {
         this.generateTheme([bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover]);
         // this.userTheme = false;
 
-
-
-
         this.userTheme = false;
 
-        const userTheme = RequestToHost.whoami((err, resp) => {
+        RequestToHost.whoami((err, resp) => {
             if (err) {
-                return false;
+                return console.log("not AUTH for GET");
+            } else {
+                const userTheme = RequestToHost.whoami((err, resp) => {
+                    if (err) {
+                        return console.log("Can't load theme");
+                    }
+                    return !!resp.theme
+                });
+                userTheme ? this.applyTheme() : "";
             }
-            return !!resp.template});
-        userTheme ? this.applyTheme() : "";
-
-
+        });
 
 
         document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
@@ -52,11 +54,11 @@ export default class ThemeChanger {
 
         RequestToHost.whoami((err, resp) => {
             if (err) {
-                return console.log("not AUTH");
+                return console.log("not AUTH for POST");
             } else {
-                RequestToHost.template(+this.userTheme, (err) => {
+                RequestToHost.theme(+this.userTheme, (err) => {
                     if (err) {
-                        return console.log("theme not found");
+                        return console.log("Can't add theme");
                     }
                 });
             }
