@@ -1,19 +1,14 @@
 .main-page {
-    padding-left: 5em;
+    /*padding-left: 5em;*/
     padding-top: 3em;
     align-content: center;
-}
-
-.main-page__logo-game {
-    opacity: 0.9;
-    cursor: pointer;
 }
 
 .main-page__main-menu {
     width:390px;
     height:400px;
     margin: 0 auto;
-    margin-left: 70px;
+    /*margin-left: 70px;*/
     padding: 10px 10px 0 10px;
     text-align: center;
     padding-top: 1em;
@@ -95,8 +90,9 @@
 
 .main-page__user {
     text-align: center;
-    width: 90%;
+    width: 80%;
     color: white;
     font-size: larger;
     background-color: lightsalmon;
+    margin-left: 10%;
 }

@@ -40,8 +40,8 @@ export default class Router {
             {button: "info-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
-        const playPage = new PlayPage();
-        playPage.addRedirectOnButtons(
+        this.playPage = new PlayPage();
+        this.playPage.addRedirectOnButtons(
             {button: "play-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
@@ -75,7 +75,7 @@ export default class Router {
     redirectToPage() {
         const pathname = window.location.pathname;
         let gameMode = (pathname === "/play");
-        PlayPage.gameMode(gameMode);
+        this.playPage.gameMode(gameMode);
         switch (pathname) {
         case "/main":
             PagePresenter.showOnlyOnePage("main-page");

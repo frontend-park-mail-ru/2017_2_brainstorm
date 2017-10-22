@@ -1,11 +1,7 @@
 .info-page {
-    padding-left: 5em;
+    padding-left: 7em;
     padding-top: 3em;
     align-content: center;
-}
-
-.info-page__logo-game {
-    opacity: 0.9;
 }
 
 .info-page__button-back {

@@ -15,9 +15,9 @@ export default class RequestToHost {
      * @returns {string}
      */
     static baseUrl() {
-        // return  "https://bubblerise-backend.herokuapp.com/";
+        return  "https://bubblerise-backend.herokuapp.com/";
         // для тестирования взаимодействия с сервером на localhost
-        return  "http://localhost:8080/";
+        // return  "http://localhost:8080/";
     }
 
     /**
@@ -61,6 +61,36 @@ export default class RequestToHost {
         xhr.withCredentials = true;
 
         xhr.send();
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== messagesFromHost.XHR_READY) {
+                return;
+            }
+            if (+xhr.status !== messagesFromHost.HTTP_OK) {
+                return callback(xhr, null);
+            }
+
+            const response = JSON.parse(xhr.responseText);
+            callback(null, response);
+        };
+    }
+
+    /**
+     * PATCH-запрос на сервер
+     * @param {string} address
+     * @param {object} data
+     * @param callback
+     */
+    static requestPatch(address, data, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PATCH", this.baseUrl() + address, true);
+        xhr.withCredentials = true; //for cookies
+
+        const body = JSON.stringify(data);
+
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
+
+        xhr.send(body);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState !== messagesFromHost.XHR_READY) {
@@ -121,6 +151,6 @@ export default class RequestToHost {
      */
     static theme(theme, callback) {
         const userTheme = {theme};
-        RequestToHost.requestPost("api/users/theme", userTheme, callback);
+        RequestToHost.requestPatch("api/users/theme", userTheme, callback);
     }
 }
