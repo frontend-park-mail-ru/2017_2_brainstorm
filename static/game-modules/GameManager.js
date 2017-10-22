@@ -131,6 +131,7 @@ export default class GameManager {
 
                 if(bubble.scale.x >= 4) {
                     this.stop();
+                    alert("Game over!");
                 }
             }
         }, 100);

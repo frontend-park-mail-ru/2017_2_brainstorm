@@ -54,7 +54,7 @@ export default class ThemeChanger {
 
         RequestToHost.whoami((err, resp) => {
             if (err) {
-                return console.log("not AUTH for POST");
+                return console.log("not AUTH for PATCH");
             } else {
                 RequestToHost.theme(+this.userTheme, (err) => {
                     if (err) {

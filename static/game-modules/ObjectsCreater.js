@@ -14,7 +14,11 @@ export default class ObjectsCreater {
     }
 
     getC1(){
+        return this.c1;
+    }
 
+    getC2(){
+        return this.c2;
     }
 
     createStaticObjects() {
