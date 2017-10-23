@@ -109,11 +109,11 @@ export default class GameManager {
         Debugger.print("Scene objects number: " + this.scene.children.length);
 
         function getRandomInteger(){
-           return (parseInt(Math.random() * 1000000) % 4) + 1;
+           return (parseInt(Math.random() * 1000000) % 6) + 1;
         }
 
         function getRandomPosition(){
-            return (parseInt(Math.random() * 1000000) % 7) + Math.random() - 3.5;
+            return (parseInt(Math.random() * 1000000) % 9) + Math.random() - 4.5;
         }
 
         this.generationInterval = setInterval(() => {
@@ -127,20 +127,20 @@ export default class GameManager {
                 case 1:
                     xx = getRandomPosition();
                     yy = getRandomPosition();
-                    zz = -3.5;
+                    zz = -4.5;
                     break;
                 case 3:
                     xx = getRandomPosition();
                     yy = getRandomPosition();
-                    zz = 3.5;
+                    zz = 4.5;
                     break;
                 case 2:
-                    xx = 3.5;
+                    xx = 4.5;
                     yy = getRandomPosition();
                     zz = getRandomPosition();
                     break;
                 case 4:
-                    xx = -3.5;
+                    xx = -4.5;
                     yy = getRandomPosition();
                     zz = getRandomPosition();
                     break;

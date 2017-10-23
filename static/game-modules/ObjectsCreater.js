@@ -4,7 +4,7 @@ export default class ObjectsCreater {
 
     constructor(scene) {
         this.scene = scene;
-        this.size = 7;
+        this.size = 9;
         this.bubbleRadius = 0.5;
         this.createStaticObjects();
     }
@@ -14,16 +14,16 @@ export default class ObjectsCreater {
     }
 
     getCube() {
-        return this.c1;
+        return this.cube;
     }
 
     getCubeFrame() {
-        return this.c2;
+        return this.cubeFrame;
     }
 
     createStaticObjects() {
-        this.c1 = this.createCube();
-        this.c2 = this.createWireFrameCube();
+        this.cube = this.createCube();
+        this.cubeFrame = this.createWireFrameCube();
 
         this.createLight(-70, 0, 0);
         this.createLight(70, 0, 0);
