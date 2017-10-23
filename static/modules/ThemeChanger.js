@@ -24,7 +24,8 @@ export default class ThemeChanger {
             } else {
                 console.log("YOUR THEME resp = " + resp.theme);
                 this.userTheme = resp.theme && true;
-                this.userTheme ? this.applyTheme() : "";
+                // this.userTheme ? this.applyTheme() : "";
+                this.applyTheme();
             }
         });
     }
