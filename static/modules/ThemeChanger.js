@@ -16,19 +16,23 @@ export default class ThemeChanger {
             if (err) {
                 return console.log("not AUTH for GET");
             } else {
-                const userTheme = RequestToHost.whoami((err, resp) => {
+                this.userTheme = RequestToHost.whoami((err, resp) => {
                     if (err) {
-                        return console.log("Can't load theme");
+                        console.log("Can't load theme");
+                        return false;
                     }
+                    console.log("YOUR THEME resp = " + resp.theme);
                     return !!resp.theme
                 });
-                userTheme ? this.applyTheme() : "";
+                // this.userTheme = userTheme;
+                console.log("YOUR THEME this = " + resp.theme);
+                this.userTheme ? this.applyTheme() : "";
             }
         });
 
 
         document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
-            this.applyTheme();
+            this.changeTheme();
         })
     }
 
@@ -44,13 +48,21 @@ export default class ThemeChanger {
     }
 
     applyTheme() {
+        console.log("YOUR THEME apply = " + this.userTheme);
+
         const addThemeStylesheet = (stylesheet) => {
             let styleTag = document.querySelector(".theme-styles");
             styleTag.innerHTML = stylesheet;
         };
-        let stylesheet = this.userTheme ? "" : this.styles;
+        let stylesheet = this.userTheme ? this.styles : "";
         addThemeStylesheet(stylesheet);
+    }
+
+    changeTheme() {
+        console.log("YOUR THEME change 1 = " + this.userTheme);
         this.userTheme = !this.userTheme;
+        console.log("YOUR THEME change 2 = " + this.userTheme);
+        this.applyTheme();
 
         RequestToHost.whoami((err, resp) => {
             if (err) {
