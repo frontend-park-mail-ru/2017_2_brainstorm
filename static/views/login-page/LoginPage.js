@@ -8,7 +8,7 @@ export default class LoginPage extends Page {
     constructor() {
         super();
         // LoginPage.render();
-        this.form = new LoginForm()
+        this.form = new LoginForm();
     }
 
     static pagePath() {

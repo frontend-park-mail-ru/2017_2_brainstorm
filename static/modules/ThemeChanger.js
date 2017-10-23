@@ -8,14 +8,16 @@ export default class ThemeChanger {
     constructor() {
         this.styles = "";
         this.generateTheme([bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover]);
-        // this.userTheme = false;
-
         this.userTheme = false;
-        let a = 0;
-        console.log("a = " + a + " !!a = "+ !!a);
-        a = 1;
-        console.log("a = " + a + " !!a = "+ !!a);
 
+        this.sendRequestForTheme();
+
+        console.log("YOUR THEME this to BOOL = " + this.userTheme);
+
+        this.addEventsOnButtons();
+    }
+
+    sendRequestForTheme() {
         RequestToHost.whoami((err, resp) => {
             if (err) {
                 return console.log("not AUTH for GET");
@@ -23,16 +25,8 @@ export default class ThemeChanger {
                 console.log("YOUR THEME resp = " + resp.theme);
                 this.userTheme = resp.theme && true;
                 this.userTheme ? this.applyTheme() : "";
-                // return (resp.theme && true);
             }
         });
-
-        console.log("YOUR THEME this to BOOL = " + this.userTheme);
-        // this.userTheme ? this.applyTheme() : "";
-
-        document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
-            this.changeTheme();
-        })
     }
 
     generateTheme(themeStyles) {
@@ -74,5 +68,11 @@ export default class ThemeChanger {
                 });
             }
         });
+    }
+
+    addEventsOnButtons() {
+        document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
+            this.changeTheme();
+        })
     }
 }

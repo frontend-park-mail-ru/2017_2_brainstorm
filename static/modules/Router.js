@@ -23,7 +23,7 @@ export default class Router {
         const registerPagePath = RegisterPage.pagePath();
         const recordsPagePath = RecordsPage.pagePath();
 
-        new ThemeChanger();
+        this.themeChanger = new ThemeChanger();
 
         Object.assign(Page.prototype, whoamiMixin);
         const mainPage = new MainPage();
@@ -70,6 +70,10 @@ export default class Router {
             registerPage.getForm().clearForm();
             loginPage.getForm().clearForm();
         });
+    }
+
+    changeTheme() {
+        this.themeChanger.sendRequestForTheme();
     }
 
     redirectToPage() {
