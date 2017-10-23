@@ -71,6 +71,7 @@ input[type="password"]:focus {
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
+    margin-top: -0.6em;
 }
 
 .login-page__link-to-register {

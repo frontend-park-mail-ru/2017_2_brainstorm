@@ -5,15 +5,17 @@
 }
 
 .play-page__button-back {
-    width: 60px;
+    width: 150px;
     height: 60px;
     cursor: pointer;
+    padding-bottom: 20px;
 }
 
 .play-page__button-back_img {
     padding-left: 1.2em;
     width: 40px;
     height: 40px;
+    /*display: inline-block;*/
     z-index: 33;
 }
 
@@ -21,6 +23,22 @@
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
+    margin-top: -0.6em;
+}
+
+.play-page__button-restart_img {
+    padding-left: 1.2em;
+    width: 40px;
+    height: 40px;
+    /*display: inline-block;*/
+    z-index: 33;
+}
+
+.play-page__button-restart_img:hover {
+    padding-left: 1.2em;
+    width: 60px;
+    height: 60px;
+    margin-top: -0.6em;
 }
 
 .play-page__play-field {

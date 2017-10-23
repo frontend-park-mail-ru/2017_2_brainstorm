@@ -181,7 +181,7 @@ export default class GameManager {
     addObjectsGeneration(){
         this.bubbles = [];
 
-        // console.log("Scene objects number: " + this.scene.children.length);
+        console.log("Scene objects number: " + this.scene.children.length);
 
         function getRandInteger(){
            return (parseInt(Math.random() * 1000000) % 4) + 1;
