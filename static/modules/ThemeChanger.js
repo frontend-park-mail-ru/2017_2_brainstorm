@@ -10,11 +10,7 @@ export default class ThemeChanger {
         this.styles = "";
         this.generateTheme([bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover]);
         this.userTheme = false;
-
         this.sendRequestForTheme();
-
-        Debugger.print("YOUR THEME this to BOOL = " + this.userTheme);
-
         this.addEventsOnButtons();
     }
 
@@ -57,7 +53,6 @@ export default class ThemeChanger {
 
     applyTheme() {
         Debugger.print("YOUR THEME apply = " + this.userTheme);
-
         const addThemeStylesheet = (stylesheet) => {
             let styleTag = document.querySelector(".theme-styles");
             styleTag.innerHTML = stylesheet;
@@ -67,9 +62,7 @@ export default class ThemeChanger {
     }
 
     changeTheme() {
-        Debugger.print("YOUR THEME change 1 = " + this.userTheme);
         this.userTheme = !this.userTheme;
-        Debugger.print("YOUR THEME change 2 = " + this.userTheme);
         this.applyTheme();
         this.sendRequestToSaveTheme();
     }

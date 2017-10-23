@@ -14,7 +14,7 @@ let whoamiMixin = {
             if (err) {
                 return loginBox.innerHTML = messagesWhoAmI.GUEST_HELLO_MESSAGE;
             }
-            loginBox.innerHTML = messagesWhoAmI.USER_HELLO_MESSAGE + resp.login + "!";
+            loginBox.innerHTML = `${messagesWhoAmI.USER_HELLO_MESSAGE} ${resp.login}!`
         });
     }
 };

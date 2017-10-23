@@ -13,11 +13,11 @@ export default class ObjectsCreater {
         return this.size;
     }
 
-    getC1(){
+    getCube() {
         return this.c1;
     }
 
-    getC2(){
+    getCubeFrame() {
         return this.c2;
     }
 
@@ -35,7 +35,7 @@ export default class ObjectsCreater {
 
     createResultSphere(xx, yy, zz) {
         let sphereGeometry = new THREE.SphereGeometry(this.bubbleRadius, 25, 25);
-        let sphereMaterial = new THREE.MeshLambertMaterial({color: "#54ff00", opacity: 0.5, transparent:true});
+        let sphereMaterial = new THREE.MeshLambertMaterial({color: "#5b54ff", opacity: 0.7, transparent:true});
         let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
 
         sphere.position.x = xx;
@@ -50,7 +50,7 @@ export default class ObjectsCreater {
         const size = this.size;
 
         let cubeGeometry = new THREE.CubeGeometry(size, size, size);
-        let cubeMaterial = new THREE.MeshLambertMaterial({color: "#8e6eff", opacity: 0.2, transparent:true});
+        let cubeMaterial = new THREE.MeshLambertMaterial({color: "#bb2d41", opacity: 0.5, transparent:true});
         let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
         cube.position.x = 0;
@@ -66,7 +66,7 @@ export default class ObjectsCreater {
         const size = this.size;
 
         let cubeGeometry = new THREE.CubeGeometry(size, size, size);
-        let cubeMaterial = new THREE.MeshBasicMaterial({color: "#ff33aa", wireframe: true});
+        let cubeMaterial = new THREE.MeshBasicMaterial({color: "#bb2d41", wireframe: true});
         let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
         cube.position.x = 0;

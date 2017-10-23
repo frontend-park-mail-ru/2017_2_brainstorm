@@ -2,6 +2,7 @@
 
 import Page from "../../modules/Page.js";
 import RequestToHost from "../../modules/RequestToHost.js";
+import Debugger from "../../modules/Debugger";
 
 export default class RecordsPage extends Page {
 
@@ -41,7 +42,7 @@ export default class RecordsPage extends Page {
     sendRequestForRecords() {
         RequestToHost.records((err, resp) => {
             if (err) {
-                return alert("Empty TOP");
+                return Debugger.print("Empty TOP");
             }
             RecordsPage.renderLeaderBoard(resp);
         });

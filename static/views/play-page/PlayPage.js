@@ -27,11 +27,12 @@ export default class PlayPage extends Page {
     gameMode(mode) {
         let gameLogo = document.querySelector(".main-box__logo-game");
         gameLogo.hidden = mode;
-        if (mode) {
-            this.gameManager.start();
-        } else {
-            this.gameManager.stop();
-        }
+        mode ?
+            this.gameManager.start() : this.gameManager.stop();
+    }
+
+    static printScore(score) {
+        document.querySelector(".panel__score-box").innerHTML = score;
     }
 
     addEventsOnButtons() {

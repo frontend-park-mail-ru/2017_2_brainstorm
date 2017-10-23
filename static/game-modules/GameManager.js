@@ -2,6 +2,9 @@
 
 import SceneRenderer from "./SceneRenderer.js";
 import ObjectsCreater from "./ObjectsCreater.js";
+import RequestToHost from "../modules/RequestToHost.js"
+import Debugger from "../modules/Debugger.js";
+import PlayPage from "../views/play-page/PlayPage.js";
 
 export default class GameManager {
 
@@ -12,50 +15,35 @@ export default class GameManager {
         this.sceneRenderer = new SceneRenderer(this.renderer, this.scene, this.camera);
         this.addClicksToBubbles();
         this.addEventsToKey();
+        this.score = 0;
     }
 
     addEventsToKey() {
-        this.a = false;
-        this.d = false;
-        this.w = false;
-        this.s = false;
+        this.keyA = false;
+        this.keyD = false;
 
-        const t = this;
-
-        window.onkeydown = function(event){
+        window.onkeydown = (event) => {
             const k = event.keyCode;
 
             switch(k){
-                case 87:
-                    t.w = true;
-                    break;
                 case 65:
-                    t.a = true;
-                    break;
-                case 83:
-                    t.s = true;
+                    this.keyA = true;
                     break;
                 case 68:
-                    t.d = true;
+                    this.keyD = true;
                     break;
             }
         };
 
-        window.onkeyup = function(event){
+        window.onkeyup = (event) => {
             const k = event.keyCode;
 
             switch(k){
-                case 87:
-                    t.w = false;
-                    break;
                 case 65:
-                    t.a = false;
-                    break;
-                case 83:
-                    t.s = false;
+                    this.keyA = false;
                     break;
                 case 68:
-                    t.d = false;
+                    this.keyD = false;
                     break;
             }
         }
@@ -67,12 +55,12 @@ export default class GameManager {
         this.addCameraMovement();
         this.addObjectsGeneration();
         this.addBubbleGrowing();
+        PlayPage.printScore(this.score);
     }
 
     initScene(ww, hh, playFieldName) {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(60, ww / hh, 0.1, 1000);
-
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setClearColor("#ffbe74");
         this.renderer.setSize(ww, hh);
@@ -82,35 +70,31 @@ export default class GameManager {
 
     setCameraPosition(xx, yy, zz) {
         const camera = this.camera;
-
         camera.position.x = xx;
         camera.position.y = yy;
         camera.position.z = zz;
-
         camera.lookAt(new THREE.Vector3(0, 0, 0));
     }
 
-    addCameraMovement(){
+    addCameraMovement() {
         const radius = 20;
         const deltaAngle = 0.05;
 
         let cameraX = radius;
         let cameraY = 0;
         let cameraZ = 0;
-
         let angleXZ = 0;
-        let angleY = 0;
 
         this.setCameraPosition(cameraX, cameraY, cameraZ);
 
         this.cameraMoveInterval = setInterval(() => {
-            if (this.a === true){
+            if (this.keyA === true){
                 angleXZ -= deltaAngle;
                 cameraX = radius * Math.cos(angleXZ);
                 cameraZ = radius * Math.sin(angleXZ);
                 this.setCameraPosition(cameraX, cameraY, cameraZ);
             }
-            if (this.d === true){
+            if (this.keyD === true){
                 angleXZ += deltaAngle;
                 cameraX = radius * Math.cos(angleXZ);
                 cameraZ = radius * Math.sin(angleXZ);
@@ -119,7 +103,59 @@ export default class GameManager {
         }, 50);
     }
 
-    addBubbleGrowing(){
+    addObjectsGeneration() {
+        this.bubbles = [];
+
+        Debugger.print("Scene objects number: " + this.scene.children.length);
+
+        function getRandomInteger(){
+           return (parseInt(Math.random() * 1000000) % 4) + 1;
+        }
+
+        function getRandomPosition(){
+            return (parseInt(Math.random() * 1000000) % 7) + Math.random() - 3.5;
+        }
+
+        this.generationInterval = setInterval(() => {
+            const side = getRandomInteger();
+
+            let xx = null;
+            let yy = null;
+            let zz = null;
+
+            switch(side) {
+                case 1:
+                    xx = getRandomPosition();
+                    yy = getRandomPosition();
+                    zz = -3.5;
+                    break;
+                case 3:
+                    xx = getRandomPosition();
+                    yy = getRandomPosition();
+                    zz = 3.5;
+                    break;
+                case 2:
+                    xx = 3.5;
+                    yy = getRandomPosition();
+                    zz = getRandomPosition();
+                    break;
+                case 4:
+                    xx = -3.5;
+                    yy = getRandomPosition();
+                    zz = getRandomPosition();
+                    break;
+            }
+
+            const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
+            this.bubbles.push(bubble);
+
+            Debugger.print("Bubbles number: " + this.bubbles.length);
+            Debugger.print("Scene objects number: " + this.scene.children.length);
+
+        }, 1000);
+    }
+
+    addBubbleGrowing() {
         const scaleDelta = 0.02;
 
         this.growingInterval = setInterval(() => {
@@ -130,14 +166,14 @@ export default class GameManager {
                 bubble.scale.z += scaleDelta;
 
                 if(bubble.scale.x >= 4) {
-                    this.stop();
                     alert("Game over!");
+                    this.stop();
                 }
             }
         }, 100);
     }
 
-    addClicksToBubbles(){
+    addClicksToBubbles() {
         let raycaster = new THREE.Raycaster();
         let mouse = new THREE.Vector2();
 
@@ -157,7 +193,7 @@ export default class GameManager {
             if ( intersects.length > 0 ) {
                 let answer = intersects[0];
 
-                if(answer.object !== this.objectsCreater.getC1() && answer.object !== this.objectsCreater.getC2()) {
+                if(answer.object !== this.objectsCreater.getCube() && answer.object !== this.objectsCreater.getCubeFrame()) {
                     let index = 0;
 
                     for (let i = 0; i < this.bubbles.length; i++) {
@@ -169,66 +205,19 @@ export default class GameManager {
 
                     this.scene.remove(answer.object);
                     this.bubbles.splice(index, 1);
+                    this.score += 1;
+                    PlayPage.printScore(this.score);
                 }
-
             }
-
-            // console.log("Bubbles number: " + this.bubbles.length);
-            // console.log("Scene objects number: " + this.scene.children.length);
+            Debugger.print("Bubbles number: " + this.bubbles.length);
+            Debugger.print("Scene objects number: " + this.scene.children.length);
         });
     };
 
-    addObjectsGeneration(){
-        this.bubbles = [];
-
-        console.log("Scene objects number: " + this.scene.children.length);
-
-        function getRandInteger(){
-           return (parseInt(Math.random() * 1000000) % 4) + 1;
-        }
-
-        function getRandPos(){
-            return (parseInt(Math.random() * 1000000) % 7) + Math.random() - 3.5;
-        }
-
-        this.generationInterval = setInterval(() => {
-            const side = getRandInteger();
-
-            let xx = null;
-            let yy = null;
-            let zz = null;
-
-            if(side === 1){
-                xx = getRandPos();
-                yy = getRandPos();
-                zz = -3.5;
-            }
-
-            if(side === 3){
-                xx = getRandPos();
-                yy = getRandPos();
-                zz = 3.5;
-            }
-
-            if(side === 2){
-                xx = 3.5;
-                yy = getRandPos();
-                zz = getRandPos();
-            }
-
-            if(side === 4){
-                xx = -3.5;
-                yy = getRandPos();
-                zz = getRandPos();
-            }
-
-            const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
-            this.bubbles.push(bubble);
-
-            // console.log("Bubbles number: " + this.bubbles.length);
-            // console.log("Scene objects number: " + this.scene.children.length);
-
-        }, 2000);
+    sendRequestToSaveScore() {
+        RequestToHost.singlescore(this.score, (err) => {
+            return Debugger.print("User don't authorise")
+        })
     }
 
     stop() {
@@ -237,14 +226,15 @@ export default class GameManager {
         clearInterval(this.growingInterval);
         clearInterval(this.generationInterval);
 
-        while(this.scene.children.length > 0){
+        while(this.scene.children.length > 0) {
             this.scene.remove(this.scene.children[0]);
         }
 
         this.bubbles = [];
-
-        console.log("Bubbles number: " + this.bubbles.length);
-        console.log("Scene objects number: " + this.scene.children.length);
+        this.sendRequestToSaveScore();
+        this.score = 0;
+        Debugger.print("Bubbles number: " + this.bubbles.length);
+        Debugger.print("Scene objects number: " + this.scene.children.length);
     }
 
 }

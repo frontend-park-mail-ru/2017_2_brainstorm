@@ -15,9 +15,9 @@ export default class RequestToHost {
      * @returns {string}
      */
     static baseUrl() {
-        return  "https://bubblerise-backend.herokuapp.com/";
+        // return  "https://bubblerise-backend.herokuapp.com/";
         // для тестирования взаимодействия с сервером на localhost
-        // return  "http://localhost:8080/";
+        return  "http://localhost:8080/";
     }
 
     /**
@@ -152,5 +152,15 @@ export default class RequestToHost {
     static theme(theme, callback) {
         const userTheme = {theme};
         RequestToHost.requestPatch("api/users/theme", userTheme, callback);
+    }
+
+    /**
+     * Отправляем score пользователя в single игре
+     * @param score
+     * @param callback
+     */
+    static singlescore(score, callback) {
+        const userScore = {score};
+        RequestToHost.requestPost("api/users/singlerecord", userScore, callback);
     }
 }
