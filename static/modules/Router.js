@@ -42,7 +42,7 @@ export default class Router {
 
         this.playPage = new PlayPage();
         this.playPage.addRedirectOnButtons(
-            {button: "play-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
+            {button: "panel__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
         this.loginPage = new LoginPage();

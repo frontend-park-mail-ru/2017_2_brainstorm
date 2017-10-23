@@ -7,7 +7,7 @@ export default class PlayPage extends Page {
 
     constructor() {
         super();
-        this.gameManager = new GameManager(960, 960, ".play-page__play-field");
+        this.gameManager = new GameManager(960, 700, ".play-page__play-field");
     }
 
     static pagePath() {
@@ -38,8 +38,12 @@ export default class PlayPage extends Page {
         document.querySelector(".main-menu__button-play").addEventListener("click", () => {
             this.gameMode(true);
         });
-        document.querySelector(".play-page__button-back").addEventListener("click", () => {
+        document.querySelector(".panel__button-back").addEventListener("click", () => {
             this.gameMode(false);
+        });
+        document.querySelector(".panel__button-restart").addEventListener("click", () => {
+            this.gameMode(false);
+            this.gameMode(true);
         });
     }
 }
