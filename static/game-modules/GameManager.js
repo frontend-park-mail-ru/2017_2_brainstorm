@@ -141,7 +141,7 @@ export default class GameManager {
         let raycaster = new THREE.Raycaster();
         let mouse = new THREE.Vector2();
 
-        this.playField.addEventListener("click", () => {
+        this.playField.addEventListener("click", (event) => {
             const ww = this.ww;
             const hh = this.hh;
 
