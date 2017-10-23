@@ -11,25 +11,24 @@ export default class ThemeChanger {
         // this.userTheme = false;
 
         this.userTheme = false;
+        let a = 0;
+        console.log("a = " + a + " !!a = "+ !!a);
+        a = 1;
+        console.log("a = " + a + " !!a = "+ !!a);
 
         RequestToHost.whoami((err, resp) => {
             if (err) {
                 return console.log("not AUTH for GET");
             } else {
-                this.userTheme = RequestToHost.whoami((err, resp) => {
-                    if (err) {
-                        console.log("Can't load theme");
-                        return false;
-                    }
-                    console.log("YOUR THEME resp = " + resp.theme);
-                    return !!resp.theme
-                });
-                // this.userTheme = userTheme;
-                console.log("YOUR THEME this = " + resp.theme);
+                console.log("YOUR THEME resp = " + resp.theme);
+                this.userTheme = resp.theme;
                 this.userTheme ? this.applyTheme() : "";
+                // return (resp.theme && true);
             }
         });
 
+        console.log("YOUR THEME this to BOOL = " + this.userTheme);
+        // this.userTheme ? this.applyTheme() : "";
 
         document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
             this.changeTheme();
