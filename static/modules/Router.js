@@ -45,10 +45,10 @@ export default class Router {
             {button: "play-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
-        const loginPage = new LoginPage();
+        this.loginPage = new LoginPage();
         const registerPage = new RegisterPage();
 
-        loginPage.addRedirectOnButtons(
+        this.loginPage.addRedirectOnButtons(
             {button: "login-page__button-back", nextPage: "main-page", pagePath: mainPagePath},
             {button: "login-page__link-to-register", nextPage: "register-page", pagePath: registerPagePath}
         );
@@ -68,12 +68,24 @@ export default class Router {
         window.addEventListener("popstate", () => {
             this.redirectToPage();
             registerPage.getForm().clearForm();
-            loginPage.getForm().clearForm();
+            this.loginPage.getForm().clearForm();
         });
     }
 
     changeTheme() {
         this.themeChanger.sendRequestForTheme();
+    }
+
+    getMe(router) {
+        this.myRouter = router;
+    }
+
+    printTEST() {
+        console.log("ADD ROUTER");
+    }
+
+    sendRouter() {
+        this.loginPage.takeRouter(this.myRouter);
     }
 
     redirectToPage() {

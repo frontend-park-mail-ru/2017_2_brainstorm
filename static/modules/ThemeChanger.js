@@ -29,6 +29,20 @@ export default class ThemeChanger {
         });
     }
 
+    sendRequestToSaveTheme() {
+        RequestToHost.whoami((err, resp) => {
+            if (err) {
+                return console.log("not AUTH for PATCH");
+            } else {
+                RequestToHost.theme(+this.userTheme, (err) => {
+                    if (err) {
+                        return console.log("Can't add theme");
+                    }
+                });
+            }
+        });
+    }
+
     generateTheme(themeStyles) {
         const createThemeStylesheet = (styles) => {
             return styles.reduce((stylesheet, current) => {
@@ -56,18 +70,7 @@ export default class ThemeChanger {
         this.userTheme = !this.userTheme;
         console.log("YOUR THEME change 2 = " + this.userTheme);
         this.applyTheme();
-
-        RequestToHost.whoami((err, resp) => {
-            if (err) {
-                return console.log("not AUTH for PATCH");
-            } else {
-                RequestToHost.theme(+this.userTheme, (err) => {
-                    if (err) {
-                        return console.log("Can't add theme");
-                    }
-                });
-            }
-        });
+        this.sendRequestToSaveTheme();
     }
 
     addEventsOnButtons() {

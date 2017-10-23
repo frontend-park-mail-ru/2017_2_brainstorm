@@ -14,7 +14,9 @@ class MainApp {
 
     constructor () {
         Debugger.print("Application was created");
-        new Router();
+        const router = new Router();
+        router.getMe(router);
+        router.sendRouter();
     }
 }
 

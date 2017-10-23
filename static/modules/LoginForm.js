@@ -15,13 +15,14 @@ const messagesLoginForm = {
 
 export default class LoginForm extends FormValidator {
 
-    constructor() {
+    constructor(router) {
         super();
         Object.assign(LoginForm.prototype, whoamiMixin, fieldsCleaner);
         this.loginValue = "";
         this.passwordValue = "";
         this.errorBox = null;
         this.addEventsToButtons();
+        this.router = router;
     }
 
     static msgEmptyField() {
@@ -76,6 +77,8 @@ export default class LoginForm extends FormValidator {
 
             PagePresenter.showOnlyOnePage("main-page");
             this.whoami();
+            this.router.printTEST();
+            this.router.changeTheme();
         });
     }
 

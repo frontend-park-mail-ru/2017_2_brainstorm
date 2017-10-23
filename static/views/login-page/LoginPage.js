@@ -8,7 +8,6 @@ export default class LoginPage extends Page {
     constructor() {
         super();
         // LoginPage.render();
-        this.form = new LoginForm();
     }
 
     static pagePath() {
@@ -17,6 +16,12 @@ export default class LoginPage extends Page {
 
     static pageBoxName() {
         return "login-page";
+    }
+
+    takeRouter(router) {
+        // this.router = router;
+        // this.router.printTEST();
+        this.form = new LoginForm(router);
     }
 
     getForm() {
