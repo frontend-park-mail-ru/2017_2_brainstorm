@@ -21,7 +21,7 @@ export default class ThemeChanger {
                 return console.log("not AUTH for GET");
             } else {
                 console.log("YOUR THEME resp = " + resp.theme);
-                this.userTheme = resp.theme;
+                this.userTheme = resp.theme && true;
                 this.userTheme ? this.applyTheme() : "";
                 // return (resp.theme && true);
             }
