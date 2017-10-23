@@ -7,7 +7,6 @@ export default class PlayPage extends Page {
 
     constructor() {
         super();
-        // PlayPage.render();
         this.gameManager = new GameManager(960, 960, ".play-page__play-field");
     }
 

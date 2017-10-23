@@ -7,7 +7,6 @@ export default class RecordsPage extends Page {
 
     constructor() {
         super();
-        // RecordsPage.render();
     }
 
     static pagePath() {

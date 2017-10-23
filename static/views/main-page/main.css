@@ -1,5 +1,4 @@
 .main-page {
-    /*padding-left: 5em;*/
     padding-top: 3em;
     align-content: center;
 }
@@ -8,11 +7,8 @@
     width:390px;
     height:400px;
     margin: 0 auto;
-    /*margin-left: 70px;*/
-    padding: 10px 10px 0 10px;
     text-align: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding: 1em 10px;
 }
 
 .main-menu__button-play {

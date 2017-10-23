@@ -72,20 +72,16 @@ export default class Router {
         });
     }
 
-    changeTheme() {
-        this.themeChanger.sendRequestForTheme();
-    }
-
     getMe(router) {
         this.myRouter = router;
     }
 
-    printTEST() {
-        console.log("ADD ROUTER");
-    }
-
     sendRouter() {
         this.loginPage.takeRouter(this.myRouter);
+    }
+
+    changeTheme() {
+        this.themeChanger.sendRequestForTheme();
     }
 
     redirectToPage() {

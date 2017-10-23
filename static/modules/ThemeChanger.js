@@ -2,6 +2,7 @@
 
 import {bodyStyles,mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover} from "./themeStyles.js";
 import RequestToHost from "./RequestToHost.js";
+import Debugger from "./Debugger";
 
 export default class ThemeChanger {
 
@@ -12,7 +13,7 @@ export default class ThemeChanger {
 
         this.sendRequestForTheme();
 
-        console.log("YOUR THEME this to BOOL = " + this.userTheme);
+        Debugger.print("YOUR THEME this to BOOL = " + this.userTheme);
 
         this.addEventsOnButtons();
     }
@@ -20,11 +21,10 @@ export default class ThemeChanger {
     sendRequestForTheme() {
         RequestToHost.whoami((err, resp) => {
             if (err) {
-                return console.log("not AUTH for GET");
+                return Debugger.print("not AUTH for GET");
             } else {
-                console.log("YOUR THEME resp = " + resp.theme);
+                Debugger.print("YOUR THEME resp = " + resp.theme);
                 this.userTheme = resp.theme && true;
-                // this.userTheme ? this.applyTheme() : "";
                 this.applyTheme();
             }
         });
@@ -33,11 +33,11 @@ export default class ThemeChanger {
     sendRequestToSaveTheme() {
         RequestToHost.whoami((err, resp) => {
             if (err) {
-                return console.log("not AUTH for PATCH");
+                return Debugger.print("not AUTH for PATCH");
             } else {
                 RequestToHost.theme(+this.userTheme, (err) => {
                     if (err) {
-                        return console.log("Can't add theme");
+                        return Debugger.print("Can't add theme");
                     }
                 });
             }
@@ -56,7 +56,7 @@ export default class ThemeChanger {
     }
 
     applyTheme() {
-        console.log("YOUR THEME apply = " + this.userTheme);
+        Debugger.print("YOUR THEME apply = " + this.userTheme);
 
         const addThemeStylesheet = (stylesheet) => {
             let styleTag = document.querySelector(".theme-styles");
@@ -67,9 +67,9 @@ export default class ThemeChanger {
     }
 
     changeTheme() {
-        console.log("YOUR THEME change 1 = " + this.userTheme);
+        Debugger.print("YOUR THEME change 1 = " + this.userTheme);
         this.userTheme = !this.userTheme;
-        console.log("YOUR THEME change 2 = " + this.userTheme);
+        Debugger.print("YOUR THEME change 2 = " + this.userTheme);
         this.applyTheme();
         this.sendRequestToSaveTheme();
     }

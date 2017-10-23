@@ -6,7 +6,6 @@ export default class InfoPage extends Page {
 
     constructor() {
         super();
-        // InfoPage.render();
     }
 
     static pagePath() {

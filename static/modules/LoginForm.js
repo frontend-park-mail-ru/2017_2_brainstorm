@@ -77,7 +77,6 @@ export default class LoginForm extends FormValidator {
 
             PagePresenter.showOnlyOnePage("main-page");
             this.whoami();
-            this.router.printTEST();
             this.router.changeTheme();
         });
     }

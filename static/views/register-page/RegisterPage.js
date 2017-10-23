@@ -7,7 +7,6 @@ export default class RegisterPage extends Page {
 
     constructor() {
         super();
-        // RegisterPage.render();
         this.form = new RegisterForm();
     }
 

@@ -6,7 +6,6 @@ export default class MainPage extends Page {
 
     constructor() {
         super();
-        // MainPage.render();
     }
 
     static pagePath() {
