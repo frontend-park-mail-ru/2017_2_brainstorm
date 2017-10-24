@@ -88,13 +88,13 @@ export default class GameManager {
         this.setCameraPosition(cameraX, cameraY, cameraZ);
 
         this.cameraMoveInterval = setInterval(() => {
-            if (this.keyA === true){
+            if (this.keyA === true) {
                 angleXZ -= deltaAngle;
                 cameraX = radius * Math.cos(angleXZ);
                 cameraZ = radius * Math.sin(angleXZ);
                 this.setCameraPosition(cameraX, cameraY, cameraZ);
             }
-            if (this.keyD === true){
+            if (this.keyD === true) {
                 angleXZ += deltaAngle;
                 cameraX = radius * Math.cos(angleXZ);
                 cameraZ = radius * Math.sin(angleXZ);
@@ -216,7 +216,9 @@ export default class GameManager {
 
     sendRequestToSaveScore() {
         RequestToHost.singlescore(this.score, (err) => {
-            return Debugger.print("User don't authorise")
+            if(err) {
+                return Debugger.print("User don't authorise")
+            }
         })
     }
 
