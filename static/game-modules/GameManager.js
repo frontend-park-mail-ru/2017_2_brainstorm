@@ -109,7 +109,7 @@ export default class GameManager {
         Debugger.print("Scene objects number: " + this.scene.children.length);
 
         function getRandomInteger(){
-           return (parseInt(Math.random() * 1000000) % 6) + 1;
+           return (parseInt(Math.random() * 1000000) % 4) + 1;
         }
 
         function getRandomPosition(){
