@@ -2,12 +2,14 @@
 
 import Page from "../../modules/Page.js";
 import RequestToHost from "../../modules/RequestToHost.js";
+import Debugger from "../../modules/Debugger";
+import templatePage from "./records-page.pug";
+import templateLeaderboard from "./leaderboard.pug";
 
 export default class RecordsPage extends Page {
 
     constructor() {
         super();
-        RecordsPage.render();
     }
 
     static pagePath() {
@@ -22,27 +24,24 @@ export default class RecordsPage extends Page {
         return "records-page__table"
     }
 
-    static render() {
-        let template = require("./records-page.pug");
-        let recordsPageBox = Page.createBoxForPage(this.pageBoxName());
-        recordsPageBox.innerHTML = template();
+    render() {
+        let recordsPageBox = Page.createBoxForPage(RecordsPage.pageBoxName());
+        recordsPageBox.innerHTML = templatePage();
     }
 
     static renderLeaderBoard(resp) {
         let leaderBoardBox = document.querySelector("." + RecordsPage.leaderBoardName());
         leaderBoardBox.innerHTML = "";
-        // подготовка шаблона для рендеринга
-        let template = require("./leaderboard.pug");
         // устанавливаем локальные переменные для рендеринга
         let locals = resp;
         // рендерим шаблон
-        leaderBoardBox.innerHTML = template(locals);
+        leaderBoardBox.innerHTML = templateLeaderboard(locals);
     }
 
     sendRequestForRecords() {
         RequestToHost.records((err, resp) => {
             if (err) {
-                return alert("Empty TOP");
+                return Debugger.print("Empty TOP");
             }
             RecordsPage.renderLeaderBoard(resp);
         });

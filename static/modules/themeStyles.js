@@ -3,7 +3,7 @@
 const bodyStyles = {
     selector: "body",
     styles: {
-        "background-color": "lightsalmon",
+        "background": "lightsalmon",
     }
 };
 

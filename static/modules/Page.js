@@ -7,12 +7,15 @@ export default class Page {
     constructor() {
         Page.pagePath();
         Page.pageBoxName();
+        this.render();
         this.addEventsOnButtons();
     }
 
     static pagePath() {}
 
     static pageBoxName() {}
+
+    render() {}
 
     addEventsOnButtons() {}
 

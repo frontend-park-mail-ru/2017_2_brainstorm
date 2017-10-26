@@ -1,30 +1,21 @@
 .main-page {
-    padding-left: 5em;
-    padding-top: 3em;
+    padding-top: 20px;
     align-content: center;
-}
-
-.main-page__logo-game {
-    opacity: 0.9;
-    cursor: pointer;
 }
 
 .main-page__main-menu {
     width:390px;
     height:400px;
     margin: 0 auto;
-    margin-left: 70px;
-    padding: 10px 10px 0 10px;
     text-align: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 30px;
 }
 
 .main-menu__button-play {
     width: 300px;
     height: 300px;
-    padding-top: 60px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .main-menu__button-play_img {
@@ -40,6 +31,7 @@
     padding-left: 4em;
     width: 250px;
     height: 250px;
+    margin-top: -1.5em;
 }
 
 .main-menu__button-login {
@@ -95,8 +87,9 @@
 
 .main-page__user {
     text-align: center;
-    width: 90%;
+    width: 80%;
     color: white;
     font-size: larger;
     background-color: lightsalmon;
+    margin-left: 10%;
 }

@@ -23,7 +23,7 @@ export default class Router {
         const registerPagePath = RegisterPage.pagePath();
         const recordsPagePath = RecordsPage.pagePath();
 
-        new ThemeChanger();
+        this.themeChanger = new ThemeChanger();
 
         Object.assign(Page.prototype, whoamiMixin);
         const mainPage = new MainPage();
@@ -40,15 +40,15 @@ export default class Router {
             {button: "info-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
-        const playPage = new PlayPage();
-        playPage.addRedirectOnButtons(
-            {button: "play-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
+        this.playPage = new PlayPage();
+        this.playPage.addRedirectOnButtons(
+            {button: "panel__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
-        const loginPage = new LoginPage();
+        this.loginPage = new LoginPage();
         const registerPage = new RegisterPage();
 
-        loginPage.addRedirectOnButtons(
+        this.loginPage.addRedirectOnButtons(
             {button: "login-page__button-back", nextPage: "main-page", pagePath: mainPagePath},
             {button: "login-page__link-to-register", nextPage: "register-page", pagePath: registerPagePath}
         );
@@ -68,12 +68,26 @@ export default class Router {
         window.addEventListener("popstate", () => {
             this.redirectToPage();
             registerPage.getForm().clearForm();
-            loginPage.getForm().clearForm();
+            this.loginPage.getForm().clearForm();
         });
+    }
+
+    getMe(router) {
+        this.myRouter = router;
+    }
+
+    sendRouter() {
+        this.loginPage.takeRouter(this.myRouter);
+    }
+
+    changeTheme() {
+        this.themeChanger.sendRequestForTheme();
     }
 
     redirectToPage() {
         const pathname = window.location.pathname;
+        let gameMode = (pathname === "/play");
+        this.playPage.gameMode(gameMode);
         switch (pathname) {
         case "/main":
             PagePresenter.showOnlyOnePage("main-page");

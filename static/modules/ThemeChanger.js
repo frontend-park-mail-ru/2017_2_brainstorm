@@ -1,18 +1,43 @@
 "use strict";
 
 import {bodyStyles,mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover} from "./themeStyles.js";
+import RequestToHost from "./RequestToHost.js";
+import Debugger from "./Debugger";
 
 export default class ThemeChanger {
 
     constructor() {
         this.styles = "";
         this.generateTheme([bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover]);
+        this.userTheme = false;
+        this.sendRequestForTheme();
+        this.addEventsOnButtons();
+    }
 
-        this.secondTheme = false;
+    sendRequestForTheme() {
+        RequestToHost.whoami((err, resp) => {
+            if (err) {
+                return Debugger.print("not AUTH for GET");
+            } else {
+                Debugger.print("YOUR THEME resp = " + resp.theme);
+                this.userTheme = resp.theme && true;
+                this.applyTheme();
+            }
+        });
+    }
 
-        document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
-            this.applyTheme();
-        })
+    sendRequestToSaveTheme() {
+        RequestToHost.whoami((err, resp) => {
+            if (err) {
+                return Debugger.print("not AUTH for PATCH");
+            } else {
+                RequestToHost.theme(+this.userTheme, (err) => {
+                    if (err) {
+                        return Debugger.print("Can't add theme");
+                    }
+                });
+            }
+        });
     }
 
     generateTheme(themeStyles) {
@@ -27,12 +52,24 @@ export default class ThemeChanger {
     }
 
     applyTheme() {
+        Debugger.print("YOUR THEME apply = " + this.userTheme);
         const addThemeStylesheet = (stylesheet) => {
             let styleTag = document.querySelector(".theme-styles");
             styleTag.innerHTML = stylesheet;
         };
-        let stylesheet = this.secondTheme ? "" : this.styles;
+        let stylesheet = this.userTheme ? this.styles : "";
         addThemeStylesheet(stylesheet);
-        this.secondTheme = !this.secondTheme;
+    }
+
+    changeTheme() {
+        this.userTheme = !this.userTheme;
+        this.applyTheme();
+        this.sendRequestToSaveTheme();
+    }
+
+    addEventsOnButtons() {
+        document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
+            this.changeTheme();
+        })
     }
 }

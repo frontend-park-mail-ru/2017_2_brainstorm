@@ -1,12 +1,12 @@
 "use strict";
 
 import Page from "../../modules/Page.js";
+import template from "./info-page.pug";
 
 export default class InfoPage extends Page {
 
     constructor() {
         super();
-        InfoPage.render();
     }
 
     static pagePath() {
@@ -17,9 +17,8 @@ export default class InfoPage extends Page {
         return "info-page";
     }
 
-    static render() {
-        let template = require("./info-page.pug");
-        let infoPageBox = Page.createBoxForPage(this.pageBoxName());
+    render() {
+        let infoPageBox = Page.createBoxForPage(InfoPage.pageBoxName());
         infoPageBox.innerHTML = template();
     }
 

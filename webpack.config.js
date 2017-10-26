@@ -5,8 +5,8 @@ let ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: "./static/modules/MainApp.js",
     output: {
-        path: __dirname + "/static/modules/",
-        filename: "app.js"
+        path: __dirname + "/static/dist/",
+        filename: "src/app.js"
     },
     module: {
         rules: [
@@ -20,12 +20,16 @@ module.exports = {
             {
                 test: /\.pug$/,
                 use: "pug-loader"
+            },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader'
             }
         ]
     },
     plugins: [
         new ExtractTextPlugin({
-            filename: "./../styles/app.css"
+            filename: "./../dist/app.css"
         })
     ],
     node: {

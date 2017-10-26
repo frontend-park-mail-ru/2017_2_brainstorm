@@ -1,12 +1,14 @@
 "use strict";
 
 import Page from "../../modules/Page.js";
+import GameManager from  "./../../game-modules/GameManager.js";
+import template from "./play-page.pug";
 
 export default class PlayPage extends Page {
 
     constructor() {
         super();
-        PlayPage.render();
+        this.gameManager = new GameManager(960, 680, ".play-page__play-field");
     }
 
     static pagePath() {
@@ -17,13 +19,32 @@ export default class PlayPage extends Page {
         return "play-page";
     }
 
-    static render() {
-        let template = require("./play-page.pug");
-        let playPageBox = Page.createBoxForPage(this.pageBoxName());
+    render() {
+        let playPageBox = Page.createBoxForPage(PlayPage.pageBoxName());
         playPageBox.innerHTML = template();
     }
 
-    addEventsOnButtons() {
+    gameMode(mode) {
+        let gameLogo = document.querySelector(".main-box__logo-game");
+        gameLogo.hidden = mode;
+        mode ?
+            this.gameManager.start() : this.gameManager.stop();
+    }
 
+    static printScore(score) {
+        document.querySelector(".panel__score-box").innerHTML = score;
+    }
+
+    addEventsOnButtons() {
+        document.querySelector(".main-menu__button-play").addEventListener("click", () => {
+            this.gameMode(true);
+        });
+        document.querySelector(".panel__button-back").addEventListener("click", () => {
+            this.gameMode(false);
+        });
+        document.querySelector(".panel__button-restart").addEventListener("click", () => {
+            this.gameMode(false);
+            this.gameMode(true);
+        });
     }
 }

@@ -1,35 +1,83 @@
 .play-page {
     padding-left: 5em;
-    padding-top: 3em;
+    padding-top: 10px;
     align-content: center;
 }
 
-.play-page__logo-game {
-    opacity: 0.9;
+.play-page__panel-buttons {
+    width: 800px;
+    height: 60px;
+    margin-top: -20px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 
-.play-page__button-back {
-    width: 60px;
+.panel__button-back {
+    width: 100px;
     height: 60px;
+    display: inline-block;
     cursor: pointer;
 }
 
-.play-page__button-back_img {
+.panel__button-back_img {
     padding-left: 1.2em;
     width: 40px;
     height: 40px;
     z-index: 33;
 }
 
-.play-page__button-back_img:hover {
+.panel__button-back_img:hover {
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
+    margin-top: -0.6em;
+}
+
+.panel__button-restart {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.panel__button-restart_img {
+    padding-left: 1.2em;
+    width: 40px;
+    height: 40px;
+    z-index: 33;
+}
+
+.panel__button-restart_img:hover {
+    padding-left: 1.2em;
+    width: 60px;
+    height: 60px;
+    margin-top: -0.6em;
+}
+
+.panel__score-label {
+    display: inline-block;
+    height: 60px;
+    font-size: 35px;
+    color: midnightblue;
+    margin-left: 300px;
+}
+
+.panel__score-box {
+    display: inline-block;
+    width: 200px;
+    height: 45px;
+    margin-left: 5px;
+    font-size: 40px;
+    color: rgb(249, 249, 254);
+    font-style: oblique;
+    background: #00bcd4;
+    padding-right: 5px;
 }
 
 .play-page__play-field {
-    width: 600px;
-    height: 600px;
+    width: 960px;
+    height: 680px;
     background: bisque;
-    margin-left: -30px;
+    margin-left: -80px;
+    box-shadow: 0 0 25px 5px rgb(255, 255, 255);
 }

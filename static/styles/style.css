@@ -1,7 +1,7 @@
 /*styles for all pages*/
 
 body {
-    background-color: lavender;
+    background: lavender;
     font-family: Geneva, Arial, Helvetica, sans-serif;
 }
 
@@ -10,17 +10,17 @@ p {
 }
 
 .main-box {
-    width: 700px;
+    width: 960px;
     height: 100vh;
     margin: 0 auto;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.75);
     align-content: center;
     border-radius: 7px;
 }
 
 .main-box__logo-game {
-    padding-left: 5em;
-    padding-top: 3em;
+    padding-left: 200px;
+    padding-top: 20px;
     align-content: center;
 }
 
@@ -32,6 +32,7 @@ p {
     top:20px;
     right:20px;
     border-radius: 30px;
+    cursor: pointer;
 }
 
 .main-box__theme-changer:hover {

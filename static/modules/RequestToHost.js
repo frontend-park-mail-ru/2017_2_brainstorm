@@ -23,15 +23,15 @@ export default class RequestToHost {
     /**
 	 * POST-запрос на сервер
      * @param {string} address
-     * @param {string} user
+     * @param {object} data
      * @param callback
      */
-    static requestPost(address, user, callback) {
+    static requestPost(address, data, callback) {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", this.baseUrl() + address, true);
         xhr.withCredentials = true; //for cookies
 
-        const body = JSON.stringify(user);
+        const body = JSON.stringify(data);
 
         xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
 
@@ -76,6 +76,36 @@ export default class RequestToHost {
     }
 
     /**
+     * PATCH-запрос на сервер
+     * @param {string} address
+     * @param {object} data
+     * @param callback
+     */
+    static requestPatch(address, data, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open("PATCH", this.baseUrl() + address, true);
+        xhr.withCredentials = true; //for cookies
+
+        const body = JSON.stringify(data);
+
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
+
+        xhr.send(body);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== messagesFromHost.XHR_READY) {
+                return;
+            }
+            if (+xhr.status !== messagesFromHost.HTTP_OK) {
+                return callback(xhr, null);
+            }
+
+            const response = JSON.parse(xhr.responseText);
+            callback(null, response);
+        };
+    }
+
+    /**
 	 * Авторизация пользователя
      * @param login
      * @param password
@@ -99,7 +129,7 @@ export default class RequestToHost {
     }
 
     /**
-	 * Узнает логин текущего пользователя
+	 * Узнает информацию о текущем пользователе
      * @param callback
      */
     static whoami(callback) {
@@ -112,5 +142,25 @@ export default class RequestToHost {
      */
     static records(callback) {
         RequestToHost.requestGet("api/users/records", callback);
+    }
+
+    /**
+     * Отправляем тему пользователя
+     * @param theme - 1 или 0 текущая тема пользователя
+     * @param callback
+     */
+    static theme(theme, callback) {
+        const userTheme = {theme};
+        RequestToHost.requestPatch("api/users/theme", userTheme, callback);
+    }
+
+    /**
+     * Отправляем score пользователя в single игре
+     * @param score
+     * @param callback
+     */
+    static singlescore(score, callback) {
+        const userScore = {score};
+        RequestToHost.requestPost("api/users/singlerecord", userScore, callback);
     }
 }
