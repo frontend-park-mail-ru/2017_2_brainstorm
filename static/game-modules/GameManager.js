@@ -6,12 +6,19 @@ import RequestToHost from "../modules/RequestToHost.js"
 import Debugger from "../modules/Debugger.js";
 import PlayPage from "../views/play-page/PlayPage.js";
 
+const keyCodes = {
+    KEY_A_KEY_CODE: 65,
+    KEY_D_KEY_CODE: 68
+};
+
+const BACKGROUND_COLOR_SCENE = "#ffbe74";
+
 export default class GameManager {
 
-    constructor(ww, hh, playFieldName) {
-        this.ww = ww;
-        this.hh = hh;
-        this.initScene(ww, hh, playFieldName);
+    constructor(width, height, playFieldName) {
+        this.width = width;
+        this.height = height;
+        this.initScene(width, height, playFieldName);
         this.sceneRenderer = new SceneRenderer(this.renderer, this.scene, this.camera);
         this.addClicksToBubbles();
         this.addEventsToKey();
@@ -26,10 +33,10 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch(k){
-                case 65:
+                case keyCodes.KEY_A_KEY_CODE:
                     this.keyA = true;
                     break;
-                case 68:
+                case keyCodes.KEY_D_KEY_CODE:
                     this.keyD = true;
                     break;
             }
@@ -39,10 +46,10 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch(k){
-                case 65:
+                case keyCodes.KEY_A_KEY_CODE:
                     this.keyA = false;
                     break;
-                case 68:
+                case keyCodes.KEY_D_KEY_CODE:
                     this.keyD = false;
                     break;
             }
@@ -50,20 +57,22 @@ export default class GameManager {
     }
 
     start() {
+        this.keyA = false;
+        this.keyD = false;
         this.sceneRenderer.startRendering();
         this.objectsCreater = new ObjectsCreater(this.scene);
         this.addCameraMovement();
-        this.addObjectsGeneration();
+        this.addBubblesGeneration();
         this.addBubbleGrowing();
         PlayPage.printScore(this.score);
     }
 
-    initScene(ww, hh, playFieldName) {
+    initScene(width, height, playFieldName) {
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(60, ww / hh, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer();
-        this.renderer.setClearColor("#ffbe74");
-        this.renderer.setSize(ww, hh);
+        this.renderer.setClearColor(BACKGROUND_COLOR_SCENE);
+        this.renderer.setSize(width, height);
         this.playField = document.querySelector(playFieldName);
         this.playField.append(this.renderer.domElement);
     }
@@ -103,56 +112,67 @@ export default class GameManager {
         }, 50);
     }
 
-    addObjectsGeneration() {
+    addBubblesGeneration() {
         this.bubbles = [];
 
         Debugger.print("Scene objects number: " + this.scene.children.length);
 
-        function getRandomInteger(){
+        function getRandomInteger() {
            return (parseInt(Math.random() * 1000000) % 4) + 1;
         }
 
-        function getRandomPosition(){
+        function getRandomPosition() {
             return (parseInt(Math.random() * 1000000) % 9) + Math.random() - 4.5;
         }
 
+        let countNow = 0;
+        let maxCount = 20;
+
         this.generationInterval = setInterval(() => {
-            const side = getRandomInteger();
+            if (countNow < maxCount) {
+                countNow++;
+            } else {
 
-            let xx = null;
-            let yy = null;
-            let zz = null;
+                countNow = 0;
+                (maxCount > 7) ? maxCount -= 0.1 : "";
 
-            switch(side) {
-                case 1:
-                    xx = getRandomPosition();
-                    yy = getRandomPosition();
-                    zz = -4.5;
-                    break;
-                case 3:
-                    xx = getRandomPosition();
-                    yy = getRandomPosition();
-                    zz = 4.5;
-                    break;
-                case 2:
-                    xx = 4.5;
-                    yy = getRandomPosition();
-                    zz = getRandomPosition();
-                    break;
-                case 4:
-                    xx = -4.5;
-                    yy = getRandomPosition();
-                    zz = getRandomPosition();
-                    break;
+                const side = getRandomInteger();
+
+                let xx = null;
+                let yy = null;
+                let zz = null;
+
+                switch (side) {
+                    case 1:
+                        xx = getRandomPosition();
+                        yy = getRandomPosition();
+                        zz = -4.5;
+                        break;
+                    case 3:
+                        xx = getRandomPosition();
+                        yy = getRandomPosition();
+                        zz = 4.5;
+                        break;
+                    case 2:
+                        xx = 4.5;
+                        yy = getRandomPosition();
+                        zz = getRandomPosition();
+                        break;
+                    case 4:
+                        xx = -4.5;
+                        yy = getRandomPosition();
+                        zz = getRandomPosition();
+                        break;
+                }
+
+                const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
+                this.bubbles.push(bubble);
+
+                Debugger.print("Bubbles number: " + this.bubbles.length);
+                Debugger.print("Scene objects number: " + this.scene.children.length);
             }
 
-            const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
-            this.bubbles.push(bubble);
-
-            Debugger.print("Bubbles number: " + this.bubbles.length);
-            Debugger.print("Scene objects number: " + this.scene.children.length);
-
-        }, 1000);
+        }, 50);
     }
 
     addBubbleGrowing() {
@@ -165,7 +185,7 @@ export default class GameManager {
                 bubble.scale.y += scaleDelta;
                 bubble.scale.z += scaleDelta;
 
-                if(bubble.scale.x >= 4) {
+                if (bubble.scale.x >= 4) {
                     alert("Game over!");
                     this.stop();
                 }
@@ -178,14 +198,14 @@ export default class GameManager {
         let mouse = new THREE.Vector2();
 
         this.playField.addEventListener("click", (event) => {
-            const ww = this.ww;
-            const hh = this.hh;
+            const width = this.width;
+            const height = this.height;
 
             const xMouse = event.offsetX;
             const yMouse = event.offsetY;
 
-            mouse.x = ( xMouse / ww ) * 2 - 1;
-            mouse.y = - ( yMouse / hh ) * 2 + 1;
+            mouse.x = ( xMouse / width ) * 2 - 1;
+            mouse.y = - ( yMouse / height ) * 2 + 1;
             raycaster.setFromCamera( mouse, this.camera );
 
             let intersects = raycaster.intersectObjects( this.scene.children );
@@ -193,7 +213,7 @@ export default class GameManager {
             if ( intersects.length > 0 ) {
                 let answer = intersects[0];
 
-                if(answer.object !== this.objectsCreater.getCube() && answer.object !== this.objectsCreater.getCubeFrame()) {
+                if (answer.object !== this.objectsCreater.getCube() && answer.object !== this.objectsCreater.getCubeFrame()) {
                     let index = 0;
 
                     for (let i = 0; i < this.bubbles.length; i++) {
@@ -216,7 +236,7 @@ export default class GameManager {
 
     sendRequestToSaveScore() {
         RequestToHost.singlescore(this.score, (err) => {
-            if(err) {
+            if (err) {
                 return Debugger.print("User don't authorise")
             }
         })
@@ -238,5 +258,4 @@ export default class GameManager {
         Debugger.print("Bubbles number: " + this.bubbles.length);
         Debugger.print("Scene objects number: " + this.scene.children.length);
     }
-
 }

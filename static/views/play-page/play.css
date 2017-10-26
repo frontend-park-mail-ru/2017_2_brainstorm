@@ -8,7 +8,6 @@
     width: 800px;
     height: 60px;
     margin-top: -20px;
-    cursor: pointer;
     padding-top: 10px;
     padding-bottom: 20px;
 }
@@ -17,6 +16,7 @@
     width: 100px;
     height: 60px;
     display: inline-block;
+    cursor: pointer;
 }
 
 .panel__button-back_img {
@@ -37,6 +37,7 @@
     width: 60px;
     height: 60px;
     display: inline-block;
+    cursor: pointer;
 }
 
 .panel__button-restart_img {
