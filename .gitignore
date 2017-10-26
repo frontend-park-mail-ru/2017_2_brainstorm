@@ -62,11 +62,10 @@ typings/
 .idea/
 
 # Webpack result script
-static/modules/app.js
+*app.js
 
 # Webpack result script
-static/styles/app.css
+*app.css
 
 # Pug templates result
 *.pug.js
-
