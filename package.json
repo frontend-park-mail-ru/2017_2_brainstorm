@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\"",
     "compile-pug": "pug -c --extension 'pug.js' --name-after-file ./static",
     "babel": "babel static/dist/src -d static/dist --presets es2015",
-    "eslint": "./node_modules/.bin/eslint ./static/script"
+    "eslint": "./node_modules/.bin/eslint ./static"
   },
   "keywords": [
     "game",

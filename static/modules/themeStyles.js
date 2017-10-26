@@ -35,4 +35,4 @@ const themeChangerStylesHover = {
     }
 };
 
-export {bodyStyles,mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover};
+export {bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover};

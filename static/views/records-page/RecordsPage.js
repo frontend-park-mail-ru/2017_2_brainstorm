@@ -21,7 +21,7 @@ export default class RecordsPage extends Page {
     }
 
     static leaderBoardName() {
-        return "records-page__table"
+        return "records-page__table";
     }
 
     render() {

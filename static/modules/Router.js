@@ -3,7 +3,7 @@
 import Page from "./Page.js";
 import whoamiMixin from "./whoamiMixin.js";
 import PagePresenter from "./PagePresenter.js";
-import ThemeChanger from "./ThemeChanger.js"
+import ThemeChanger from "./ThemeChanger.js";
 
 import InfoPage from "../views/info-page/InfoPage.js";
 import PlayPage from "../views/play-page/PlayPage";

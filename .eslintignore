@@ -1,1 +1,3 @@
 app.js
+libs/
+*.pug.js

@@ -42,8 +42,8 @@ export default class ObjectsCreater {
         this.createLight(70, 0, 0);
         this.createLight(0, 0, -70);
         this.createLight(0, 0, 70);
-        this.createLight( 0, -70, 0);
-        this.createLight( 0, 70, 0);
+        this.createLight(0, -70, 0);
+        this.createLight(0, 70, 0);
     }
 
     createObject(geometry, material, pos) {
@@ -108,7 +108,7 @@ export default class ObjectsCreater {
     }
 
     createLight(xx, yy, zz) {
-        const pointLight = new THREE.PointLight( objectColors.LIGHT_COLOR, 2);
+        const pointLight = new THREE.PointLight(objectColors.LIGHT_COLOR, 2);
         pointLight.position.set(xx, yy, zz);
         this.scene.add(pointLight);
     }

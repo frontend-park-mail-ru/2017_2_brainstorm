@@ -2,13 +2,20 @@
 
 import SceneRenderer from "./SceneRenderer.js";
 import ObjectsCreater from "./ObjectsCreater.js";
-import RequestToHost from "../modules/RequestToHost.js"
+import RequestToHost from "../modules/RequestToHost.js";
 import Debugger from "../modules/Debugger.js";
 import PlayPage from "../views/play-page/PlayPage.js";
 
 const keyCodes = {
     KEY_A_KEY_CODE: 65,
     KEY_D_KEY_CODE: 68
+};
+
+const cubeSides = {
+    FIRST_SIDE: 1,
+    SECOND_SIDE: 2,
+    THIRD_SIDE: 3,
+    FOURTH_SIDE: 4
 };
 
 const BACKGROUND_COLOR_SCENE = "#ffbe74";
@@ -33,12 +40,12 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch(k){
-                case keyCodes.KEY_A_KEY_CODE:
-                    this.keyA = true;
-                    break;
-                case keyCodes.KEY_D_KEY_CODE:
-                    this.keyD = true;
-                    break;
+            case keyCodes.KEY_A_KEY_CODE:
+                this.keyA = true;
+                break;
+            case keyCodes.KEY_D_KEY_CODE:
+                this.keyD = true;
+                break;
             }
         };
 
@@ -46,14 +53,14 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch(k){
-                case keyCodes.KEY_A_KEY_CODE:
-                    this.keyA = false;
-                    break;
-                case keyCodes.KEY_D_KEY_CODE:
-                    this.keyD = false;
-                    break;
+            case keyCodes.KEY_A_KEY_CODE:
+                this.keyA = false;
+                break;
+            case keyCodes.KEY_D_KEY_CODE:
+                this.keyD = false;
+                break;
             }
-        }
+        };
     }
 
     start() {
@@ -118,7 +125,7 @@ export default class GameManager {
         Debugger.print("Scene objects number: " + this.scene.children.length);
 
         function getRandomInteger() {
-           return (parseInt(Math.random() * 1000000) % 4) + 1;
+            return (parseInt(Math.random() * 1000000) % 4) + 1;
         }
 
         function getRandomPosition() {
@@ -143,26 +150,26 @@ export default class GameManager {
                 let zz = null;
 
                 switch (side) {
-                    case 1:
-                        xx = getRandomPosition();
-                        yy = getRandomPosition();
-                        zz = -4.5;
-                        break;
-                    case 3:
-                        xx = getRandomPosition();
-                        yy = getRandomPosition();
-                        zz = 4.5;
-                        break;
-                    case 2:
-                        xx = 4.5;
-                        yy = getRandomPosition();
-                        zz = getRandomPosition();
-                        break;
-                    case 4:
-                        xx = -4.5;
-                        yy = getRandomPosition();
-                        zz = getRandomPosition();
-                        break;
+                case cubeSides.FIRST_SIDE:
+                    xx = getRandomPosition();
+                    yy = getRandomPosition();
+                    zz = -4.5;
+                    break;
+                case cubeSides.THIRD_SIDE:
+                    xx = getRandomPosition();
+                    yy = getRandomPosition();
+                    zz = 4.5;
+                    break;
+                case cubeSides.SECOND_SIDE:
+                    xx = 4.5;
+                    yy = getRandomPosition();
+                    zz = getRandomPosition();
+                    break;
+                case cubeSides.FOURTH_SIDE:
+                    xx = -4.5;
+                    yy = getRandomPosition();
+                    zz = getRandomPosition();
+                    break;
                 }
 
                 const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
@@ -204,13 +211,13 @@ export default class GameManager {
             const xMouse = event.offsetX;
             const yMouse = event.offsetY;
 
-            mouse.x = ( xMouse / width ) * 2 - 1;
-            mouse.y = - ( yMouse / height ) * 2 + 1;
-            raycaster.setFromCamera( mouse, this.camera );
+            mouse.x = (xMouse / width) * 2 - 1;
+            mouse.y = - (yMouse / height) * 2 + 1;
+            raycaster.setFromCamera(mouse, this.camera);
 
-            let intersects = raycaster.intersectObjects( this.scene.children );
+            let intersects = raycaster.intersectObjects(this.scene.children);
 
-            if ( intersects.length > 0 ) {
+            if (intersects.length > 0) {
                 let answer = intersects[0];
 
                 if (answer.object !== this.objectsCreater.getCube() && answer.object !== this.objectsCreater.getCubeFrame()) {
@@ -232,14 +239,14 @@ export default class GameManager {
             Debugger.print("Bubbles number: " + this.bubbles.length);
             Debugger.print("Scene objects number: " + this.scene.children.length);
         });
-    };
+    }
 
     sendRequestToSaveScore() {
         RequestToHost.singlescore(this.score, (err) => {
             if (err) {
-                return Debugger.print("User don't authorise")
+                return Debugger.print("User don't authorise");
             }
-        })
+        });
     }
 
     stop() {
