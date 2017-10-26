@@ -3,6 +3,8 @@
 import Page from "../../modules/Page.js";
 import RequestToHost from "../../modules/RequestToHost.js";
 import Debugger from "../../modules/Debugger";
+import templatePage from "./records-page.pug";
+import templateLeaderboard from "./leaderboard.pug";
 
 export default class RecordsPage extends Page {
 
@@ -23,20 +25,17 @@ export default class RecordsPage extends Page {
     }
 
     render() {
-        let template = require("./records-page.pug");
         let recordsPageBox = Page.createBoxForPage(RecordsPage.pageBoxName());
-        recordsPageBox.innerHTML = template();
+        recordsPageBox.innerHTML = templatePage();
     }
 
     static renderLeaderBoard(resp) {
         let leaderBoardBox = document.querySelector("." + RecordsPage.leaderBoardName());
         leaderBoardBox.innerHTML = "";
-        // подготовка шаблона для рендеринга
-        let template = require("./leaderboard.pug");
         // устанавливаем локальные переменные для рендеринга
         let locals = resp;
         // рендерим шаблон
-        leaderBoardBox.innerHTML = template(locals);
+        leaderBoardBox.innerHTML = templateLeaderboard(locals);
     }
 
     sendRequestForRecords() {

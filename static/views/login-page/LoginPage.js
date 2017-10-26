@@ -2,6 +2,7 @@
 
 import Page from "../../modules/Page.js";
 import LoginForm from "../../modules/LoginForm.js";
+import template from "./login-page.pug";
 
 export default class LoginPage extends Page {
 
@@ -26,7 +27,6 @@ export default class LoginPage extends Page {
     }
 
     render() {
-        let template = require("./login-page.pug");
         let loginPageBox = Page.createBoxForPage(LoginPage.pageBoxName());
         loginPageBox.innerHTML = template();
     }

@@ -2,6 +2,7 @@
 
 import Page from "../../modules/Page.js";
 import GameManager from  "./../../game-modules/GameManager.js";
+import template from "./play-page.pug";
 
 export default class PlayPage extends Page {
 
@@ -19,7 +20,6 @@ export default class PlayPage extends Page {
     }
 
     render() {
-        let template = require("./play-page.pug");
         let playPageBox = Page.createBoxForPage(PlayPage.pageBoxName());
         playPageBox.innerHTML = template();
     }

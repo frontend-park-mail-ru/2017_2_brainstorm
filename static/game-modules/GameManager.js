@@ -134,7 +134,7 @@ export default class GameManager {
             } else {
 
                 countNow = 0;
-                (maxCount > 7) ? maxCount -= 0.1 : "";
+                (maxCount > 8) ? maxCount -= 0.1 : "";
 
                 const side = getRandomInteger();
 

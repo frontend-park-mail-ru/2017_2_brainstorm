@@ -2,6 +2,7 @@
 
 import Page from "../../modules/Page.js";
 import RegisterForm from "../../modules/RegisterForm.js";
+import template from "./register-page.pug";
 
 export default class RegisterPage extends Page {
 
@@ -23,7 +24,6 @@ export default class RegisterPage extends Page {
     }
 
     render() {
-        let template = require("./register-page.pug");
         let registerPageBox = Page.createBoxForPage(RegisterPage.pageBoxName());
         registerPageBox.innerHTML = template();
     }
