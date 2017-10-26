@@ -8,6 +8,9 @@
     "parserOptions": {
         "sourceType": "module"
     },
+    "globals": {
+        "THREE": false
+    },
     "rules": {
         "indent": [
             "error",
@@ -46,6 +49,10 @@
                 "before": false,
                 "after": true
             }
+        ],
+        "eol-last": [
+            "error",
+            "always"
         ],
         "space-infix-ops": "error",
         "no-console":0

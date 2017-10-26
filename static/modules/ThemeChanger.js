@@ -1,6 +1,6 @@
 "use strict";
 
-import {bodyStyles,mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover} from "./themeStyles.js";
+import {bodyStyles, mainBoxStyles, buttonLoginStyles, themeChangerStyles, themeChangerStylesHover} from "./themeStyles.js";
 import RequestToHost from "./RequestToHost.js";
 import Debugger from "./Debugger";
 
@@ -27,7 +27,7 @@ export default class ThemeChanger {
     }
 
     sendRequestToSaveTheme() {
-        RequestToHost.whoami((err, resp) => {
+        RequestToHost.whoami((err) => {
             if (err) {
                 return Debugger.print("not AUTH for PATCH");
             } else {
@@ -70,6 +70,6 @@ export default class ThemeChanger {
     addEventsOnButtons() {
         document.querySelector(".main-box__theme-changer").addEventListener("click", () => {
             this.changeTheme();
-        })
+        });
     }
 }
