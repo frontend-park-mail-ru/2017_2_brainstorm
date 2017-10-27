@@ -141,7 +141,7 @@ export default class RequestToHost {
      * @param callback
      */
     static records(callback) {
-        RequestToHost.requestGet("api/users/records", callback);
+        RequestToHost.requestGet("api/game/records", callback);
     }
 
     /**
@@ -161,6 +161,6 @@ export default class RequestToHost {
      */
     static singlescore(score, callback) {
         const userScore = {score};
-        RequestToHost.requestPost("api/users/singlerecord", userScore, callback);
+        RequestToHost.requestPost("api/game/local_record", userScore, callback);
     }
 }
