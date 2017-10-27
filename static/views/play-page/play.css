@@ -1,5 +1,4 @@
 .play-page {
-    padding-left: 5em;
     padding-top: 10px;
     align-content: center;
 }
@@ -7,6 +6,7 @@
 .play-page__panel-buttons {
     width: 800px;
     height: 60px;
+    margin-left: 80px;
     margin-top: -20px;
     padding-top: 10px;
     padding-bottom: 20px;
@@ -78,6 +78,5 @@
     width: 960px;
     height: 680px;
     background: bisque;
-    margin-left: -80px;
     box-shadow: 0 0 25px 5px rgb(255, 255, 255);
 }
