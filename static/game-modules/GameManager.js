@@ -35,7 +35,6 @@ export default class GameManager {
     addEventsToKey() {
         this.keyA = false;
         this.keyD = false;
-
         window.onkeydown = (event) => {
             const k = event.keyCode;
 

@@ -69,3 +69,7 @@ typings/
 
 # Pug templates result
 *.pug.js
+
+# dist
+/static/dist
+
