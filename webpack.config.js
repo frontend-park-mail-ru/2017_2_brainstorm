@@ -11,19 +11,25 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: "css-loader"
-                })
-            },
-            {
                 test: /\.pug$/,
                 use: "pug-loader"
             },
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader'
+            },
+            {
+                test: /\.scss$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "sass-loader",
+                    options: {
+                        includePaths: ["absolute/path/a", "absolute/path/b"]
+                    }
+                }]
             }
         ]
     },

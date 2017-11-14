@@ -8,7 +8,6 @@ const cacheUrls = [
     "/info",
     "/records",
     "dist/app.js",
-    "dist/app.css",
 
     "img/back_2.png",
     "img/bubblerise.png",
@@ -25,6 +24,8 @@ const cacheUrls = [
     "game-modules/libs/stats.min.js",
     "game-modules/libs/three.min.js"
 ];
+
+// "dist/app.css",
 
 this.addEventListener("install", function (event) {
     event.waitUntil(
