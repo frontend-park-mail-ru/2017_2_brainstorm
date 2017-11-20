@@ -142,6 +142,9 @@ export default class MultyGameManager {
     socketWorking() {
         this.socket = new WebSocket("wss://bubblerise-backend.herokuapp.com/game");
         // let opened = false;
+        //
+        //
+        //
 
         this.socket.onopen = () => {
             console.log("Соединение установлено");

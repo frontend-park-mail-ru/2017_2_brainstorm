@@ -30,6 +30,7 @@
     "style-loader": "^0.19.0",
     "node-sass": "^4.6.1",
     "sass-loader": "^6.0.6",
+    "url-loader": "^0.6.2",
     "webpack": "^3.5.6"
   },
   "repository": {
@@ -40,7 +41,6 @@
     "eslint": "^4.8.0",
     "eslint-config-airbnb-base": "^12.0.1",
     "eslint-config-google": "^0.9.1",
-    "eslint-plugin-import": "^2.7.0",
-    "url-loader": "^0.6.2"
+    "eslint-plugin-import": "^2.7.0"
   }
 }
