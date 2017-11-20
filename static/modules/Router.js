@@ -7,6 +7,7 @@ import ThemeChanger from "./ThemeChanger.js";
 
 import InfoPage from "../views/info-page/InfoPage.js";
 import PlayPage from "../views/play-page/PlayPage";
+import MultyPlayPage from "../views/multyplay-page/MultyPlayPage.js";
 import MainPage from "../views/main-page/MainPage.js";
 import LoginPage from "../views/login-page/LoginPage";
 import RegisterPage from "../views/register-page/RegisterPage";
@@ -19,6 +20,7 @@ export default class Router {
         const mainPagePath = MainPage.pagePath();
         const infoPagePath = InfoPage.pagePath();
         const playPagePath = PlayPage.pagePath();
+        const multyPlayPagePath = MultyPlayPage.pagePath();
         const loginPagePath = LoginPage.pagePath();
         const registerPagePath = RegisterPage.pagePath();
         const recordsPagePath = RecordsPage.pagePath();
@@ -44,6 +46,7 @@ export default class Router {
         this.playPage.addRedirectOnButtons(
             {button: "panel__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
+        this.multyPlayPage = new MultyPlayPage();
 
         this.loginPage = new LoginPage();
         const registerPage = new RegisterPage();
@@ -103,6 +106,11 @@ export default class Router {
 
         case "/play":
             PagePresenter.showOnlyOnePage("play-page");
+            break;
+        case "/multyplay":
+            PagePresenter.showOnlyOnePage("multyplay-page");
+            //////////////////////////////////ЗАМЕНИТЬ НА КНОПКУ//////////////////////////////
+            this.multyPlayPage.gameMode(true);
             break;
 
         case "/records":

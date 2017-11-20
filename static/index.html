@@ -8,6 +8,19 @@
     <title>BubbleRise</title>
 </head>
 <body>
+    <div class = "fon-box" hidden></div>
+    <div class = "message-box" hidden></div>
+
+    <script>
+        let messageBoxInterval = setInterval(() => {
+            const xx = (parseInt(window.innerWidth) - 500) / 2;
+            const yy = (parseInt(window.innerHeight) - 250) / 2;
+            const box = document.getElementsByClassName("message-box")[0];
+            box.style.left = xx + "px";
+            box.style.top = yy + "px";
+        }, 100);
+    </script>
+
     <div class="main-box">
         <img class="main-box__logo-game" src="img/logo_3.png">
         <div class="main-box__theme-changer"></div>

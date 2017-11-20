@@ -1,0 +1,24 @@
+.message-box__singleplay-button {
+  /* position: fixed; */
+  background-image: url(./../../img/single.png);
+  height: 230px;
+  width: 250px;
+  /* display: inline-block; */
+  background-size: contain;
+  float: left;
+}
+.message-box__singleplay-button:hover {
+  height: 250px;
+}
+.message-box__multyplay-button {
+  /* position: fixed; */
+  background-image: url(./../../img/multy.png);
+  height: 230px;
+  width: 250px;
+  /* display: inline-block; */
+  background-size: contain;
+  float: right;
+}
+.message-box__multyplay-button:hover {
+  height: 250px;
+}

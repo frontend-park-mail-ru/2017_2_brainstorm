@@ -1,3 +1,5 @@
+$mobile-width: 480px;
+
 .main-page {
     padding-top: 20px;
     align-content: center;
@@ -9,6 +11,10 @@
     margin: 0 auto;
     text-align: center;
     padding-top: 30px;
+  @media only screen and (max-device-width: $mobile-width) {
+    height: 600px;
+    width: auto;
+  }
 }
 
 .main-menu__button-play {
@@ -16,6 +22,10 @@
     height: 300px;
     padding-top: 30px;
     padding-bottom: 30px;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: auto;
+    height: 600px;
+  }
 }
 
 .main-menu__button-play_img {
@@ -25,6 +35,11 @@
     height: 200px;
     z-index: 33;
     cursor: pointer;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: 500px;
+    height: 500px;
+    padding-left: 0;
+  }
 }
 
 .main-menu__button-play_img:hover {
@@ -41,6 +56,9 @@
     padding: 0.5em;
     cursor: pointer;
     margin: 3px;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: 200px;
+  }
 }
 
 .button-login__img{
@@ -58,6 +76,9 @@
     padding: 0.5em;
     cursor: pointer;
     margin: 3px;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: 200px;
+  }
 }
 
 .button-records__img{
@@ -75,6 +96,9 @@
     padding: 0.5em;
     cursor: pointer;
     margin: 3px;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: 200px;
+  }
 }
 
 .button-info__img{
@@ -92,4 +116,7 @@
     font-size: larger;
     background-color: lightsalmon;
     margin-left: 10%;
+  @media only screen and (max-device-width: $mobile-width) {
+    font-size: 45px;
+  }
 }

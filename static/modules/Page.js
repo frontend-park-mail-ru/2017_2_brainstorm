@@ -15,6 +15,20 @@ export default class Page {
 
     static pageBoxName() {}
 
+    static messageBox() {
+        return ".message-box";
+    }
+
+    static hideMessageBox() {
+        document.querySelector(".fon-box").hidden = true;
+        document.querySelector(".message-box").hidden = true;
+    }
+
+    static showMessageBox() {
+        document.querySelector(".fon-box").hidden = false;
+        document.querySelector(".message-box").hidden = false;
+    }
+
     render() {}
 
     addEventsOnButtons() {}

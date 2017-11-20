@@ -1,27 +1,9 @@
+$mobile-width: 480px;
+
 .records-page {
     padding-left: 5em;
     padding-top: 3em;
     align-content: center;
-}
-
-.records-page__button-back {
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-}
-
-.records-page__button-back_img {
-    padding-left: 1.2em;
-    width: 40px;
-    height: 40px;
-    z-index: 33;
-}
-
-.records-page__button-back_img:hover {
-    padding-left: 1.2em;
-    width: 60px;
-    height: 60px;
-    margin-top: -0.6em;
 }
 
 table {
@@ -29,17 +11,30 @@ table {
     border-radius: 10px;
     border-spacing: 0;
     text-align: center;
+    @media only screen and (max-device-width: $mobile-width) {
+        font-size: 40px;
+        border-radius: 20px;
+        margin-top: 100px;
+    }
 }
+
 th {
     background: #aedaeb;
     color: white;
     text-shadow: 0 1px 1px #4a4a4a;
     padding: 10px 20px;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding: 30px 20px;
+        text-shadow: 0 2px 2px #4a4a4a;
+    }
 }
 th, td {
     border-style: solid;
     border-width: 0 3px 3px 0;
     border-color: rgba(255, 255, 255, 0.53);
+    @media only screen and (max-device-width: $mobile-width) {
+        border-width: 0 7px 7px 0;
+    }
 }
 th:first-child, td:first-child {
     text-align: left;
@@ -54,6 +49,9 @@ th:last-child {
 td {
     padding: 10px 20px;
     background: bisque;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding: 10px 20px;
+    }
 }
 tr:last-child td:first-child {
     border-radius: 0 0 0 10px;

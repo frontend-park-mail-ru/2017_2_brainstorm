@@ -4,7 +4,7 @@ import SceneRenderer from "./SceneRenderer.js";
 import ObjectsCreater from "./ObjectsCreater.js";
 import RequestToHost from "../modules/RequestToHost.js";
 import Debugger from "../modules/Debugger.js";
-import PlayPage from "../views/play-page/PlayPage.js";
+import MultyPlayPage from "../views/multyplay-page/MultyPlayPage.js";
 
 const keyCodes = {
     KEY_A_KEY_CODE: 65,
@@ -18,19 +18,9 @@ const cubeSides = {
     FOURTH_SIDE: 4
 };
 
-const BACKGROUND_COLOR_SCENE = "#ffbe74";
+const BACKGROUND_COLOR_SCENE = "#c1ff65";
 
-export default class GameManager {
-
-    constructor(width, height, playFieldName) {
-        this.width = width;
-        this.height = height;
-        this.initScene(width, height, playFieldName);
-        this.sceneRenderer = new SceneRenderer(this.renderer, this.scene, this.camera);
-        this.addClicksToBubbles();
-        this.addEventsToKey();
-        this.score = 0;
-    }
+export default class MultyGameManager {
 
     addEventsToKey() {
         this.keyA = false;
@@ -39,12 +29,12 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch(k){
-            case keyCodes.KEY_A_KEY_CODE:
-                this.keyA = true;
-                break;
-            case keyCodes.KEY_D_KEY_CODE:
-                this.keyD = true;
-                break;
+                case keyCodes.KEY_A_KEY_CODE:
+                    this.keyA = true;
+                    break;
+                case keyCodes.KEY_D_KEY_CODE:
+                    this.keyD = true;
+                    break;
             }
         });
 
@@ -52,25 +42,14 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch(k){
-            case keyCodes.KEY_A_KEY_CODE:
-                this.keyA = false;
-                break;
-            case keyCodes.KEY_D_KEY_CODE:
-                this.keyD = false;
-                break;
+                case keyCodes.KEY_A_KEY_CODE:
+                    this.keyA = false;
+                    break;
+                case keyCodes.KEY_D_KEY_CODE:
+                    this.keyD = false;
+                    break;
             }
         });
-    }
-
-    start() {
-        this.keyA = false;
-        this.keyD = false;
-        this.sceneRenderer.startRendering();
-        this.objectsCreater = new ObjectsCreater(this.scene);
-        this.addCameraMovement();
-        this.addBubblesGeneration();
-        this.addBubbleGrowing();
-        PlayPage.printScore(this.score);
     }
 
     initScene(width, height, playFieldName) {
@@ -118,67 +97,34 @@ export default class GameManager {
         }, 50);
     }
 
-    addBubblesGeneration() {
+
+    /////////////////////////////////////////////////
+
+    constructor(width, height, playFieldName) {
+        this.width = width;
+        this.height = height;
+        this.score = 0;
+
+        this.initScene(width, height, playFieldName);
+        this.sceneRenderer = new SceneRenderer(this.renderer, this.scene, this.camera);
+
+        this.addClicksToBubbles();
+        this.addEventsToKey();
+    }
+
+    start() {
+        this.keyA = false;
+        this.keyD = false;
+        this.sceneRenderer.startRendering();
+        this.objectsCreater = new ObjectsCreater(this.scene);
+        MultyPlayPage.printScore(this.score);
+
         this.bubbles = [];
+        this.idArr = [];
+        this.socketWorking();
 
-        Debugger.print("Scene objects number: " + this.scene.children.length);
-
-        function getRandomInteger() {
-            return (parseInt(Math.random() * 1000000) % 4) + 1;
-        }
-
-        function getRandomPosition() {
-            return (parseInt(Math.random() * 1000000) % 9) + Math.random() - 4.5;
-        }
-
-        let countNow = 0;
-        let maxCount = 20;
-
-        this.generationInterval = setInterval(() => {
-            if (countNow < maxCount) {
-                countNow++;
-            } else {
-
-                countNow = 0;
-                (maxCount > 8) ? maxCount -= 0.1 : "";
-
-                const side = getRandomInteger();
-
-                let xx = null;
-                let yy = null;
-                let zz = null;
-
-                switch (side) {
-                case cubeSides.FIRST_SIDE:
-                    xx = getRandomPosition();
-                    yy = getRandomPosition();
-                    zz = -4.5;
-                    break;
-                case cubeSides.THIRD_SIDE:
-                    xx = getRandomPosition();
-                    yy = getRandomPosition();
-                    zz = 4.5;
-                    break;
-                case cubeSides.SECOND_SIDE:
-                    xx = 4.5;
-                    yy = getRandomPosition();
-                    zz = getRandomPosition();
-                    break;
-                case cubeSides.FOURTH_SIDE:
-                    xx = -4.5;
-                    yy = getRandomPosition();
-                    zz = getRandomPosition();
-                    break;
-                }
-
-                const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
-                this.bubbles.push(bubble);
-
-                Debugger.print("Bubbles number: " + this.bubbles.length);
-                Debugger.print("Scene objects number: " + this.scene.children.length);
-            }
-
-        }, 50);
+        this.addCameraMovement();
+        this.addBubbleGrowing();
     }
 
     addBubbleGrowing() {
@@ -199,6 +145,75 @@ export default class GameManager {
         }, 100);
     }
 
+    socketWorking() {
+        this.socket = new WebSocket("wss://bubblerise-backend.herokuapp.com/game");
+        let opened = false;
+
+        this.socket.onopen = () => {
+            console.log("Соединение установлено");
+            opened = true;
+        };
+
+        this.socket.onclose = (event) => {
+            console.log("Соединение закрыто");
+            opened = false;
+        };
+
+        this.socket.onerror = (event) =>  {
+            console.log("Ошибка сокета");
+            opened = false;
+        };
+
+        this.socket.onmessage = (event) =>  {
+            //console.log("Получено сообщение: " + event.data);
+            let message = event.data.toString();
+            let content = JSON.parse(message);
+            //console.log(content);
+
+            let bubblesArray = [];
+            bubblesArray = content.bubbles;
+
+            // rewrite bubbles
+            for (let i = 0; i < bubblesArray.length; i++) {
+                const myBubble = bubblesArray[i];
+                const id = myBubble.id;
+
+                if (myBubble.burst === false) {
+
+                    let flag = false;
+                    for(let j = 0; j < this.bubbles.length; j++) {
+                        if(id === this.idArr[j]) {
+                            flag = true;
+                        }
+                    }
+
+                    if(flag === false) {
+                        const xx = myBubble.coords.x;
+                        const yy = myBubble.coords.y;
+                        const zz = myBubble.coords.z;
+
+                        const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
+                        bubble.scale.x = myBubble.radius;
+                        bubble.scale.y = myBubble.radius;
+                        bubble.scale.z = myBubble.radius;
+
+                        this.bubbles.push(bubble);
+                        this.idArr.push(myBubble.id);
+
+                        Debugger.print("Bubbles number: " + this.bubbles.length);
+                        Debugger.print("Scene objects number: " + this.scene.children.length);
+                        console.log("Bubbles number: " + this.bubbles.length);
+                        console.log("Id array length: " + this.idArr.length);
+                        console.log("Scene objects number: " + this.scene.children.length);
+                    }
+                }
+            }
+        };
+    }
+
+    /////////////////////////////////////////////////
+
+
     addClicksToBubbles() {
         let raycaster = new THREE.Raycaster();
         let mouse = new THREE.Vector2();
@@ -218,6 +233,7 @@ export default class GameManager {
 
             if (intersects.length > 0) {
                 let answer = intersects[0];
+                console.log("KILL BALL");
 
                 if (answer.object !== this.objectsCreater.getCube() && answer.object !== this.objectsCreater.getCubeFrame()) {
                     let index = 0;
@@ -230,13 +246,22 @@ export default class GameManager {
                     }
 
                     this.scene.remove(answer.object);
+
+                    const deleteNumber = this.idArr[index];
+                    // { "class":"ClientSnap", "burstingBubbleId": 110 }
+                    this.socket.send( JSON.stringify({class: "ClientSnap", burstingBubbleId: deleteNumber}));
+                    console.log(  JSON.stringify({burstingBubbleId: deleteNumber})  );
                     this.bubbles.splice(index, 1);
+                    this.idArr.splice(index, 1);
+
                     this.score += 1;
-                    PlayPage.printScore(this.score);
+                    MultyPlayPage.printScore(this.score);
+                    // document.querySelector(".multypanel__score-box").innerHTML = this.score;
                 }
             }
-            Debugger.print("Bubbles number: " + this.bubbles.length);
-            Debugger.print("Scene objects number: " + this.scene.children.length);
+            console.log("Bubbles number: " + this.bubbles.length);
+            console.log("Id array length: " + this.idArr.length);
+            console.log("Scene objects number: " + this.scene.children.length);
         });
     }
 
@@ -251,15 +276,14 @@ export default class GameManager {
     stop() {
         this.sceneRenderer.stopRendering();
         clearInterval(this.cameraMoveInterval);
-        clearInterval(this.growingInterval);
-        clearInterval(this.generationInterval);
 
         while(this.scene.children.length > 0) {
             this.scene.remove(this.scene.children[0]);
         }
 
         this.bubbles = [];
-        this.sendRequestToSaveScore();
+        this.idArr = [];
+        // this.sendRequestToSaveScore();
         this.score = 0;
         Debugger.print("Bubbles number: " + this.bubbles.length);
         Debugger.print("Scene objects number: " + this.scene.children.length);

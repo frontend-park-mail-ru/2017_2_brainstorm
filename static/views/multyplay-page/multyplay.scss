@@ -1,6 +1,6 @@
 $mobile-width: 480px;
 
-.play-page {
+.multyplay-page {
     padding-top: 10px;
     align-content: center;
     @media only screen and (max-device-width: $mobile-width) {
@@ -8,7 +8,7 @@ $mobile-width: 480px;
     }
 }
 
-.play-page__panel-buttons {
+.multyplay-page__panel-buttons {
     width: 800px;
     height: 60px;
     margin-left: 80px;
@@ -23,14 +23,14 @@ $mobile-width: 480px;
     }
 }
 
-.panel__button-back {
+.multypanel__button-back {
     width: 100px;
     height: 60px;
     display: inline-block;
     cursor: pointer;
 }
 
-.panel__button-back_img {
+.multypanel__button-back_img {
     padding-left: 1.2em;
     width: 40px;
     height: 40px;
@@ -43,7 +43,7 @@ $mobile-width: 480px;
     }
 }
 
-.panel__button-back_img:hover {
+.multypanel__button-back_img:hover {
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
@@ -56,14 +56,14 @@ $mobile-width: 480px;
     }
 }
 
-.panel__button-restart {
+.multypanel__button-restart {
     width: 60px;
     height: 60px;
     display: inline-block;
     cursor: pointer;
 }
 
-.panel__button-restart_img {
+.multypanel__button-restart_img {
     padding-left: 1.2em;
     width: 40px;
     height: 40px;
@@ -76,7 +76,7 @@ $mobile-width: 480px;
     }
 }
 
-.panel__button-restart_img:hover {
+.multypanel__button-restart_img:hover {
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
@@ -89,7 +89,7 @@ $mobile-width: 480px;
     }
 }
 
-.panel__score-label {
+.multypanel__score-label {
     display: inline-block;
     height: 60px;
     font-size: 35px;
@@ -97,7 +97,7 @@ $mobile-width: 480px;
     margin-left: 300px;
 }
 
-.panel__score-box {
+.multypanel__score-box {
     display: inline-block;
     width: 200px;
     height: 45px;
@@ -109,7 +109,7 @@ $mobile-width: 480px;
     padding-right: 5px;
 }
 
-.play-page__play-field {
+.multyplay-page__play-field {
     width: 960px;
     height: 680px;
     background: bisque;
