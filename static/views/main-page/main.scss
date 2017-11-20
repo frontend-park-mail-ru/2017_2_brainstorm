@@ -22,6 +22,7 @@ $mobile-width: 480px;
     height: 300px;
     padding-top: 30px;
     padding-bottom: 30px;
+    margin-bottom: -15px;
   @media only screen and (max-device-width: $mobile-width) {
     width: auto;
     height: 600px;
@@ -47,6 +48,11 @@ $mobile-width: 480px;
     width: 250px;
     height: 250px;
     margin-top: -1.5em;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: 500px;
+    height: 500px;
+    padding-left: 0;
+  }
 }
 
 .main-menu__button-login {

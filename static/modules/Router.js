@@ -30,8 +30,10 @@ export default class Router {
         Object.assign(Page.prototype, whoamiMixin);
         const mainPage = new MainPage();
         mainPage.whoami();
+        // {button: "main-menu__button-play", nextPage: "play-page", pagePath: playPagePath},
         mainPage.addRedirectOnButtons(
-            {button: "main-menu__button-play", nextPage: "play-page", pagePath: playPagePath},
+            {button: "message-box__multyplay-button", nextPage: "multyplay-page", pagePath: multyPlayPagePath},
+            {button: "message-box__singleplay-button", nextPage: "play-page", pagePath: playPagePath},
             {button: "main-menu__button-login", nextPage: "login-page", pagePath: loginPagePath},
             {button: "main-menu__button-records", nextPage: "records-page", pagePath: recordsPagePath},
             {button: "main-menu__button-info", nextPage: "info-page", pagePath: infoPagePath}
@@ -46,7 +48,11 @@ export default class Router {
         this.playPage.addRedirectOnButtons(
             {button: "panel__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
+
         this.multyPlayPage = new MultyPlayPage();
+        this.multyPlayPage.addRedirectOnButtons(
+            {button: "multypanel__button-back", nextPage: "main-page", pagePath: mainPagePath}
+        );
 
         this.loginPage = new LoginPage();
         const registerPage = new RegisterPage();
@@ -91,6 +97,8 @@ export default class Router {
         const pathname = window.location.pathname;
         let gameMode = (pathname === "/play");
         this.playPage.gameMode(gameMode);
+        let multyGameMode = (pathname === "/multyplay");
+        this.multyPlayPage.gameMode(multyGameMode);
         switch (pathname) {
         case "/main":
             PagePresenter.showOnlyOnePage("main-page");
@@ -107,10 +115,11 @@ export default class Router {
         case "/play":
             PagePresenter.showOnlyOnePage("play-page");
             break;
+
         case "/multyplay":
             PagePresenter.showOnlyOnePage("multyplay-page");
             //////////////////////////////////ЗАМЕНИТЬ НА КНОПКУ//////////////////////////////
-            this.multyPlayPage.gameMode(true);
+            // this.multyPlayPage.gameMode(true);
             break;
 
         case "/records":

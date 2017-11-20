@@ -1,10 +1,11 @@
 // наименование для нашего хранилища кэша
-const CACHE_NAME = "brise_serviceworker_v1";
+const CACHE_NAME = "brise_serviceworker_v2";
 // ссылки на кэшируемые файлы
 const cacheUrls = [
     "/",
     "/main",
     "/play",
+    "/multyplay",
     "/info",
     "/records",
     "dist/app.js",
@@ -17,6 +18,8 @@ const cacheUrls = [
     "img/logo_3.png",
     "img/record.png",
     "img/restart.png",
+    "img/multy.png",
+    "img/single.png",
 
     "game-modules/libs/CanvasRenderer.js",
     "game-modules/libs/dat.gui.min.js",
@@ -28,6 +31,7 @@ const cacheUrls = [
 // "dist/app.css",
 
 this.addEventListener("install", function (event) {
+    // this.skipWaiting()
     event.waitUntil(
         // находим в глобальном хранилище Cache-объект с нашим именем
         // если такого не существует, то он будет создан
@@ -36,6 +40,10 @@ this.addEventListener("install", function (event) {
                 // загружаем в наш cache необходимые файлы
                 return cache.addAll(cacheUrls);
             })
+            .then(
+                // сразу активируем текущую версию
+                this.skipWaiting()
+            )
     );
 });
 
@@ -51,5 +59,22 @@ this.addEventListener("fetch", function (event) {
             // иначе запрашиваем из сети как обычно
             return fetch(event.request);
         })
+    );
+});
+
+this.addEventListener("activate", function(event) {
+    let cacheWhitelist = [CACHE_NAME];
+
+    event.waitUntil(
+        // onActivate(event, config).then(() => self.clients.claim())
+
+        caches.keys()
+            .then(function(keyList) {
+                return Promise.all(keyList.map(function(key) {
+                    if (cacheWhitelist.indexOf(key) === -1) {
+                        return caches.delete(key);
+                    }
+                }));
+            })
     );
 });

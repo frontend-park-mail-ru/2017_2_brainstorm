@@ -104,6 +104,7 @@ export default class MultyGameManager {
         this.width = width;
         this.height = height;
         this.score = 0;
+        this.scoreEnemy = 0;
 
         this.initScene(width, height, playFieldName);
         this.sceneRenderer = new SceneRenderer(this.renderer, this.scene, this.camera);
@@ -117,7 +118,7 @@ export default class MultyGameManager {
         this.keyD = false;
         this.sceneRenderer.startRendering();
         this.objectsCreater = new ObjectsCreater(this.scene);
-        MultyPlayPage.printScore(this.score);
+        MultyPlayPage.printScore(this.score, this.scoreEnemy);
 
         this.bubbles = [];
         this.idArr = [];
@@ -168,7 +169,11 @@ export default class MultyGameManager {
             //console.log("Получено сообщение: " + event.data);
             let message = event.data.toString();
             let content = JSON.parse(message);
-            //console.log(content);
+            console.log(content);
+            this.score = content.currentPlayer.score;
+            this.scoreEnemy = content.enemy.score;
+            // console.log(this.score + "   " + this.scoreEnemy);
+            MultyPlayPage.printScore(this.score, this.scoreEnemy);
 
             let bubblesArray = [];
             bubblesArray = content.bubbles;
@@ -202,9 +207,9 @@ export default class MultyGameManager {
 
                         Debugger.print("Bubbles number: " + this.bubbles.length);
                         Debugger.print("Scene objects number: " + this.scene.children.length);
-                        console.log("Bubbles number: " + this.bubbles.length);
-                        console.log("Id array length: " + this.idArr.length);
-                        console.log("Scene objects number: " + this.scene.children.length);
+                        // console.log("Bubbles number: " + this.bubbles.length);
+                        // console.log("Id array length: " + this.idArr.length);
+                        // console.log("Scene objects number: " + this.scene.children.length);
                     }
                 }
             }
@@ -254,8 +259,8 @@ export default class MultyGameManager {
                     this.bubbles.splice(index, 1);
                     this.idArr.splice(index, 1);
 
-                    this.score += 1;
-                    MultyPlayPage.printScore(this.score);
+                    // this.score += 1;
+                    // MultyPlayPage.printScore(this.score);
                     // document.querySelector(".multypanel__score-box").innerHTML = this.score;
                 }
             }
@@ -276,6 +281,7 @@ export default class MultyGameManager {
     stop() {
         this.sceneRenderer.stopRendering();
         clearInterval(this.cameraMoveInterval);
+        clearInterval(this.growingInterval);
 
         while(this.scene.children.length > 0) {
             this.scene.remove(this.scene.children[0]);
@@ -285,6 +291,12 @@ export default class MultyGameManager {
         this.idArr = [];
         // this.sendRequestToSaveScore();
         this.score = 0;
+        this.scoreEnemy = 0;
+        try {
+            this.socket.close();
+        } catch(e) {
+            // err
+        }
         Debugger.print("Bubbles number: " + this.bubbles.length);
         Debugger.print("Scene objects number: " + this.scene.children.length);
     }

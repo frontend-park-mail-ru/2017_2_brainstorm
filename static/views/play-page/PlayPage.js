@@ -36,7 +36,7 @@ export default class PlayPage extends Page {
     }
 
     addEventsOnButtons() {
-        document.querySelector(".main-menu__button-play").addEventListener("click", () => {
+        document.querySelector(".message-box__singleplay-button").addEventListener("click", () => {
             this.gameMode(true);
         });
         document.querySelector(".panel__button-back").addEventListener("click", () => {

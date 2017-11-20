@@ -31,14 +31,15 @@ export default class MultyPlayPage extends Page {
             this.gameManager.start() : this.gameManager.stop();
     }
 
-    static printScore(score) {
+    static printScore(score, scoreEnemy) {
         document.querySelector(".multypanel__score-box").innerHTML = score;
+        document.querySelector(".multypanel__score-box-enemy").innerHTML = scoreEnemy;
     }
 
     addEventsOnButtons() {
-        // document.querySelector(".main-menu__button-multyplay").addEventListener("click", () => {
-        //     this.gameMode(true);
-        // });
+        document.querySelector(".message-box__multyplay-button").addEventListener("click", () => {
+            this.gameMode(true);
+        });
         document.querySelector(".multypanel__button-back").addEventListener("click", () => {
             this.gameMode(false);
         });
