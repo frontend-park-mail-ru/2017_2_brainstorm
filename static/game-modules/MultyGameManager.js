@@ -11,13 +11,6 @@ const keyCodes = {
     KEY_D_KEY_CODE: 68
 };
 
-const cubeSides = {
-    FIRST_SIDE: 1,
-    SECOND_SIDE: 2,
-    THIRD_SIDE: 3,
-    FOURTH_SIDE: 4
-};
-
 const BACKGROUND_COLOR_SCENE = "#c1ff65";
 
 export default class MultyGameManager {
@@ -29,12 +22,12 @@ export default class MultyGameManager {
             const k = event.keyCode;
 
             switch(k){
-                case keyCodes.KEY_A_KEY_CODE:
-                    this.keyA = true;
-                    break;
-                case keyCodes.KEY_D_KEY_CODE:
-                    this.keyD = true;
-                    break;
+            case keyCodes.KEY_A_KEY_CODE:
+                this.keyA = true;
+                break;
+            case keyCodes.KEY_D_KEY_CODE:
+                this.keyD = true;
+                break;
             }
         });
 
@@ -42,12 +35,12 @@ export default class MultyGameManager {
             const k = event.keyCode;
 
             switch(k){
-                case keyCodes.KEY_A_KEY_CODE:
-                    this.keyA = false;
-                    break;
-                case keyCodes.KEY_D_KEY_CODE:
-                    this.keyD = false;
-                    break;
+            case keyCodes.KEY_A_KEY_CODE:
+                this.keyA = false;
+                break;
+            case keyCodes.KEY_D_KEY_CODE:
+                this.keyD = false;
+                break;
             }
         });
     }
@@ -148,21 +141,21 @@ export default class MultyGameManager {
 
     socketWorking() {
         this.socket = new WebSocket("wss://bubblerise-backend.herokuapp.com/game");
-        let opened = false;
+        // let opened = false;
 
         this.socket.onopen = () => {
             console.log("Соединение установлено");
-            opened = true;
+            // opened = true;
         };
 
-        this.socket.onclose = (event) => {
+        this.socket.onclose = () => {
             console.log("Соединение закрыто");
-            opened = false;
+            // opened = false;
         };
 
-        this.socket.onerror = (event) =>  {
+        this.socket.onerror = () =>  {
             console.log("Ошибка сокета");
-            opened = false;
+            // opened = false;
         };
 
         this.socket.onmessage = (event) =>  {
@@ -254,8 +247,8 @@ export default class MultyGameManager {
 
                     const deleteNumber = this.idArr[index];
                     // { "class":"ClientSnap", "burstingBubbleId": 110 }
-                    this.socket.send( JSON.stringify({class: "ClientSnap", burstingBubbleId: deleteNumber}));
-                    console.log(  JSON.stringify({burstingBubbleId: deleteNumber})  );
+                    this.socket.send(JSON.stringify({class: "ClientSnap", burstingBubbleId: deleteNumber}));
+                    console.log(JSON.stringify({burstingBubbleId: deleteNumber}));
                     this.bubbles.splice(index, 1);
                     this.idArr.splice(index, 1);
 

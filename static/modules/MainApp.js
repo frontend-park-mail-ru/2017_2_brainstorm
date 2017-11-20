@@ -5,13 +5,13 @@ import Debugger from "./Debugger.js";
 import "../views/info-page/info.scss";
 import "../views/login-page/login.scss";
 import "../views/main-page/main.scss";
-import "../views/main-page/playmenu.scss"
+import "../views/main-page/playmenu.scss";
 import "../views/play-page/play.scss";
 import "../views/multyplay-page/multyplay.scss";
 import "../views/records-page/records.scss";
 import "../views/register-page/register.scss";
 import "./../styles/form.scss";
-import "./../styles/message-box.scss"
+import "./../styles/message-box.scss";
 import "./../styles/style.scss";
 
 class MainApp {

@@ -2,14 +2,14 @@
 
 import Page from "../../modules/Page.js";
 import template from "./main-page.pug";
-import templatePlaymenu from "./playmenu.pug"
+import templatePlaymenu from "./playmenu.pug";
 
 export default class MainPage extends Page {
 
     constructor() {
         super();
         MainPage.playmenuRender();
-        this.addEventsOnPlaymenuButtons()
+        this.addEventsOnPlaymenuButtons();
     }
 
     static pagePath() {
