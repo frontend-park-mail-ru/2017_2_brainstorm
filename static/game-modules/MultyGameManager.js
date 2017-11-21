@@ -204,7 +204,7 @@ export default class MultyGameManager {
                         this.bubbles.splice(numberOfKilledBubble, 1);
                         this.idArr.splice(numberOfKilledBubble, 1);
                     }
-                })
+                });
             }
 
             Debugger.print("Bubbles number: " + this.bubbles.length);
