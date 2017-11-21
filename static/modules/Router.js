@@ -33,7 +33,6 @@ export default class Router {
         Object.assign(Page.prototype, whoamiMixin);
         const mainPage = new MainPage();
         mainPage.whoami();
-        // {button: "main-menu__button-play", nextPage: "play-page", pagePath: playPagePath},
         mainPage.addRedirectOnButtons(
             {button: "message-box__multyplay-button", nextPage: "multyplay-page", pagePath: multyPlayPagePath},
             {button: "message-box__singleplay-button", nextPage: "play-page", pagePath: playPagePath},

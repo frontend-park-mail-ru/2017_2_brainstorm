@@ -11,6 +11,7 @@ export default class MainPage extends Page {
         super();
         MainPage.playmenuRender();
         this.addEventsOnPlaymenuButtons();
+        document.querySelector(".message-box__multyplay-hold").hidden = true;
     }
 
     static pagePath() {
