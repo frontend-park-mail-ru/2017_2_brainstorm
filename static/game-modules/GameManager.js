@@ -5,6 +5,7 @@ import ObjectsCreater from "./ObjectsCreater.js";
 import RequestToHost from "../modules/RequestToHost.js";
 import Debugger from "../modules/Debugger.js";
 import PlayPage from "../views/play-page/PlayPage.js";
+import MultyPlayPage from "../views/multyplay-page/MultyPlayPage.js";
 
 const keyCodes = {
     KEY_A_KEY_CODE: 65,
@@ -22,7 +23,8 @@ const BACKGROUND_COLOR_SCENE = "#ffbe74";
 
 export default class GameManager {
 
-    constructor(width, height, playFieldName) {
+    constructor(mode, width, height, playFieldName) {
+        this.mode = mode;
         this.width = width;
         this.height = height;
         this.initScene(width, height, playFieldName);
@@ -30,6 +32,7 @@ export default class GameManager {
         this.addClicksToBubbles();
         this.addEventsToKey();
         this.score = 0;
+        this.scoreEnemy = 0;
     }
 
     addEventsToKey() {
@@ -68,10 +71,17 @@ export default class GameManager {
         this.keyD = false;
         this.sceneRenderer.startRendering();
         this.objectsCreater = new ObjectsCreater(this.scene);
+        this.bubbles = [];
+        this.idArr = [];
         this.addCameraMovement();
-        this.addBubblesGeneration();
         this.addBubbleGrowing();
-        PlayPage.printScore(this.score);
+        if (this.mode) {
+            MultyPlayPage.printScore(this.score, this.scoreEnemy);
+            this.socketWorking();
+        } else {
+            PlayPage.printScore(this.score);
+            this.addBubblesGeneration();
+        }
     }
 
     initScene(width, height, playFieldName) {
@@ -195,8 +205,8 @@ export default class GameManager {
                 bubble.scale.z += scaleDelta;
 
                 if (bubble.scale.x >= 4) {
-                    alert("Game over!");
                     this.stop();
+                    alert("Game over!");
                 }
             }
         }, 100);
@@ -231,11 +241,19 @@ export default class GameManager {
                             break;
                         }
                     }
-
                     this.scene.remove(answer.object);
-                    this.bubbles.splice(index, 1);
-                    this.score += 1;
-                    PlayPage.printScore(this.score);
+
+                    if (this.mode) {
+                        const deleteNumber = this.idArr[index];
+                        this.socket.send(JSON.stringify({class: "ClientSnap", burstingBubbleId: deleteNumber}));
+                        console.log(JSON.stringify({burstingBubbleId: deleteNumber}));
+                        this.bubbles.splice(index, 1);
+                        this.idArr.splice(index, 1);
+                    } else {
+                        this.bubbles.splice(index, 1);
+                        this.score += 1;
+                        PlayPage.printScore(this.score);
+                    }
                 }
             }
             Debugger.print("Bubbles number: " + this.bubbles.length);
@@ -243,11 +261,90 @@ export default class GameManager {
         });
     }
 
+    socketWorking() {
+        this.socket = new WebSocket("wss://bubblerise-backend.herokuapp.com/game");
+
+        this.socket.onopen = () => {
+            console.log("Соединение установлено");
+        };
+
+        this.socket.onclose = () => {
+            console.log("Соединение закрыто");
+        };
+
+        this.socket.onerror = () =>  {
+            console.log("Ошибка сокета");
+        };
+
+        this.socket.onmessage = (event) =>  {
+            let message = event.data.toString();
+            let content = JSON.parse(message);
+            Debugger.print(content);
+
+            if (content.class === "ServerSnap") {
+
+            }
+
+            if (content.class === "NewBubbles") {
+                let newBubbles = content.bubbles;
+                newBubbles.forEach((myBubble) => {
+                    const xx = myBubble.coords.x;
+                    const yy = myBubble.coords.y;
+                    const zz = myBubble.coords.z;
+
+                    const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
+                    bubble.scale.x = myBubble.radius;
+                    bubble.scale.y = myBubble.radius;
+                    bubble.scale.z = myBubble.radius;
+
+                    this.bubbles.push(bubble);
+                    this.idArr.push(myBubble.id);
+                });
+            }
+
+            if (content.class === "BurstingBubbles") {
+                this.score = content.currentPlayerScore;
+                this.scoreEnemy = content.enemyScore;
+                MultyPlayPage.printScore(this.score, this.scoreEnemy);
+                let killedBubbles = content.burstingBubbleIds;
+                killedBubbles.forEach((myBubble) => {
+                    const id = myBubble.burstingBubbleId;
+                    const numberOfKilledBubble = this.idArr.indexOf(id);
+
+                    if (numberOfKilledBubble !== -1) {
+                        const bubbleObject = this.bubbles[numberOfKilledBubble];
+                        this.scene.remove(bubbleObject);
+
+                        this.bubbles.splice(numberOfKilledBubble, 1);
+                        this.idArr.splice(numberOfKilledBubble, 1);
+                    }
+                });
+            }
+
+            Debugger.print("Bubbles number: " + this.bubbles.length);
+            Debugger.print("Id array length: " + this.idArr.length);
+            Debugger.print("Scene objects number: " + this.scene.children.length);
+        };
+    }
+
     sendRequestToSaveScore() {
         RequestToHost.singlescore(this.score, (err) => {
             if (err) {
-                return Debugger.print("User don't authorise");
+                let myScore = localStorage.getItem("myScore");
+                if (this.score > myScore) {
+                    localStorage.setItem("myScore", this.score);
+                }
+                Debugger.print("User don't authorise");
+                return null;
             }
+            let previousScore = localStorage.getItem("myScore");
+            RequestToHost.singlescore(previousScore, (err) => {
+                if (err) {
+                    Debugger.print("Cant load to host");
+                    return null;
+                }
+                localStorage.removeItem("myScore");
+            })
         });
     }
 
@@ -255,15 +352,29 @@ export default class GameManager {
         this.sceneRenderer.stopRendering();
         clearInterval(this.cameraMoveInterval);
         clearInterval(this.growingInterval);
-        clearInterval(this.generationInterval);
+        if (!this.mode) {
+            clearInterval(this.generationInterval);
+        }
 
         while(this.scene.children.length > 0) {
             this.scene.remove(this.scene.children[0]);
         }
 
         this.bubbles = [];
-        this.sendRequestToSaveScore();
+        this.idArr = [];
+        if (this.mode) {
+            try {
+                this.socket.close();
+            } catch(e) {
+                // err
+            }
+        } else {
+            this.sendRequestToSaveScore();
+        }
+
         this.score = 0;
+        this.scoreEnemy = 0;
+
         Debugger.print("Bubbles number: " + this.bubbles.length);
         Debugger.print("Scene objects number: " + this.scene.children.length);
     }

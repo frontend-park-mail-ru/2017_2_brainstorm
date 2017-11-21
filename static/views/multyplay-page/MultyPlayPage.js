@@ -1,14 +1,14 @@
 "use strict";
 
 import Page from "../../modules/Page.js";
-import MultyGameManager from  "./../../game-modules/MultyGameManager.js";
+import GameManager from  "./../../game-modules/GameManager.js";
 import template from "./multyplay-page.pug";
 
 export default class MultyPlayPage extends Page {
 
     constructor() {
         super();
-        this.gameManager = new MultyGameManager(960, 680, ".multyplay-page__multyplay-field");
+        this.gameManager = new GameManager(true, 960, 680, ".multyplay-page__multyplay-field");
     }
 
     static pagePath() {
