@@ -34,6 +34,6 @@ export default class MessageBox {
     addEventOnFon() {
         document.querySelector(MessageBox.fonBox()).addEventListener("click", () => {
             MessageBox.hideMessageBox();
-        })
+        });
     }
 }
