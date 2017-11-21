@@ -42,7 +42,7 @@ this.addEventListener("install", function (event) {
             })
             .then(
                 // сразу активируем текущую версию
-                this.skipWaiting()
+                () => {this.skipWaiting();}
             )
     );
 });
@@ -66,8 +66,6 @@ this.addEventListener("activate", function(event) {
     let cacheWhitelist = [CACHE_NAME];
 
     event.waitUntil(
-        // onActivate(event, config).then(() => self.clients.claim())
-
         caches.keys()
             .then(function(keyList) {
                 return Promise.all(keyList.map(function(key) {
