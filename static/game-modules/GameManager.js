@@ -281,10 +281,6 @@ export default class GameManager {
             let content = JSON.parse(message);
             Debugger.print(content);
 
-            if (content.class === "ServerSnap") {
-
-            }
-
             if (content.class === "NewBubbles") {
                 let newBubbles = content.bubbles;
                 newBubbles.forEach((myBubble) => {
@@ -344,7 +340,7 @@ export default class GameManager {
                     return null;
                 }
                 localStorage.removeItem("myScore");
-            })
+            });
         });
     }
 
