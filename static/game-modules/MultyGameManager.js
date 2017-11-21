@@ -135,8 +135,8 @@ export default class MultyGameManager {
                 bubble.scale.z += scaleDelta;
 
                 if (bubble.scale.x >= 4) {
-                    alert("Game over!");
                     this.stop();
+                    alert("Game over!");
                 }
             }
         }, 100);
@@ -165,53 +165,53 @@ export default class MultyGameManager {
         };
 
         this.socket.onmessage = (event) =>  {
-            //console.log("Получено сообщение: " + event.data);
             let message = event.data.toString();
             let content = JSON.parse(message);
             console.log(content);
-            this.score = content.currentPlayer.score;
-            this.scoreEnemy = content.enemy.score;
+
             // console.log(this.score + "   " + this.scoreEnemy);
-            MultyPlayPage.printScore(this.score, this.scoreEnemy);
 
-            let bubblesArray = [];
-            bubblesArray = content.bubbles;
+            if (content.class === "NewBubbles") {
+                let newBubbles = content.bubbles;
+                newBubbles.forEach((myBubble) => {
+                    const xx = myBubble.coords.x;
+                    const yy = myBubble.coords.y;
+                    const zz = myBubble.coords.z;
 
-            // rewrite bubbles
-            for (let i = 0; i < bubblesArray.length; i++) {
-                const myBubble = bubblesArray[i];
-                const id = myBubble.id;
+                    const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
+                    bubble.scale.x = myBubble.radius;
+                    bubble.scale.y = myBubble.radius;
+                    bubble.scale.z = myBubble.radius;
 
-                if (myBubble.burst === false) {
-
-                    let flag = false;
-                    for(let j = 0; j < this.bubbles.length; j++) {
-                        if(id === this.idArr[j]) {
-                            flag = true;
-                        }
-                    }
-
-                    if(flag === false) {
-                        const xx = myBubble.coords.x;
-                        const yy = myBubble.coords.y;
-                        const zz = myBubble.coords.z;
-
-                        const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
-                        bubble.scale.x = myBubble.radius;
-                        bubble.scale.y = myBubble.radius;
-                        bubble.scale.z = myBubble.radius;
-
-                        this.bubbles.push(bubble);
-                        this.idArr.push(myBubble.id);
-
-                        Debugger.print("Bubbles number: " + this.bubbles.length);
-                        Debugger.print("Scene objects number: " + this.scene.children.length);
-                        // console.log("Bubbles number: " + this.bubbles.length);
-                        // console.log("Id array length: " + this.idArr.length);
-                        // console.log("Scene objects number: " + this.scene.children.length);
-                    }
-                }
+                    this.bubbles.push(bubble);
+                    this.idArr.push(myBubble.id);
+                });
             }
+
+            if (content.class === "BurstingBubbles") {
+                this.score = content.currentPlayerScore;
+                this.scoreEnemy = content.enemyScore;
+                MultyPlayPage.printScore(this.score, this.scoreEnemy);
+                let killedBubbles = content.burstingBubbleIds;
+                killedBubbles.forEach((myBubble) => {
+                    const id = myBubble.burstingBubbleId;
+                    const numberOfKilledBubble = this.idArr.indexOf(id);
+
+                    if (numberOfKilledBubble !== -1) {
+                        const bubbleObject = this.bubbles[numberOfKilledBubble];
+                        this.scene.remove(bubbleObject);
+
+                        this.bubbles.splice(numberOfKilledBubble, 1);
+                        this.idArr.splice(numberOfKilledBubble, 1);
+                    }
+                })
+            }
+
+            Debugger.print("Bubbles number: " + this.bubbles.length);
+            Debugger.print("Scene objects number: " + this.scene.children.length);
+            console.log("Bubbles number: " + this.bubbles.length);
+            console.log("Id array length: " + this.idArr.length);
+            console.log("Scene objects number: " + this.scene.children.length);
         };
     }
 
