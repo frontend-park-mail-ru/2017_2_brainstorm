@@ -26,6 +26,7 @@ export default class MultyPlayPage extends Page {
 
     gameMode(mode) {
         let gameLogo = document.querySelector(".main-box__logo-game");
+        document.querySelector(".footer").hidden = mode;
         gameLogo.hidden = mode;
         mode ?
             this.gameManager.start() : this.gameManager.stop();

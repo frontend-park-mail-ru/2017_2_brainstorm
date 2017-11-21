@@ -17,6 +17,7 @@ $mobile-width: 480px;
     border: 1em solid lightsalmon;
     padding-top: 1em;
     padding-bottom: 1em;
+    margin-left: 200px;
     @media only screen and (max-device-width: $mobile-width) {
         width: 600px;
         height: 500px;

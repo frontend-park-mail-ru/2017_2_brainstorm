@@ -39,4 +39,6 @@ class MainApp {
 
 window.addEventListener("load", function () {
     new MainApp();
+    document.querySelector(".main-box").hidden = false;
+    document.querySelector(".footer").hidden = false;
 });

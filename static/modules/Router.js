@@ -6,12 +6,13 @@ import PagePresenter from "./PagePresenter.js";
 import ThemeChanger from "./ThemeChanger.js";
 
 import InfoPage from "../views/info-page/InfoPage.js";
-import PlayPage from "../views/play-page/PlayPage";
+import PlayPage from "../views/play-page/PlayPage.js";
 import MultyPlayPage from "../views/multyplay-page/MultyPlayPage.js";
 import MainPage from "../views/main-page/MainPage.js";
-import LoginPage from "../views/login-page/LoginPage";
-import RegisterPage from "../views/register-page/RegisterPage";
-import RecordsPage from "../views/records-page/RecordsPage";
+import LoginPage from "../views/login-page/LoginPage.js";
+import RegisterPage from "../views/register-page/RegisterPage.js";
+import RecordsPage from "../views/records-page/RecordsPage.js";
+import MessageBox from "./MessageBox.js";
 
 export default class Router {
 
@@ -26,6 +27,7 @@ export default class Router {
         const recordsPagePath = RecordsPage.pagePath();
 
         this.themeChanger = new ThemeChanger();
+        new MessageBox();
 
         Object.assign(Page.prototype, whoamiMixin);
         const mainPage = new MainPage();

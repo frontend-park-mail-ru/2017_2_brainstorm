@@ -28,6 +28,7 @@ $mobile-width: 480px;
     height: 60px;
     display: inline-block;
     cursor: pointer;
+    margin-left: -20px;
 }
 
 .multypanel__button-back_img {
@@ -94,7 +95,11 @@ $mobile-width: 480px;
     height: 60px;
     font-size: 35px;
     color: midnightblue;
-    margin-left: 300px;
+    margin-left: 20px;
+    padding-left: 20px;
+    @media only screen and (max-device-width: $mobile-width) {
+       margin-left: 300px;
+    }
     // margin-left: 300px;
 }
 
@@ -115,7 +120,10 @@ $mobile-width: 480px;
     height: 60px;
     font-size: 35px;
     color: midnightblue;
-    margin-left: 410px;
+    margin-left: 10px;
+    @media only screen and (max-device-width: $mobile-width) {
+        margin-left: 410px;
+    }
     // margin-left: 300px;
 }
 

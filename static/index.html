@@ -3,29 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
-    <!--<link rel = "stylesheet" type = "text/css" href = "./dist/app.css"/>-->
+    <!-- <link rel = "stylesheet" type = "text/css" href = "./dist/app.css"/> -->
     <style class="theme-styles"></style>
     <title>BubbleRise</title>
 </head>
 <body>
     <div class = "fon-box" hidden></div>
-    <div class = "message-box" hidden></div>
+    <div class = "message-box" hidden>
+        <!-- <img class="loading-wheel" src="./img/cat.gif"> -->
+    </div>
 
-    <script>
-        let messageBoxInterval = setInterval(() => {
-            const xx = (parseInt(window.innerWidth) - 500) / 2;
-            const yy = (parseInt(window.innerHeight) - 250) / 2;
-            const box = document.getElementsByClassName("message-box")[0];
-            box.style.left = xx + "px";
-            box.style.top = yy + "px";
-        }, 100);
-    </script>
-
-    <div class="main-box">
+    <div class="main-box" hidden>
         <img class="main-box__logo-game" src="img/logo_3.png">
         <div class="main-box__theme-changer"></div>
     </div>
-    <div class="footer" align="center">&copy;brainstorm,2017</div>
+    <div class="footer" align="center" hidden>&copy;brainstorm,2017</div>
 
     <script src = "game-modules/libs/three.min.js"></script>
     <script src = "game-modules/libs/Projector.js"></script>

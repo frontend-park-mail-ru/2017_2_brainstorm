@@ -15,6 +15,7 @@ $mobile-width: 480px;
     text-align: center;
     border:1em solid cornflowerblue;
     padding: 1em 20px;
+    margin-left: 200px;
     @media only screen and (max-device-width: $mobile-width) {
         width: 600px;
         height: 590px;

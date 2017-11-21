@@ -101,7 +101,11 @@ p {
 }
 
 .login-or-register {
-  font-size: 40px;
+  margin-left: -95px;
+  @media only screen and (max-device-width: $mobile-width) {
+    margin-left: -100px;
+    font-size: 40px;
+  }
 }
 
 .footer {

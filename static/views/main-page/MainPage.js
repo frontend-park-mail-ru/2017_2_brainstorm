@@ -1,6 +1,7 @@
 "use strict";
 
-import Page from "../../modules/Page.js";
+import Page from "./../../modules/Page.js";
+import MessageBox from "./../../modules/MessageBox.js";
 import template from "./main-page.pug";
 import templatePlaymenu from "./playmenu.pug";
 
@@ -32,16 +33,16 @@ export default class MainPage extends Page {
 
     addEventsOnPlaymenuButtons() {
         document.querySelector(".message-box__singleplay-button").addEventListener("click", () => {
-            Page.hideMessageBox();
+            MessageBox.hideMessageBox();
         });
         document.querySelector(".message-box__multyplay-button").addEventListener("click", () => {
-            Page.hideMessageBox();
+            MessageBox.hideMessageBox();
         });
     }
 
     addEventsOnButtons() {
         document.querySelector(".main-menu__button-play").addEventListener("click", () => {
-            Page.showMessageBox();
+            MessageBox.showMessageBox();
         });
     }
 }

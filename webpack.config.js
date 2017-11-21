@@ -15,7 +15,7 @@ module.exports = {
                 use: "pug-loader"
             },
             {
-                test: /\.(png|jpg)$/,
+                test: /\.(png|jpg|gif)$/,
                 loader: 'url-loader'
             },
             {
