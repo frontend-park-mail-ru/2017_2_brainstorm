@@ -75,13 +75,15 @@ export default class MultyGameManager {
         this.setCameraPosition(cameraX, cameraY, cameraZ);
 
         this.cameraMoveInterval = setInterval(() => {
-            if (this.keyA === true) {
+            if (this.keyA === true && this.keyD === false) {
                 angleXZ -= deltaAngle;
                 cameraX = radius * Math.cos(angleXZ);
                 cameraZ = radius * Math.sin(angleXZ);
                 this.setCameraPosition(cameraX, cameraY, cameraZ);
             }
             if (this.keyD === true) {
+                // off A key
+                this.keyA = false;
                 angleXZ += deltaAngle;
                 cameraX = radius * Math.cos(angleXZ);
                 cameraZ = radius * Math.sin(angleXZ);
@@ -107,7 +109,8 @@ export default class MultyGameManager {
     }
 
     start() {
-        this.keyA = false;
+        // default A
+        this.keyA = true;
         this.keyD = false;
         this.sceneRenderer.startRendering();
         this.objectsCreater = new ObjectsCreater(this.scene);

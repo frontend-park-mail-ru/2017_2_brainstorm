@@ -13,6 +13,7 @@ import LoginPage from "../views/login-page/LoginPage.js";
 import RegisterPage from "../views/register-page/RegisterPage.js";
 import RecordsPage from "../views/records-page/RecordsPage.js";
 import MessageBox from "./MessageBox.js";
+import TouchDelegater from "./TouchDelegater.js";
 
 export default class Router {
 
@@ -74,6 +75,7 @@ export default class Router {
             {button: "records-page__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
+        new TouchDelegater();
         this.redirectToPage();
 
         window.addEventListener("popstate", () => {
@@ -120,8 +122,6 @@ export default class Router {
 
         case "/multyplay":
             PagePresenter.showOnlyOnePage("multyplay-page");
-            //////////////////////////////////ЗАМЕНИТЬ НА КНОПКУ//////////////////////////////
-            // this.multyPlayPage.gameMode(true);
             break;
 
         case "/records":

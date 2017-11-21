@@ -1,3 +1,4 @@
+import TouchDelegater from "./TouchDelegater.js";
 "use strict";
 
 export default class MessageBox {
@@ -32,6 +33,8 @@ export default class MessageBox {
     }
 
     addEventOnFon() {
+        // delegate
+        TouchDelegater.delegateTouch(MessageBox.fonBox());
         document.querySelector(MessageBox.fonBox()).addEventListener("click", () => {
             MessageBox.hideMessageBox();
         });
