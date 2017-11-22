@@ -41,26 +41,26 @@ export default class GameManager {
         window.addEventListener("keydown", (event) => {
             const k = event.keyCode;
 
-            switch(k){
-            case keyCodes.KEY_A_KEY_CODE:
-                this.keyA = true;
-                break;
-            case keyCodes.KEY_D_KEY_CODE:
-                this.keyD = true;
-                break;
+            switch (k) {
+                case keyCodes.KEY_A_KEY_CODE:
+                    this.keyA = true;
+                    break;
+                case keyCodes.KEY_D_KEY_CODE:
+                    this.keyD = true;
+                    break;
             }
         });
 
         window.addEventListener("keyup", (event) => {
             const k = event.keyCode;
 
-            switch(k){
-            case keyCodes.KEY_A_KEY_CODE:
-                this.keyA = false;
-                break;
-            case keyCodes.KEY_D_KEY_CODE:
-                this.keyD = false;
-                break;
+            switch (k) {
+                case keyCodes.KEY_A_KEY_CODE:
+                    this.keyA = false;
+                    break;
+                case keyCodes.KEY_D_KEY_CODE:
+                    this.keyD = false;
+                    break;
             }
         });
     }
@@ -73,6 +73,8 @@ export default class GameManager {
         this.objectsCreater = new ObjectsCreater(this.scene);
         this.bubbles = [];
         this.idArr = [];
+        this.score = 0;
+        this.scoreEnemy = 0;
         this.addCameraMovement();
         this.addBubbleGrowing();
         if (this.mode) {
@@ -162,26 +164,26 @@ export default class GameManager {
                 let zz = null;
 
                 switch (side) {
-                case cubeSides.FIRST_SIDE:
-                    xx = getRandomPosition();
-                    yy = getRandomPosition();
-                    zz = -4.5;
-                    break;
-                case cubeSides.THIRD_SIDE:
-                    xx = getRandomPosition();
-                    yy = getRandomPosition();
-                    zz = 4.5;
-                    break;
-                case cubeSides.SECOND_SIDE:
-                    xx = 4.5;
-                    yy = getRandomPosition();
-                    zz = getRandomPosition();
-                    break;
-                case cubeSides.FOURTH_SIDE:
-                    xx = -4.5;
-                    yy = getRandomPosition();
-                    zz = getRandomPosition();
-                    break;
+                    case cubeSides.FIRST_SIDE:
+                        xx = getRandomPosition();
+                        yy = getRandomPosition();
+                        zz = -4.5;
+                        break;
+                    case cubeSides.THIRD_SIDE:
+                        xx = getRandomPosition();
+                        yy = getRandomPosition();
+                        zz = 4.5;
+                        break;
+                    case cubeSides.SECOND_SIDE:
+                        xx = 4.5;
+                        yy = getRandomPosition();
+                        zz = getRandomPosition();
+                        break;
+                    case cubeSides.FOURTH_SIDE:
+                        xx = -4.5;
+                        yy = getRandomPosition();
+                        zz = getRandomPosition();
+                        break;
                 }
 
                 const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
@@ -198,7 +200,7 @@ export default class GameManager {
         const scaleDelta = 0.02;
 
         this.growingInterval = setInterval(() => {
-            for(let i = 0; i < this.bubbles.length; i++){
+            for (let i = 0; i < this.bubbles.length; i++) {
                 const bubble = this.bubbles[i];
                 bubble.scale.x += scaleDelta;
                 bubble.scale.y += scaleDelta;
@@ -224,7 +226,7 @@ export default class GameManager {
             const yMouse = event.offsetY;
 
             mouse.x = (xMouse / width) * 2 - 1;
-            mouse.y = - (yMouse / height) * 2 + 1;
+            mouse.y = -(yMouse / height) * 2 + 1;
             raycaster.setFromCamera(mouse, this.camera);
 
             let intersects = raycaster.intersectObjects(this.scene.children);
@@ -246,7 +248,7 @@ export default class GameManager {
                     if (this.mode) {
                         const deleteNumber = this.idArr[index];
                         this.socket.send(JSON.stringify({class: "ClientSnap", burstingBubbleId: deleteNumber}));
-                        console.log(JSON.stringify({burstingBubbleId: deleteNumber}));
+                        Debugger.print(JSON.stringify({burstingBubbleId: deleteNumber}));
                         this.bubbles.splice(index, 1);
                         this.idArr.splice(index, 1);
                     } else {
@@ -272,11 +274,11 @@ export default class GameManager {
             console.log("Соединение закрыто");
         };
 
-        this.socket.onerror = () =>  {
+        this.socket.onerror = () => {
             console.log("Ошибка сокета");
         };
 
-        this.socket.onmessage = (event) =>  {
+        this.socket.onmessage = (event) => {
             let message = event.data.toString();
             let content = JSON.parse(message);
             Debugger.print(content);
@@ -326,20 +328,25 @@ export default class GameManager {
     sendRequestToSaveScore() {
         RequestToHost.singlescore(this.score, (err) => {
             if (err) {
+                console.log("1 = " + err);
                 let myScore = localStorage.getItem("myScore");
-                if (this.score > myScore) {
+                console.log("new score = " + this.score);
+                if (this.score > parseInt(myScore)) {
                     localStorage.setItem("myScore", this.score);
+                    console.log("2 = " + err);
                 }
                 Debugger.print("User don't authorise");
                 return null;
             }
-            let previousScore = localStorage.getItem("myScore");
+            let previousScore = parseInt(localStorage.getItem("myScore"));
             RequestToHost.singlescore(previousScore, (err) => {
                 if (err) {
+                    console.log("3 = " + err);
                     Debugger.print("Cant load to host");
                     return null;
                 }
-                localStorage.removeItem("myScore");
+                console.log("4 = " + err);
+                localStorage.setItem("myScore", 0);
             });
         });
     }
@@ -352,7 +359,7 @@ export default class GameManager {
             clearInterval(this.generationInterval);
         }
 
-        while(this.scene.children.length > 0) {
+        while (this.scene.children.length > 0) {
             this.scene.remove(this.scene.children[0]);
         }
 
@@ -361,15 +368,12 @@ export default class GameManager {
         if (this.mode) {
             try {
                 this.socket.close();
-            } catch(e) {
+            } catch (e) {
                 // err
             }
         } else {
             this.sendRequestToSaveScore();
         }
-
-        this.score = 0;
-        this.scoreEnemy = 0;
 
         Debugger.print("Bubbles number: " + this.bubbles.length);
         Debugger.print("Scene objects number: " + this.scene.children.length);
