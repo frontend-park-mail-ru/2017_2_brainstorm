@@ -103,15 +103,16 @@ export default class Router {
         let gameMode = (pathname === "/play");
         this.playPage.gameMode(gameMode);
 
+        let multiGameMode = (pathname === "/multiplay");
         let auth = false;
-        if (pathname === "/multiplay") {
+        if (multiGameMode) {
             RequestToHost.whoami((err) => {
                 if (err) {
+                    this.multiPlayPage.gameMode(false);
                     return Debugger.print("not AUTH");
                 } else {
                     auth = true;
-                    let multiGameMode = (pathname === "/multiplay");
-                    this.multiPlayPage.gameMode(multiGameMode);
+                    this.multiPlayPage.gameMode(true);
                 }
             });
         }
