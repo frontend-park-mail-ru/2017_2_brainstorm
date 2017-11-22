@@ -42,12 +42,12 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch (k) {
-                case keyCodes.KEY_A_KEY_CODE:
-                    this.keyA = true;
-                    break;
-                case keyCodes.KEY_D_KEY_CODE:
-                    this.keyD = true;
-                    break;
+            case keyCodes.KEY_A_KEY_CODE:
+                this.keyA = true;
+                break;
+            case keyCodes.KEY_D_KEY_CODE:
+                this.keyD = true;
+                break;
             }
         });
 
@@ -55,12 +55,12 @@ export default class GameManager {
             const k = event.keyCode;
 
             switch (k) {
-                case keyCodes.KEY_A_KEY_CODE:
-                    this.keyA = false;
-                    break;
-                case keyCodes.KEY_D_KEY_CODE:
-                    this.keyD = false;
-                    break;
+            case keyCodes.KEY_A_KEY_CODE:
+                this.keyA = false;
+                break;
+            case keyCodes.KEY_D_KEY_CODE:
+                this.keyD = false;
+                break;
             }
         });
     }
@@ -164,26 +164,26 @@ export default class GameManager {
                 let zz = null;
 
                 switch (side) {
-                    case cubeSides.FIRST_SIDE:
-                        xx = getRandomPosition();
-                        yy = getRandomPosition();
-                        zz = -4.5;
-                        break;
-                    case cubeSides.THIRD_SIDE:
-                        xx = getRandomPosition();
-                        yy = getRandomPosition();
-                        zz = 4.5;
-                        break;
-                    case cubeSides.SECOND_SIDE:
-                        xx = 4.5;
-                        yy = getRandomPosition();
-                        zz = getRandomPosition();
-                        break;
-                    case cubeSides.FOURTH_SIDE:
-                        xx = -4.5;
-                        yy = getRandomPosition();
-                        zz = getRandomPosition();
-                        break;
+                case cubeSides.FIRST_SIDE:
+                    xx = getRandomPosition();
+                    yy = getRandomPosition();
+                    zz = -4.5;
+                    break;
+                case cubeSides.THIRD_SIDE:
+                    xx = getRandomPosition();
+                    yy = getRandomPosition();
+                    zz = 4.5;
+                    break;
+                case cubeSides.SECOND_SIDE:
+                    xx = 4.5;
+                    yy = getRandomPosition();
+                    zz = getRandomPosition();
+                    break;
+                case cubeSides.FOURTH_SIDE:
+                    xx = -4.5;
+                    yy = getRandomPosition();
+                    zz = getRandomPosition();
+                    break;
                 }
 
                 const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
