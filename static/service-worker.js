@@ -28,10 +28,7 @@ const cacheUrls = [
     "game-modules/libs/three.min.js"
 ];
 
-// "dist/app.css",
-
 this.addEventListener("install", function (event) {
-    // this.skipWaiting()
     event.waitUntil(
         // находим в глобальном хранилище Cache-объект с нашим именем
         // если такого не существует, то он будет создан
@@ -48,7 +45,6 @@ this.addEventListener("install", function (event) {
 });
 
 this.addEventListener("fetch", function (event) {
-    // console.log(event);
     event.respondWith(
         // ищем запрашиваемый ресурс в хранилище кэша
         caches.match(event.request).then(function (cachedResponse) {
@@ -64,7 +60,6 @@ this.addEventListener("fetch", function (event) {
 
 this.addEventListener("activate", function(event) {
     let cacheWhitelist = [CACHE_NAME];
-
     event.waitUntil(
         caches.keys()
             .then(function(keyList) {

@@ -328,9 +328,7 @@ export default class GameManager {
     sendRequestToSaveScore() {
         RequestToHost.singlescore(this.score, (err) => {
             if (err) {
-                console.log("1 = " + err);
                 let myScore = localStorage.getItem("myScore");
-                console.log("new score = " + this.score);
                 if (this.score > parseInt(myScore)) {
                     localStorage.setItem("myScore", this.score);
                     console.log("2 = " + err);
@@ -341,11 +339,9 @@ export default class GameManager {
             let previousScore = parseInt(localStorage.getItem("myScore"));
             RequestToHost.singlescore(previousScore, (err) => {
                 if (err) {
-                    console.log("3 = " + err);
                     Debugger.print("Cant load to host");
                     return null;
                 }
-                console.log("4 = " + err);
                 localStorage.setItem("myScore", 0);
             });
         });
