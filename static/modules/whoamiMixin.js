@@ -12,9 +12,11 @@ let whoamiMixin = {
         RequestToHost.whoami((err, resp) => {
             const loginBox = document.querySelector(".main-page__user");
             if (err) {
+                document.querySelector(".message-box__multiplay-hold").hidden = false;
                 return loginBox.innerHTML = messagesWhoAmI.GUEST_HELLO_MESSAGE;
             }
-            loginBox.innerHTML = `${messagesWhoAmI.USER_HELLO_MESSAGE} ${resp.login}! Личный рекорд: ${resp.localRecord}`;
+            loginBox.innerHTML = `${messagesWhoAmI.USER_HELLO_MESSAGE} ${resp.login}! <br>Личный рекорд: ${resp.localRecord}`;
+            document.querySelector(".message-box__multiplay-hold").hidden = true;
         });
     }
 };

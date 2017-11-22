@@ -1,0 +1,30 @@
+.message-box__singleplay-button {
+  background-image: url(./../../img/single.png);
+  height: 230px;
+  width: 250px;
+  background-size: contain;
+  float: left;
+}
+.message-box__singleplay-button:hover {
+  height: 250px;
+}
+.message-box__multiplay-button {
+  background-image: url(./../../img/multi.png);
+  height: 230px;
+  width: 250px;
+  background-size: contain;
+  float: right;
+}
+.message-box__multiplay-button:hover {
+  height: 250px;
+}
+
+.message-box__multiplay-hold {
+  filter: blur(5px);
+  height: 250px;
+  width: 250px;
+  margin-left: 250px;
+  z-index: 330;
+  opacity: 0.5;
+  background: lavender;
+}

@@ -1,0 +1,24 @@
+$mobile-width: 480px;
+
+.info-page {
+    padding-left: 5em;
+    padding-top: 3em;
+    align-content: center;
+}
+
+.info-page__info-box {
+    color: salmon;
+    width: 35em;
+    height: 35em;
+    padding-left: 5em;
+    padding-right: 5em;
+    align-content: center;
+    @media only screen and (max-device-width: $mobile-width) {
+        word-wrap: break-word;
+        width: 830px;
+        align-content: center;
+        font-size: 40px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

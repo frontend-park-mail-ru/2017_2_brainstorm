@@ -2,18 +2,35 @@
 
 import Router from "./Router.js";
 import Debugger from "./Debugger.js";
-import "../views/info-page/info.css";
-import "../views/login-page/login.css";
-import "../views/main-page/main.css";
-import "../views/play-page/play.css";
-import "../views/records-page/records.css";
-import "../views/register-page/register.css";
-import "./../styles/style.css";
+import "../views/info-page/info.scss";
+import "../views/login-page/login.scss";
+import "../views/main-page/main.scss";
+import "../views/main-page/playmenu.scss";
+import "../views/play-page/play.scss";
+import "../views/multiplay-page/multiplay.scss";
+import "../views/records-page/records.scss";
+import "../views/register-page/register.scss";
+import "./../styles/form.scss";
+import "./../styles/message-box.scss";
+import "./../styles/style.scss";
 
 class MainApp {
 
     constructor () {
         Debugger.print("Application was created");
+
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js")
+                .then(function (registration) {
+                    // при удачной регистрации имеем объект типа ServiceWorkerRegistration
+                    console.log("ServiceWorker registration", registration);
+                })
+                .catch(function (err) {
+                    // throw new Error('ServiceWorker error: ' + err);
+                    console.error("Registration err", err);
+                });
+        }
+
         const router = new Router();
         router.getMe(router);
         router.sendRouter();
@@ -22,4 +39,6 @@ class MainApp {
 
 window.addEventListener("load", function () {
     new MainApp();
+    document.querySelector(".main-box").hidden = false;
+    document.querySelector(".footer").hidden = false;
 });

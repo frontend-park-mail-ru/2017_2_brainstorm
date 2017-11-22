@@ -1,0 +1,63 @@
+$mobile-width: 480px;
+
+.form-input {
+  width: 100%;
+  @media only screen and (max-device-width: $mobile-width) {
+    width: 550px;
+    height: 80px;
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.form-button {
+  width: 100%;
+  cursor: pointer;
+  font-size:15px;
+  text-decoration: none;
+  padding:10px 20px;
+  color:#4a4a4a;
+  background-color:#E6E6FA;
+  border-radius:6px;
+  border: 4px solid #E6E6FA;
+  cursor: pointer;
+  @media only screen and (max-device-width: $mobile-width) {
+    padding: 10px 20px;
+    color: #4a4a4a;
+    background-color: #E6E6FA;
+    border-radius: 20px;
+    height: 120px;
+    width: 550px;
+    font-size: 50px;
+    text-decoration: none;
+  }
+}
+
+.form-button:hover {
+  background-color:lightsalmon;
+  border: 3px solid salmon;
+}
+
+input[type="text"]:focus {
+  height: 30px;
+  font-size: large;
+  border: 0.2em solid #FFA07A;
+  @media only screen and (max-device-width: $mobile-width) {
+    height: 80px;
+    font-size: 40px;
+  }
+}
+
+input[type="password"]:focus {
+  border: 0.2em solid #FFA07A;
+}
+
+.error-box {
+  color: white;
+  background-color: lightcoral;
+  @media only screen and (max-device-width: $mobile-width) {
+    margin-left: 25px;
+    font-size: 40px;
+    width: 550px;
+  }
+}

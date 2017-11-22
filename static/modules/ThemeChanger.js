@@ -43,7 +43,7 @@ export default class ThemeChanger {
     generateTheme(themeStyles) {
         const createThemeStylesheet = (styles) => {
             return styles.reduce((stylesheet, current) => {
-                const properties = Object.entries(current.styles).map(prop => prop[0] + ":" + prop[1] + ";");
+                const properties = Object.entries(current.styles).map(prop => prop[0] + ":" + prop[1] + "!important;");
                 stylesheet += `${current.selector} {${properties}}\n`;
                 return stylesheet;
             }, "");

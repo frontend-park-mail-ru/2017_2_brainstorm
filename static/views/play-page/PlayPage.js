@@ -8,7 +8,7 @@ export default class PlayPage extends Page {
 
     constructor() {
         super();
-        this.gameManager = new GameManager(960, 680, ".play-page__play-field");
+        this.gameManager = new GameManager(false, 960, 680, ".play-page__play-field");
     }
 
     static pagePath() {
@@ -26,6 +26,7 @@ export default class PlayPage extends Page {
 
     gameMode(mode) {
         let gameLogo = document.querySelector(".main-box__logo-game");
+        document.querySelector(".footer").hidden = mode;
         gameLogo.hidden = mode;
         mode ?
             this.gameManager.start() : this.gameManager.stop();
@@ -36,7 +37,7 @@ export default class PlayPage extends Page {
     }
 
     addEventsOnButtons() {
-        document.querySelector(".main-menu__button-play").addEventListener("click", () => {
+        document.querySelector(".message-box__singleplay-button").addEventListener("click", () => {
             this.gameMode(true);
         });
         document.querySelector(".panel__button-back").addEventListener("click", () => {

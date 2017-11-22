@@ -52,7 +52,6 @@ export default class ObjectsCreater {
             let sphereGeometry = new THREE.SphereGeometry(this.bubbleRadius, 25, 25);
             let sphereMaterial = new THREE.MeshLambertMaterial(material);
             object = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
         } else if (geometry === objectGeometry.CUBE) {
             const size = this.cubeSize;
             let cubeGeometry = new THREE.CubeGeometry(size, size, size);

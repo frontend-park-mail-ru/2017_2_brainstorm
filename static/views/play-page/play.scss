@@ -1,6 +1,11 @@
+$mobile-width: 480px;
+
 .play-page {
     padding-top: 10px;
     align-content: center;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding-top: 0;
+    }
 }
 
 .play-page__panel-buttons {
@@ -10,6 +15,12 @@
     margin-top: -20px;
     padding-top: 10px;
     padding-bottom: 20px;
+    @media only screen and (max-device-width: $mobile-width) {
+        height: 120px;
+        margin-top: 50px;
+        padding-top: 15px;
+        background: lavender;
+    }
 }
 
 .panel__button-back {
@@ -24,6 +35,12 @@
     width: 40px;
     height: 40px;
     z-index: 33;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding-left: 1.2em;
+        width: 100px;
+        height: 100px;
+        z-index: 33;
+    }
 }
 
 .panel__button-back_img:hover {
@@ -31,6 +48,12 @@
     width: 60px;
     height: 60px;
     margin-top: -0.6em;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding-left: 1.2em;
+        width: 100px;
+        height: 100px;
+        z-index: 33;
+    }
 }
 
 .panel__button-restart {
@@ -45,6 +68,12 @@
     width: 40px;
     height: 40px;
     z-index: 33;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding-left: 1.2em;
+        width: 100px;
+        height: 100px;
+        z-index: 33;
+    }
 }
 
 .panel__button-restart_img:hover {
@@ -52,6 +81,12 @@
     width: 60px;
     height: 60px;
     margin-top: -0.6em;
+    @media only screen and (max-device-width: $mobile-width) {
+        padding-left: 1.2em;
+        width: 100px;
+        height: 100px;
+        z-index: 33;
+    }
 }
 
 .panel__score-label {
@@ -79,4 +114,11 @@
     height: 680px;
     background: bisque;
     box-shadow: 0 0 25px 5px rgb(255, 255, 255);
+    @media only screen and (max-device-width: $mobile-width) {
+        width: 960px;
+        height: 60vh;
+        background: #ffbe74;
+        box-shadow: 0 0 25px 5px rgb(255, 255, 255);
+        padding-top: 20vh;
+    }
 }
