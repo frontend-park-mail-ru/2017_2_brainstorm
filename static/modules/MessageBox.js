@@ -33,7 +33,6 @@ export default class MessageBox {
     }
 
     addEventOnFon() {
-        // delegate
         TouchDelegater.delegateTouch(MessageBox.fonBox());
         document.querySelector(MessageBox.fonBox()).addEventListener("click", () => {
             MessageBox.hideMessageBox();

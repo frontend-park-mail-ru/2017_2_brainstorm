@@ -9,16 +9,6 @@ $mobile-width: 480px;
     margin-bottom: 40px;
   }
 }
-//
-//.input-password {
-//  width: 100%;
-//  @media only screen and (max-device-width: $mobile-width) {
-//    width: 550px;
-//    height: 80px;
-//    font-size: 40px;
-//    margin-bottom: 40px;
-//  }
-//}
 
 .form-button {
   width: 100%;
@@ -66,7 +56,6 @@ input[type="password"]:focus {
   color: white;
   background-color: lightcoral;
   @media only screen and (max-device-width: $mobile-width) {
-    // height: 80px;
     margin-left: 25px;
     font-size: 40px;
     width: 550px;
