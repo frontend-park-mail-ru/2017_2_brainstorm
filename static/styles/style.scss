@@ -4,6 +4,7 @@ $mobile-width: 480px;
 
 html {
   overflow: hidden;
+  touch-action: none;
 }
 
 body {
