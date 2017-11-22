@@ -103,37 +103,37 @@ export default class Router {
         let multiGameMode = (pathname === "/multiplay");
         this.multiPlayPage.gameMode(multiGameMode);
         switch (pathname) {
-            case "/main":
-                PagePresenter.showOnlyOnePage("main-page");
-                break;
+        case "/main":
+            PagePresenter.showOnlyOnePage("main-page");
+            break;
 
-            case "/register":
-                PagePresenter.showOnlyOnePage("register-page");
-                break;
+        case "/register":
+            PagePresenter.showOnlyOnePage("register-page");
+            break;
 
-            case "/login":
-                PagePresenter.showOnlyOnePage("login-page");
-                break;
+        case "/login":
+            PagePresenter.showOnlyOnePage("login-page");
+            break;
 
-            case "/play":
-                PagePresenter.showOnlyOnePage("play-page");
-                break;
+        case "/play":
+            PagePresenter.showOnlyOnePage("play-page");
+            break;
 
-            case "/multiplay":
-                PagePresenter.showOnlyOnePage("multiplay-page");
-                break;
+        case "/multiplay":
+            PagePresenter.showOnlyOnePage("multiplay-page");
+            break;
 
-            case "/records":
-                this.recordsPage.sendRequestForRecords();
-                PagePresenter.showOnlyOnePage("records-page");
-                break;
+        case "/records":
+            this.recordsPage.sendRequestForRecords();
+            PagePresenter.showOnlyOnePage("records-page");
+            break;
 
-            case "/info":
-                PagePresenter.showOnlyOnePage("info-page");
-                break;
-            default:
-                PagePresenter.showOnlyOnePage("main-page");
-                break;
+        case "/info":
+            PagePresenter.showOnlyOnePage("info-page");
+            break;
+        default:
+            PagePresenter.showOnlyOnePage("main-page");
+            break;
         }
     }
 }
