@@ -328,42 +328,6 @@ export default class GameManager {
             }
             }
 
-            // if (content.class === "NewBubbles") {
-            //     let newBubbles = content.bubbles;
-            //     newBubbles.forEach((myBubble) => {
-            //         const xx = myBubble.coords.x;
-            //         const yy = myBubble.coords.y;
-            //         const zz = myBubble.coords.z;
-            //
-            //         const bubble = this.objectsCreater.createResultSphere(xx, yy, zz);
-            //         bubble.scale.x = myBubble.radius;
-            //         bubble.scale.y = myBubble.radius;
-            //         bubble.scale.z = myBubble.radius;
-            //
-            //         this.bubbles.push(bubble);
-            //         this.idArr.push(myBubble.id);
-            //     });
-            // }
-            //
-            // if (content.class === "BurstingBubbles") {
-            //     this.score = content.currentPlayerScore;
-            //     this.scoreEnemy = content.enemyScore;
-            //     MultyPlayPage.printScore(this.score, this.scoreEnemy);
-            //     let killedBubbles = content.burstingBubbleIds;
-            //     killedBubbles.forEach((myBubble) => {
-            //         const id = myBubble.burstingBubbleId;
-            //         const numberOfKilledBubble = this.idArr.indexOf(id);
-            //
-            //         if (numberOfKilledBubble !== -1) {
-            //             const bubbleObject = this.bubbles[numberOfKilledBubble];
-            //             this.scene.remove(bubbleObject);
-            //
-            //             this.bubbles.splice(numberOfKilledBubble, 1);
-            //             this.idArr.splice(numberOfKilledBubble, 1);
-            //         }
-            //     });
-            // }
-
             Debugger.print("Bubbles number: " + this.bubbles.length);
             Debugger.print("Id array length: " + this.idArr.length);
             Debugger.print("Scene objects number: " + this.scene.children.length);
