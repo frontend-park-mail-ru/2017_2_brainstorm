@@ -115,6 +115,8 @@ export default class Router {
                     this.multiPlayPage.gameMode(true);
                 }
             });
+        } else {
+            this.multiPlayPage.gameMode(false);
         }
 
         switch (pathname) {
