@@ -14,8 +14,6 @@ import RegisterPage from "../views/register-page/RegisterPage.js";
 import RecordsPage from "../views/records-page/RecordsPage.js";
 import MessageBox from "./MessageBox.js";
 import TouchDelegater from "./TouchDelegater.js";
-import RequestToHost from "./RequestToHost.js";
-import Debugger from "./Debugger.js";
 
 export default class Router {
 
@@ -102,57 +100,40 @@ export default class Router {
         const pathname = window.location.pathname;
         let gameMode = (pathname === "/play");
         this.playPage.gameMode(gameMode);
-
         let multiGameMode = (pathname === "/multiplay");
-        // let auth = false;
-        if (multiGameMode) {
-            RequestToHost.whoami((err) => {
-                if (err) {
-                    this.multiPlayPage.gameMode(false);
-                    PagePresenter.showOnlyOnePage("main-page");
-                    return Debugger.print("not AUTH");
-                } else {
-                    //auth = true;
-                    PagePresenter.showOnlyOnePage("multiplay-page");
-                    this.multiPlayPage.gameMode(true);
-                }
-            });
-        } else {
-            this.multiPlayPage.gameMode(false);
-        }
-
+        this.multiPlayPage.gameMode(multiGameMode);
         switch (pathname) {
-        case "/main":
-            PagePresenter.showOnlyOnePage("main-page");
-            break;
+            case "/main":
+                PagePresenter.showOnlyOnePage("main-page");
+                break;
 
-        case "/register":
-            PagePresenter.showOnlyOnePage("register-page");
-            break;
+            case "/register":
+                PagePresenter.showOnlyOnePage("register-page");
+                break;
 
-        case "/login":
-            PagePresenter.showOnlyOnePage("login-page");
-            break;
+            case "/login":
+                PagePresenter.showOnlyOnePage("login-page");
+                break;
 
-        case "/play":
-            PagePresenter.showOnlyOnePage("play-page");
-            break;
+            case "/play":
+                PagePresenter.showOnlyOnePage("play-page");
+                break;
 
-        case "/multiplay":
-            //PagePresenter.showOnlyOnePage("multiplay-page");
-            break;
+            case "/multiplay":
+                PagePresenter.showOnlyOnePage("multiplay-page");
+                break;
 
-        case "/records":
-            this.recordsPage.sendRequestForRecords();
-            PagePresenter.showOnlyOnePage("records-page");
-            break;
+            case "/records":
+                this.recordsPage.sendRequestForRecords();
+                PagePresenter.showOnlyOnePage("records-page");
+                break;
 
-        case "/info":
-            PagePresenter.showOnlyOnePage("info-page");
-            break;
-        default:
-            PagePresenter.showOnlyOnePage("main-page");
-            break;
+            case "/info":
+                PagePresenter.showOnlyOnePage("info-page");
+                break;
+            default:
+                PagePresenter.showOnlyOnePage("main-page");
+                break;
         }
     }
 }
