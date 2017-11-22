@@ -16,7 +16,7 @@ export default class TouchDelegater {
     }
 
     static delegateTouch(element) {
-        document.querySelector(element).addEventListener("touchend", function(e){
+        document.querySelector(element).addEventListener("touchend", (e) => {
             e.preventDefault();
             e.target.click();
         }, false);
