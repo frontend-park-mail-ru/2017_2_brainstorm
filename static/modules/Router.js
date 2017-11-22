@@ -14,6 +14,8 @@ import RegisterPage from "../views/register-page/RegisterPage.js";
 import RecordsPage from "../views/records-page/RecordsPage.js";
 import MessageBox from "./MessageBox.js";
 import TouchDelegater from "./TouchDelegater.js";
+import RequestToHost from "./RequestToHost.js";
+import Debugger from "./Debugger.js";
 
 export default class Router {
 
@@ -100,8 +102,20 @@ export default class Router {
         const pathname = window.location.pathname;
         let gameMode = (pathname === "/play");
         this.playPage.gameMode(gameMode);
-        let multiGameMode = (pathname === "/multiplay");
-        this.multiPlayPage.gameMode(multiGameMode);
+
+        let auth = false;
+        if (pathname === "/multiplay") {
+            RequestToHost.whoami((err) => {
+                if (err) {
+                    return Debugger.print("not AUTH");
+                } else {
+                    auth = true;
+                    let multiGameMode = (pathname === "/multiplay");
+                    this.multiPlayPage.gameMode(multiGameMode);
+                }
+            });
+        }
+
         switch (pathname) {
         case "/main":
             PagePresenter.showOnlyOnePage("main-page");
@@ -120,7 +134,7 @@ export default class Router {
             break;
 
         case "/multiplay":
-            PagePresenter.showOnlyOnePage("multiplay-page");
+            auth ? PagePresenter.showOnlyOnePage("multiplay-page") : PagePresenter.showOnlyOnePage("main-page");
             break;
 
         case "/records":
