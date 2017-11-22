@@ -109,9 +109,11 @@ export default class Router {
             RequestToHost.whoami((err) => {
                 if (err) {
                     this.multiPlayPage.gameMode(false);
+                    PagePresenter.showOnlyOnePage("main-page");
                     return Debugger.print("not AUTH");
                 } else {
                     auth = true;
+                    PagePresenter.showOnlyOnePage("multiplay-page");
                     this.multiPlayPage.gameMode(true);
                 }
             });
@@ -137,7 +139,7 @@ export default class Router {
             break;
 
         case "/multiplay":
-            auth ? PagePresenter.showOnlyOnePage("multiplay-page") : PagePresenter.showOnlyOnePage("main-page");
+            //PagePresenter.showOnlyOnePage("multiplay-page");
             break;
 
         case "/records":
