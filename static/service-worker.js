@@ -1,11 +1,11 @@
 // наименование для нашего хранилища кэша
-const CACHE_NAME = "brise_serviceworker_v2";
+const CACHE_NAME = "brise_serviceworker_v3";
 // ссылки на кэшируемые файлы
 const cacheUrls = [
     "/",
     "/main",
     "/play",
-    "/multyplay",
+    "/multiplay",
     "/info",
     "/records",
     "dist/app.js",
@@ -18,7 +18,7 @@ const cacheUrls = [
     "img/logo_3.png",
     "img/record.png",
     "img/restart.png",
-    "img/multy.png",
+    "img/multi.png",
     "img/single.png",
 
     "game-modules/libs/CanvasRenderer.js",

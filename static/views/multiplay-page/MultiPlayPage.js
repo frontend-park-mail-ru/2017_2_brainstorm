@@ -2,25 +2,25 @@
 
 import Page from "../../modules/Page.js";
 import GameManager from  "./../../game-modules/GameManager.js";
-import template from "./multyplay-page.pug";
+import template from "./multiplay-page.pug";
 
-export default class MultyPlayPage extends Page {
+export default class MultiPlayPage extends Page {
 
     constructor() {
         super();
-        this.gameManager = new GameManager(true, 960, 680, ".multyplay-page__multyplay-field");
+        this.gameManager = new GameManager(true, 960, 680, ".multiplay-page__multiplay-field");
     }
 
     static pagePath() {
-        return "/multyplay";
+        return "/multiplay";
     }
 
     static pageBoxName() {
-        return "multyplay-page";
+        return "multiplay-page";
     }
 
     render() {
-        let playPageBox = Page.createBoxForPage(MultyPlayPage.pageBoxName());
+        let playPageBox = Page.createBoxForPage(MultiPlayPage.pageBoxName());
         playPageBox.innerHTML = template();
     }
 
@@ -33,18 +33,18 @@ export default class MultyPlayPage extends Page {
     }
 
     static printScore(score, scoreEnemy) {
-        document.querySelector(".multypanel__score-box").innerHTML = score;
-        document.querySelector(".multypanel__score-box-enemy").innerHTML = scoreEnemy;
+        document.querySelector(".multipanel__score-box").innerHTML = score;
+        document.querySelector(".multipanel__score-box-enemy").innerHTML = scoreEnemy;
     }
 
     addEventsOnButtons() {
-        document.querySelector(".message-box__multyplay-button").addEventListener("click", () => {
+        document.querySelector(".message-box__multiplay-button").addEventListener("click", () => {
             this.gameMode(true);
         });
-        document.querySelector(".multypanel__button-back").addEventListener("click", () => {
+        document.querySelector(".multipanel__button-back").addEventListener("click", () => {
             this.gameMode(false);
         });
-        document.querySelector(".multypanel__button-restart").addEventListener("click", () => {
+        document.querySelector(".multipanel__button-restart").addEventListener("click", () => {
             this.gameMode(false);
             this.gameMode(true);
         });

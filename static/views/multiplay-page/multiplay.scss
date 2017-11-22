@@ -1,6 +1,6 @@
 $mobile-width: 480px;
 
-.multyplay-page {
+.multiplay-page {
     padding-top: 10px;
     align-content: center;
     @media only screen and (max-device-width: $mobile-width) {
@@ -8,7 +8,7 @@ $mobile-width: 480px;
     }
 }
 
-.multyplay-page__panel-buttons {
+.multiplay-page__panel-buttons {
     width: 800px;
     height: 60px;
     margin-left: 80px;
@@ -23,7 +23,7 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__button-back {
+.multipanel__button-back {
     width: 100px;
     height: 60px;
     display: inline-block;
@@ -31,7 +31,7 @@ $mobile-width: 480px;
     margin-left: -20px;
 }
 
-.multypanel__button-back_img {
+.multipanel__button-back_img {
     padding-left: 1.2em;
     width: 40px;
     height: 40px;
@@ -44,7 +44,7 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__button-back_img:hover {
+.multipanel__button-back_img:hover {
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
@@ -57,14 +57,14 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__button-restart {
+.multipanel__button-restart {
     width: 60px;
     height: 60px;
     display: inline-block;
     cursor: pointer;
 }
 
-.multypanel__button-restart_img {
+.multipanel__button-restart_img {
     padding-left: 1.2em;
     width: 40px;
     height: 40px;
@@ -77,7 +77,7 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__button-restart_img:hover {
+.multipanel__button-restart_img:hover {
     padding-left: 1.2em;
     width: 60px;
     height: 60px;
@@ -90,7 +90,7 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__score-label {
+.multipanel__score-label {
     display: inline-block;
     height: 60px;
     font-size: 35px;
@@ -102,7 +102,7 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__score-box {
+.multipanel__score-box {
     display: inline-block;
     width: 200px;
     margin-left: 5px;
@@ -113,7 +113,7 @@ $mobile-width: 480px;
     padding-right: 5px;
 }
 
-.multypanel__score-label-enemy {
+.multipanel__score-label-enemy {
     display: inline-block;
     height: 60px;
     font-size: 35px;
@@ -124,7 +124,7 @@ $mobile-width: 480px;
     }
 }
 
-.multypanel__score-box-enemy {
+.multipanel__score-box-enemy {
     display: inline-block;
     width: 200px;
     margin-left: 5px;
@@ -135,7 +135,7 @@ $mobile-width: 480px;
     padding-right: 5px;
 }
 
-.multyplay-page__multyplay-field {
+.multiplay-page__multiplay-field {
     width: 960px;
     height: 680px;
     background: bisque;

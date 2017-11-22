@@ -5,7 +5,7 @@ import ObjectsCreater from "./ObjectsCreater.js";
 import RequestToHost from "../modules/RequestToHost.js";
 import Debugger from "../modules/Debugger.js";
 import PlayPage from "../views/play-page/PlayPage.js";
-import MultyPlayPage from "../views/multyplay-page/MultyPlayPage.js";
+import MultiPlayPage from "../views/multiplay-page/MultiPlayPage.js";
 
 const keyCodes = {
     KEY_A_KEY_CODE: 65,
@@ -84,7 +84,7 @@ export default class GameManager {
         this.addCameraMovement();
         this.addBubbleGrowing();
         if (this.mode) {
-            MultyPlayPage.printScore(this.score, this.scoreEnemy);
+            MultiPlayPage.printScore(this.score, this.scoreEnemy);
             this.socketWorking();
         } else {
             PlayPage.printScore(this.score);
@@ -310,7 +310,7 @@ export default class GameManager {
             case contentClasses.BURSTING_BUBBLES: {
                 this.score = content.currentPlayerScore;
                 this.scoreEnemy = content.enemyScore;
-                MultyPlayPage.printScore(this.score, this.scoreEnemy);
+                MultiPlayPage.printScore(this.score, this.scoreEnemy);
                 let killedBubbles = content.burstingBubbleIds;
                 killedBubbles.forEach((myBubble) => {
                     const id = myBubble.burstingBubbleId;

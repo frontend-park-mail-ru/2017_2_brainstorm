@@ -4,7 +4,7 @@ const clickedElements = [
     ".register-form__button",
     ".login-form__button",
     ".main-box__theme-changer",
-    ".multypanel__button-restart",
+    ".multipanel__button-restart",
     ".panel__button-restart",
     ".main-menu__button-play"
 ];

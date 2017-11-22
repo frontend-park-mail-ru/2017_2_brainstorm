@@ -7,7 +7,7 @@ import ThemeChanger from "./ThemeChanger.js";
 
 import InfoPage from "../views/info-page/InfoPage.js";
 import PlayPage from "../views/play-page/PlayPage.js";
-import MultyPlayPage from "../views/multyplay-page/MultyPlayPage.js";
+import MultiPlayPage from "../views/multiplay-page/MultiPlayPage.js";
 import MainPage from "../views/main-page/MainPage.js";
 import LoginPage from "../views/login-page/LoginPage.js";
 import RegisterPage from "../views/register-page/RegisterPage.js";
@@ -22,7 +22,7 @@ export default class Router {
         const mainPagePath = MainPage.pagePath();
         const infoPagePath = InfoPage.pagePath();
         const playPagePath = PlayPage.pagePath();
-        const multyPlayPagePath = MultyPlayPage.pagePath();
+        const multiPlayPagePath = MultiPlayPage.pagePath();
         const loginPagePath = LoginPage.pagePath();
         const registerPagePath = RegisterPage.pagePath();
         const recordsPagePath = RecordsPage.pagePath();
@@ -34,7 +34,7 @@ export default class Router {
         const mainPage = new MainPage();
         mainPage.whoami();
         mainPage.addRedirectOnButtons(
-            {button: "message-box__multyplay-button", nextPage: "multyplay-page", pagePath: multyPlayPagePath},
+            {button: "message-box__multiplay-button", nextPage: "multiplay-page", pagePath: multiPlayPagePath},
             {button: "message-box__singleplay-button", nextPage: "play-page", pagePath: playPagePath},
             {button: "main-menu__button-login", nextPage: "login-page", pagePath: loginPagePath},
             {button: "main-menu__button-records", nextPage: "records-page", pagePath: recordsPagePath},
@@ -51,9 +51,9 @@ export default class Router {
             {button: "panel__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
-        this.multyPlayPage = new MultyPlayPage();
-        this.multyPlayPage.addRedirectOnButtons(
-            {button: "multypanel__button-back", nextPage: "main-page", pagePath: mainPagePath}
+        this.multiPlayPage = new MultiPlayPage();
+        this.multiPlayPage.addRedirectOnButtons(
+            {button: "multipanel__button-back", nextPage: "main-page", pagePath: mainPagePath}
         );
 
         this.loginPage = new LoginPage();
@@ -100,8 +100,8 @@ export default class Router {
         const pathname = window.location.pathname;
         let gameMode = (pathname === "/play");
         this.playPage.gameMode(gameMode);
-        let multyGameMode = (pathname === "/multyplay");
-        this.multyPlayPage.gameMode(multyGameMode);
+        let multiGameMode = (pathname === "/multiplay");
+        this.multiPlayPage.gameMode(multiGameMode);
         switch (pathname) {
         case "/main":
             PagePresenter.showOnlyOnePage("main-page");
@@ -119,8 +119,8 @@ export default class Router {
             PagePresenter.showOnlyOnePage("play-page");
             break;
 
-        case "/multyplay":
-            PagePresenter.showOnlyOnePage("multyplay-page");
+        case "/multiplay":
+            PagePresenter.showOnlyOnePage("multiplay-page");
             break;
 
         case "/records":

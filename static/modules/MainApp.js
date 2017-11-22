@@ -7,7 +7,7 @@ import "../views/login-page/login.scss";
 import "../views/main-page/main.scss";
 import "../views/main-page/playmenu.scss";
 import "../views/play-page/play.scss";
-import "../views/multyplay-page/multyplay.scss";
+import "../views/multiplay-page/multiplay.scss";
 import "../views/records-page/records.scss";
 import "../views/register-page/register.scss";
 import "./../styles/form.scss";

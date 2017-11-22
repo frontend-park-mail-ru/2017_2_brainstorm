@@ -11,7 +11,7 @@ export default class MainPage extends Page {
         super();
         MainPage.playmenuRender();
         this.addEventsOnPlaymenuButtons();
-        document.querySelector(".message-box__multyplay-hold").hidden = true;
+        document.querySelector(".message-box__multiplay-hold").hidden = true;
     }
 
     static pagePath() {
@@ -36,7 +36,7 @@ export default class MainPage extends Page {
         document.querySelector(".message-box__singleplay-button").addEventListener("click", () => {
             MessageBox.hideMessageBox();
         });
-        document.querySelector(".message-box__multyplay-button").addEventListener("click", () => {
+        document.querySelector(".message-box__multiplay-button").addEventListener("click", () => {
             MessageBox.hideMessageBox();
         });
     }
