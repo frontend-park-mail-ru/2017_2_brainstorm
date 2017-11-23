@@ -1,0 +1,36 @@
+{
+  "name": "BubbleRise",
+  "short_name": "BRise",
+  "lang": "ru-RU",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#E6E6FA",
+  "theme_color": "#F98B67",
+  "icons": [{
+    "src": "/img/icon/icon96.png",
+    "type": "image/png",
+    "sizes": "96x96"
+    }, {
+    "src": "/img/icon/icon24.png",
+    "type": "image/png",
+    "sizes": "24x24"
+    }, {
+    "src": "/img/icon/icon48.png",
+    "type": "image/png",
+    "sizes": "48x48"
+    }, {
+    "src": "/img/icon/icon72.png",
+    "type": "image/png",
+    "sizes": "72x72"
+    }, {
+      "src": "/img/icon/icon96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    }, {
+      "src": "/img/icon/icon144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ]
+}
